@@ -2,14 +2,13 @@
 /* (C)2023 */
 package frc.robot.commands;
 
-import org.frc238.lib.autonomous.AutonomousModeAnnotation;
-
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
+import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 
 
 @AutonomousModeAnnotation(parameterNames = {"delay"})
-public class Delay extends CommandBase {
+public class Delay extends Command {
     private double m_delay;
     private double m_startTime;
 

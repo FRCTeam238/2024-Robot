@@ -1,14 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.OI;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 
 /**
  * Drive
  */
-public class Drive extends CommandBase {
+public class Drive extends Command {
 
     Drivetrain drivetrain = Robot.drivetrain;
 

@@ -5,12 +5,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.AbsoluteEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.SparkMaxAbsoluteEncoder;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.*;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -24,16 +19,16 @@ public class SwerveModule {
 
     AbsoluteEncoder turnEncoder;
 
-    SparkMaxPIDController turningPIDController;
+    SparkPIDController turningPIDController;
 
     private SwerveModuleState m_desiredState = new SwerveModuleState(0.0, new Rotation2d());
 
     public SwerveModule(int driveCANID, int turnCANID) {
-        turnMotor = new CANSparkMax(turnCANID, CANSparkMaxLowLevel.MotorType.kBrushless);
+        turnMotor = new CANSparkMax(turnCANID, CANSparkLowLevel.MotorType.kBrushless);
         driveMotor = new TalonFX(driveCANID);
 
         turnMotor.restoreFactoryDefaults();
-        turnEncoder = turnMotor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
+        turnEncoder = turnMotor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle);
 
         turningPIDController = turnMotor.getPIDController();
         turningPIDController.setFeedbackDevice(turnEncoder);
@@ -51,7 +46,7 @@ public class SwerveModule {
         turningPIDController.setPositionPIDWrappingMaxInput(SwerveModuleConstants.kTurningEncoderPositionPIDMaxInput);
 
         turnMotor.setSmartCurrentLimit(SwerveModuleConstants.turningCurrentLimit);
-        turnMotor.setIdleMode(IdleMode.kBrake);
+        turnMotor.setIdleMode(CANSparkBase.IdleMode.kBrake);
         turnMotor.burnFlash();
 
         var config = new TalonFXConfiguration();
@@ -94,7 +89,7 @@ public class SwerveModule {
     }
 
     public void resetEncoders() {
-        driveMotor.setRotorPosition(0);
+        driveMotor.setPosition(0);
     }
 
     public static class SwerveModuleConstants {
