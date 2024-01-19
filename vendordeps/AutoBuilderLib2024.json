@@ -1,0 +1,56 @@
+{
+    "fileName": "AutoBuilderLib2024.json",
+    "name": "AutoBuilderLib",
+    "version": "0.0.2",
+    "uuid": "811b13c9-a73b-45bd-9020-bbd186d98c43",
+    "frcYear": "2024",
+    "mavenUrls": [
+        "https://me6262.github.io/builds/"
+    ],
+    "jsonUrl": "https://me6262.github.io/AutoBuilderLib2024.json",
+    "javaDependencies": [
+        {
+            "groupId": "org.frc238.lib",
+            "artifactId": "AutoBuilderLib-java",
+            "version": "0.0.2"
+        }
+    ],
+    "cppDependencies": [
+        {
+            "groupId": "org.frc238.lib",
+            "artifactId": "AutoBuilderLib-cpp",
+            "version": "0.0.2",
+            "libName": "AutoBuilderLib",
+            "headerClassifier": "headers",
+            "sharedLibrary": false,
+            "skipInvalidPlatforms": true,
+            "binaryPlatforms": [
+                "windowsx86-64",
+                "windowsx86",
+                "linuxarm64",
+                "linuxx86-64",
+                "linuxathena",
+                "linuxarm32",
+                "osxuniversal"
+            ]
+        },
+        {
+            "groupId": "org.frc238.lib",
+            "artifactId": "AutoBuilderLib-driver",
+            "version": "0.0.2",
+            "libName": "AutoBuilderLibDriver",
+            "headerClassifier": "headers",
+            "sharedLibrary": false,
+            "skipInvalidPlatforms": true,
+            "binaryPlatforms": [
+                "windowsx86-64",
+                "windowsx86",
+                "linuxarm64",
+                "linuxx86-64",
+                "linuxathena",
+                "linuxarm32",
+                "osxuniversal"
+            ]
+        }
+    ]
+}
