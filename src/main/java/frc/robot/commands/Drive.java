@@ -27,7 +27,7 @@ public class Drive extends Command {
         double leftJoyY = Robot.oi.leftJoystick.getY();
         double rightJoyX = Robot.oi.rightJoystick.getX();
 
-        drivetrain.drive(leftJoyX, leftJoyY, rightJoyX, true);
+        drivetrain.drive(leftJoyX, leftJoyY, rightJoyX);
         
     }
     
