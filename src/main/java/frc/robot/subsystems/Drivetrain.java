@@ -7,7 +7,10 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj.SPI.Port;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -26,6 +29,8 @@ public class Drivetrain extends SubsystemBase {
 
     AHRS gyro;
 
+    StructPublisher<Pose2d> publisher;
+
     public Drivetrain() {
         gyro = new AHRS(Port.kMXP);
         odometry = new SwerveDriveOdometry(
@@ -38,13 +43,14 @@ public class Drivetrain extends SubsystemBase {
                     backRight.getPosition()
                 }
         );
+        initializeTelemetry();
     
     }
 
     @Override
     public void periodic() {
         odometry.update(
-                gyro.getRotation2d(), 
+                gyro.getRotation2d(),
                 new SwerveModulePosition[] {
                     frontLeft.getPosition(),
                     frontRight.getPosition(),
@@ -52,8 +58,57 @@ public class Drivetrain extends SubsystemBase {
                     backRight.getPosition()
                 }
         );
+        updateTelemetry();
     }
 
+
+public void initializeTelemetry() {
+    publisher = NetworkTableInstance.getDefault().getStructTopic("/RobotPose", Pose2d.struct).publish();
+    SmartDashboard.putNumber("swerve/moduleCount", 4);
+    SmartDashboard.putNumberArray("swerve/wheelLocations", new double[] {
+            new Translation2d(DriveConstants.kWheelBase / 2, DriveConstants.kTrackWidth / 2).getX(),
+            new Translation2d(DriveConstants.kWheelBase / 2, DriveConstants.kTrackWidth / 2).getY(),
+            new Translation2d(DriveConstants.kWheelBase / 2, -DriveConstants.kTrackWidth / 2).getX(),
+            new Translation2d(DriveConstants.kWheelBase / 2, -DriveConstants.kTrackWidth / 2).getY(),
+            new Translation2d(-DriveConstants.kWheelBase / 2, DriveConstants.kTrackWidth / 2).getX(),
+            new Translation2d(-DriveConstants.kWheelBase / 2, DriveConstants.kTrackWidth / 2).getY(),
+            new Translation2d(-DriveConstants.kWheelBase / 2, -DriveConstants.kTrackWidth / 2).getX(),
+            new Translation2d(-DriveConstants.kWheelBase / 2, -DriveConstants.kTrackWidth / 2).getY(),
+    });
+    SmartDashboard.putString("swerve/rotationUnit", "radians");
+    SmartDashboard.putNumber("swerve/sizeLeftRight", DriveConstants.kTrackWidth);
+    SmartDashboard.putNumber("swerve/sizeFrontBack", DriveConstants.kWheelBase);
+    SmartDashboard.putString("swerve/forwardDirection", "up");
+    SmartDashboard.putNumber("swerve/maxAngularVelocity", DriveConstants.maxAngularVelocityRadsPerSec);
+    SmartDashboard.putNumber("swerve/maxSpeed", DriveConstants.maxVelocityMetersPerSec);
+}
+
+public void updateTelemetry() {
+    publisher.set(getPose());
+    SmartDashboard.putNumberArray("swerve/measuredStates", new double[]{
+            frontLeft.getState().angle.getRadians(), frontLeft.getState().speedMetersPerSecond,
+            frontRight.getState().angle.getRadians(), frontRight.getState().speedMetersPerSecond,
+            backLeft.getState().angle.getRadians(), backLeft.getState().speedMetersPerSecond,
+            backRight.getState().angle.getRadians(), backRight.getState().speedMetersPerSecond,
+    });
+    SmartDashboard.putNumberArray("swerve/desiredStates", new double[]{
+            frontLeft.getDesiredState().angle.getRadians(), frontLeft.getDesiredState().speedMetersPerSecond,
+            frontRight.getDesiredState().angle.getRadians(), frontRight.getDesiredState().speedMetersPerSecond,
+            backLeft.getDesiredState().angle.getRadians(), backLeft.getDesiredState().speedMetersPerSecond,
+            backRight.getDesiredState().angle.getRadians(), backRight.getDesiredState().speedMetersPerSecond,
+    });
+    SmartDashboard.putNumber("swerve/robotRotation", gyro.getRotation2d().getRadians());
+    ChassisSpeeds measuredChassisSpeeds = DriveConstants.kDriveKinematics.toChassisSpeeds(frontLeft.getState(), frontRight.getState(), backLeft.getState(), backRight.getState());
+    ChassisSpeeds desiredChassisSpeeds = DriveConstants.kDriveKinematics.toChassisSpeeds(frontLeft.getDesiredState(), frontRight.getDesiredState(), backLeft.getDesiredState(), backRight.getDesiredState());
+
+    SmartDashboard.putNumberArray("swerve/measuredChassisSpeeds", new double[]{
+            measuredChassisSpeeds.vyMetersPerSecond, measuredChassisSpeeds.vxMetersPerSecond, measuredChassisSpeeds.omegaRadiansPerSecond
+    });
+    SmartDashboard.putNumberArray("swerve/desiredChassisSpeeds", new double[]{
+            desiredChassisSpeeds.vyMetersPerSecond, desiredChassisSpeeds.vxMetersPerSecond, desiredChassisSpeeds.omegaRadiansPerSecond
+    });
+
+}
     public Pose2d getPose() {
         return odometry.getPoseMeters();
     }
@@ -77,7 +132,7 @@ public class Drivetrain extends SubsystemBase {
         
         var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
            DriveConstants.fieldRelative
-           ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(gyro.getAngle()))
+           ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
            : new ChassisSpeeds(xSpeed, ySpeed, rot)
         );
 
@@ -157,9 +212,13 @@ public class Drivetrain extends SubsystemBase {
         public static final int backLeftTurnCANId = 5;
         public static final int frontLeftTurnCANId = 7;
 
-        public static final double kP = 0;
+        public static final double kP = 1;
         public static final double kI = 0;
         public static final double kD = 0;
+
+        public static final double kPAngular = 1;
+        public static final double kIAngular = 0;
+        public static final double kDAngular = 0;
 
         public static final double maxVelocityMetersPerSec = 4.86;
         public static final double maxAccelerationMetersPerSec2 = 100; //TODO: make this a real number
@@ -172,5 +231,6 @@ public class Drivetrain extends SubsystemBase {
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
                 new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
+        public static double maxAngularVelocityRadsPerSec = 2*Math.PI;
     }
 }

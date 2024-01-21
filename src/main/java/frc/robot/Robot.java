@@ -6,6 +6,7 @@ package frc.robot;
 
 import java.util.List;
 
+import frc.robot.commands.TrajectoryDriveCommand;
 import org.frc238.lib.autonomous.AutonomousModesReader;
 import org.frc238.lib.autonomous.DataFileAutonomousModeDataSource;
 
@@ -67,6 +68,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        m_autonomousCommand = new TrajectoryDriveCommand("NewPath", true, 1, false);
 
         if (m_autonomousCommand != null) {
             m_autonomousCommand.schedule();

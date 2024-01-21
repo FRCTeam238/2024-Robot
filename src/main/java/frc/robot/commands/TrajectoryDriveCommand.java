@@ -46,9 +46,9 @@ public class TrajectoryDriveCommand extends SequentialCommandGroup {
                 Drivetrain.DriveConstants.kD
         );
         PIDController rotationController = new PIDController(
-                Drivetrain.DriveConstants.kP,
-                Drivetrain.DriveConstants.kI,
-                Drivetrain.DriveConstants.kD
+                Drivetrain.DriveConstants.kPAngular,
+                Drivetrain.DriveConstants.kIAngular,
+                Drivetrain.DriveConstants.kDAngular
         );
 
         //creates a command that sets the position of the robot to the starting point of the trajectory

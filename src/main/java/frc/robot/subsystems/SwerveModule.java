@@ -29,6 +29,7 @@ public class SwerveModule {
 
         turnMotor.restoreFactoryDefaults();
         turnEncoder = turnMotor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle);
+        turnMotor.setInverted(true);
 
         turningPIDController = turnMotor.getPIDController();
         turningPIDController.setFeedbackDevice(turnEncoder);
@@ -58,7 +59,7 @@ public class SwerveModule {
         config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
         config.CurrentLimits.StatorCurrentLimit = SwerveModuleConstants.driveCurrentLimit;
         config.CurrentLimits.StatorCurrentLimitEnable = true;
-        config.Feedback.SensorToMechanismRatio = SwerveModuleConstants.kDriveMetersPerRev;
+        config.Feedback.SensorToMechanismRatio = 1/SwerveModuleConstants.kDriveMetersPerRev;
         driveMotor.getConfigurator().apply(config);
 
         m_desiredState.angle = new Rotation2d(turnEncoder.getPosition());
@@ -72,6 +73,10 @@ public class SwerveModule {
         return new SwerveModulePosition(driveMotor.getPosition().getValue(), new Rotation2d(turnEncoder.getPosition()));
 
     }
+    public SwerveModuleState getDesiredState() {
+        return m_desiredState;
+    }
+
 
     public void setDesiredState(SwerveModuleState state) {
         Rotation2d encoderRotation = new Rotation2d(turnEncoder.getPosition());
@@ -81,11 +86,11 @@ public class SwerveModule {
         // Scale speed by cosine of angle error. This scales down movement perpendicular to the desired
         // direction of travel that can occur when modules change directions. This results in smoother
         // driving.
-        state.speedMetersPerSecond *= optimizedState.angle.minus(encoderRotation).getCos();
+        optimizedState.speedMetersPerSecond *= optimizedState.angle.minus(encoderRotation).getCos();
         var requestedVoltage = new VelocityVoltage(optimizedState.speedMetersPerSecond);
         driveMotor.setControl(requestedVoltage);
 
-        m_desiredState = state;
+        m_desiredState = optimizedState;
     }
 
     public void resetEncoders() {
@@ -99,7 +104,7 @@ public class SwerveModule {
         public static int turningCurrentLimit = 30;
         public static double kTurningEncoderPositionPIDMinInput = 0;
         public static double kTurningEncoderPositionPIDMaxInput = kTurningEncoderPositionFactor;
-        public static double turnP = .01;
+        public static double turnP = .5;
         public static double turnI = 0;
         public static double turnD = 0;
         public static double turnFF = 0;
