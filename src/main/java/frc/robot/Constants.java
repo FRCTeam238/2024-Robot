@@ -12,4 +12,8 @@ public class Constants {
         public static double kFF;
         
     }
+
+    public class PivotConstants {
+        public static double voltageMax;
+    }
 }
