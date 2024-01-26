@@ -21,4 +21,8 @@ public class Constants {
             XBOX
         }
     }
+
+    public class PivotConstants {
+        public static double voltageMax;
+    }
 }
