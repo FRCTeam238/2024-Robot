@@ -1,0 +1,30 @@
+{
+  "autonomousModes" : [ {
+    "name" : "New Auto",
+    "commands" : [ {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "NewPath", "true", "0", "true" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "\"delay\"" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "\"delay\"" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "\"delay\"" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "\"delay\"" ],
+      "parallelType" : "None"
+    } ]
+  } ]
+}

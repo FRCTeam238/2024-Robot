@@ -7,6 +7,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
+import frc.robot.Utils;
 import frc.robot.subsystems.Drivetrain;
 import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 
@@ -15,7 +16,7 @@ import java.util.function.Supplier;
 /**
  * TrajectoryDriveCommand
  */
-@AutonomousModeAnnotation(parameterNames = {"pathName", "resetPosition", "maxVelocity", "reversed"})
+@AutonomousModeAnnotation(parameterNames = {"TrajectoryName", "resetPosition", "maxVelocity"})
 public class TrajectoryDriveCommand extends SequentialCommandGroup {
 
     Drivetrain drivetrain = Robot.drivetrain;
@@ -30,7 +31,7 @@ public class TrajectoryDriveCommand extends SequentialCommandGroup {
      *                     helpful if this is the first trajectory you want to run
      * @param maxVelocity in meters per second - if set to zero, the default maximum velocity of the drivetrain is used
      */
-    public TrajectoryDriveCommand(String pathName, boolean resetPosition, double maxVelocity, boolean reversed) {
+    public TrajectoryDriveCommand(String pathName, boolean resetPosition, double maxVelocity) {
         ChoreoTrajectory trajectory = Choreo.getTrajectory(pathName);
 
         //reference to the method used to get the current pose
@@ -67,7 +68,7 @@ public class TrajectoryDriveCommand extends SequentialCommandGroup {
                 yController,
                 rotationController,
                 drivetrain::driveWithChassisSpeeds,
-                () -> reversed
+                Utils::isPathReversed
         );
 
         addCommands(swerveCommand);
