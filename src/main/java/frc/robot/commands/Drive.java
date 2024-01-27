@@ -1,8 +1,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.Utils;
 import frc.robot.subsystems.Drivetrain;
+import static frc.robot.subsystems.Drivetrain.DriveConstants.*;
 
 /**
  * Drive
@@ -25,23 +28,9 @@ public class Drive extends Command {
     public void execute() {
         // if the |joystick x axis| is less than 10%, then set leftJoyX to 0
 
-        double leftJoyX = Robot.oi.leftJoystick.getX();
+        double[] joyValues = OI.getSwerveJoystickValues();
 
-        if (Math.abs(leftJoyX) <= .1){
-            leftJoyX = 0;
-        }
-        double rightJoyX = Robot.oi.rightJoystick.getX();
-        if (Math.abs(rightJoyX) <= .1){
-            rightJoyX = 0;
-        }
-        double leftJoyY = Robot.oi.leftJoystick.getY();
-        if (Math.abs(leftJoyY) <= .1){
-            leftJoyY = 0;
-        }
-        var maxSpeed = Drivetrain.DriveConstants.maxVelocityMetersPerSec;
-        var maxAng = Drivetrain.DriveConstants.maxAngularVelocityRadsPerSec;
-
-        drivetrain.drive(-leftJoyY*maxSpeed, -leftJoyX*maxSpeed, -rightJoyX * maxAng);
+        drivetrain.drive(joyValues[0]*maxVelocityMetersPerSec, joyValues[1]*maxVelocityMetersPerSec, joyValues[2]* maxAngularVelocityRadsPerSec);
         
     }
     
