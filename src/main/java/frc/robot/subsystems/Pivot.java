@@ -1,18 +1,18 @@
 package frc.robot.subsystems;
 
-import java.util.concurrent.CancellationException;
-
-import com.ctre.phoenix6.signals.ControlModeValue;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 import com.revrobotics.SparkPIDController.ArbFFUnits;
 
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.PivotConstants.*;
+import static frc.robot.Constants.ShooterConstants.kP;
+
 import frc.robot.MotionProfile;
 
 public class Pivot extends SubsystemBase{
@@ -23,9 +23,14 @@ public class Pivot extends SubsystemBase{
     ArmFeedforward ff; 
 
     public Pivot() {
-        ff = new ArmFeedforward(0, 0, 0);
+        ff = new ArmFeedforward(kS, kG, kV);
         pivotMotor.getPIDController().setFeedbackDevice(encoder);
         //TODO: set pid values
+        SparkPIDController pidController = pivotMotor.getPIDController();
+                
+        pidController.setP(kP);
+        pidController.setI(kI);
+        pidController.setD(kD);
     }
 
     public void setDesiredState(MotionProfile.State state) {
