@@ -10,7 +10,7 @@ public class Constants {
         public static double kI;
         public static double kD;
         public static double kFF;
-        
+        public static double shooterTolerance = 0.3;//TODO: see  if another value is better.
     }
 
     public class OperatorConstants {
