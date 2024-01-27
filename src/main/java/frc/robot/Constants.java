@@ -15,5 +15,14 @@ public class Constants {
 
     public class PivotConstants {
         public static double voltageMax;
+        public static double kS;
+        public static double kG;
+        public static double kV;
+        
+        public static double kP;
+        public static double kI;
+        public static double kD;
+
+        
     }
 }
