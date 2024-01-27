@@ -4,6 +4,7 @@ import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 import com.revrobotics.SparkPIDController.ArbFFUnits;
@@ -17,7 +18,7 @@ import frc.robot.MotionProfile;
 
 public class Pivot extends SubsystemBase{
 
-    CANSparkMax pivotMotor = new CANSparkMax(0, MotorType.kBrushless);
+    CANSparkMax pivotMotor = new CANSparkMax(motor1, MotorType.kBrushless);
     AbsoluteEncoder encoder = pivotMotor.getAbsoluteEncoder(Type.kDutyCycle);
     
     ArmFeedforward ff; 
@@ -31,6 +32,9 @@ public class Pivot extends SubsystemBase{
         pidController.setP(kP);
         pidController.setI(kI);
         pidController.setD(kD);
+        pivotMotor.setSecondaryCurrentLimit(currentLimit);
+        pivotMotor.setIdleMode(IdleMode.kBrake);
+
     }
 
     public void setDesiredState(MotionProfile.State state) {
@@ -52,5 +56,11 @@ public class Pivot extends SubsystemBase{
         pivotMotor.getPIDController().setReference(position, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
         
     }
-    
+
+    public double getVelocity() {
+        return encoder.getVelocity();
+    }
+
+    public double getCurrentPostion();
+        return encoder.getCurrentPostion();
 }
