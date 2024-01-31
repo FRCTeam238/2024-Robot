@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Feeder extends SubsystemBase {
   /** Creates a new Feeder. */
-  CANSparkMax feederMotor = new CANSparkMax(deviceId, MotorType.kBrushless);
-  DigitalInput sensorMachine = new DigitalInput(deviceId);
+  CANSparkMax feederMotor = new CANSparkMax(feederId, MotorType.kBrushless);
+  DigitalInput sensorMachine = new DigitalInput(sensorId);
   public Feeder() {}
 
   public void rollerController(double speed){
