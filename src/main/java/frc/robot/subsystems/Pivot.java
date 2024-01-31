@@ -12,7 +12,7 @@ import com.revrobotics.SparkPIDController.ArbFFUnits;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.PivotConstants.*;
-import static frc.robot.Constants.ShooterConstants.kP;
+
 
 import frc.robot.MotionProfile;
 
@@ -32,7 +32,7 @@ public class Pivot extends SubsystemBase{
         pidController.setP(kP);
         pidController.setI(kI);
         pidController.setD(kD);
-        pivotMotor.setSecondaryCurrentLimit(currentLimit);
+        pivotMotor.setSmartCurrentLimit(currentLimit);
         pivotMotor.setIdleMode(IdleMode.kBrake);
 
     }
@@ -61,6 +61,7 @@ public class Pivot extends SubsystemBase{
         return encoder.getVelocity();
     }
 
-    public double getCurrentPostion();
-        return encoder.getCurrentPostion();
+    public double getCurrentPosition(){
+        return encoder.getPosition();
+    }
 }

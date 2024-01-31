@@ -23,7 +23,7 @@ public class Constants {
         public static double kI;
         public static double kD;
 
-        public static double currentLimit;
+        public static int currentLimit;
         public static int motor1;
     }
 }
