@@ -1,6 +1,5 @@
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.Timer;
 
 public class MotionProfile {
@@ -9,6 +8,7 @@ public class MotionProfile {
          * {@summary} Class describing the motion constraints for the profile to obey
          * 
     **/
+
     public static class MotionConstraints {
         public double maxJerk;
         public double maxAccel;
@@ -36,11 +36,11 @@ public class MotionProfile {
         }
     }
 
-
     public static class State {
         public double velocity;
         public double acceleration;
         public double position;
+
         /**
          * {@summary} constructor for MotionProfile State
          * 
@@ -57,7 +57,8 @@ public class MotionProfile {
             this.velocity = velocity;
             this.position = position;
         }
-                /**
+
+        /**
          * {@summary} constructor for MotionProfile State. Acceleration will be set to 0
          * 
          * @param position
@@ -86,7 +87,6 @@ public class MotionProfile {
         double endRampDownDeccel;   //profile complete
     }
 
-    //Internal class representing the state at each of the phase transitions described in Timings above
     private class TransitionStates {
         State state1, state2, state3, state4, state5, state6;
         public TransitionStates()
@@ -97,26 +97,31 @@ public class MotionProfile {
             v = constraints.maxJerk*Math.pow(t,2)/2;
             p = initial.position + constraints.maxJerk*Math.pow(t,3)/6;
             state1 = new State(p,v,a);
+          
             t = timings.endMaxAccel - timings.endRampUpAccel;
             a = state1.acceleration;
             v = state1.velocity + a*t;
             p = state1.position + state1.velocity*t + a*Math.pow(t,2)/2;
             state2 = new State(p,v,a);
+          
             t = timings.endRampDownAccel - timings.endMaxAccel;
             a = state2.acceleration - constraints.maxJerk*t;
             v = state2.velocity + state2.acceleration*t-constraints.maxJerk*Math.pow(t,2)/2;
             p = state2.position + state2.velocity*t + state2.acceleration*Math.pow(t,2)/2-constraints.maxJerk*Math.pow(t,3)/6;
             state3 = new State(p,v,a);
+
             t = timings.endMaxVelocity - timings.endRampDownAccel;
             a = 0;
             v = state3.velocity;
             p = state3.position + state3.velocity*t;
             state4 = new State(p,v,a);
+
             t = timings.endRampUpDeccel - timings.endMaxVelocity;
             a = -state1.acceleration;
             v = state4.velocity - constraints.maxJerk*Math.pow(t,2)/2;
             p = state4.position + state4.velocity*t - constraints.maxJerk*Math.pow(t,3)/6;
             state5 = new State(p,v,a);
+
             t = timings.endMaxDeccel - timings.endRampUpDeccel;
             a = state5.acceleration;
             v = state5.velocity + a*t;
@@ -132,6 +137,8 @@ public class MotionProfile {
     private State goal, initial;
     private Timings timings;
     private Timer timer;
+
+    private State last, lookback;
     double lastTime = 0;
     private TransitionStates states;
     private ProfileType type;
@@ -139,6 +146,7 @@ public class MotionProfile {
     public MotionProfile(State goal, State current, MotionConstraints constraints, ProfileType type)
     {
         this.constraints = constraints;
+
         //It's easier to always calculate the profile the same way, so if the goal is less than current, flip them and we'll flip the result later
         direction = shouldFlipProfile(current, goal) ? -1 : 1;
         this.goal = direct(goal);
@@ -147,6 +155,8 @@ public class MotionProfile {
         timer = new Timer();
 
         //Choose a profile type and calculate it. This will populate the Timings object and TransitionStates object as necessary
+        last = new State(initial.velocity,initial.position,initial.acceleration);
+        lookback = new State(0,0,0);
         if(current.velocity > constraints.velocityTolerance || goal.velocity !=0 || type == ProfileType.TRAPEZOID)
         {
             this.type = ProfileType.TRAPEZOID;

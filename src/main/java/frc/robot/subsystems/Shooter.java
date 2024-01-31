@@ -1,7 +1,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.units.Velocity;
+
 import static frc.robot.Constants.ShooterConstants.*;
 
 public class Shooter {
@@ -18,11 +22,14 @@ public class Shooter {
         config.Slot0.kV = kFF;
 
         rightMotor.setInverted(true);
-
+        leftMotor.getConfigurator().apply(config);
+        rightMotor.getConfigurator().apply(config);
     }
     public void setSpeed(double left, double right) {
-        leftMotor.set(left);
-        rightMotor.set(right);
+        VelocityVoltage rightVelocityVoltage = new VelocityVoltage(right);
+        VelocityVoltage leftVelocityVoltage = new VelocityVoltage(left);
+        leftMotor.setControl(leftVelocityVoltage);
+        rightMotor.setControl(rightVelocityVoltage);
         desiredLeftSpeed = left;
         desiredRightSpeed = right;
     }
@@ -35,10 +42,7 @@ public class Shooter {
     }
     boolean isAtSpeed(){
         if(getLeftSpeed() <= desiredLeftSpeed + 0.3 && getLeftSpeed() >= desiredLeftSpeed - 0.3){
-            if(getRightSpeed() <= desiredRightSpeed + 0.3 && getRightSpeed() > desiredRightSpeed - 0.3){
-                return true;
-            }
-            return false;
+           return getRightSpeed() <= desiredRightSpeed + 0.3 && getRightSpeed() > desiredRightSpeed - 0.3;
         }else{
             return false;
         }
