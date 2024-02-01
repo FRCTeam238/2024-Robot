@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -20,6 +21,9 @@ import java.util.List;
 import monologue.Logged;
 import monologue.Monologue;
 import org.frc238.lib.autonomous.AutonomousModesReader;
+import org.littletonrobotics.urcl.URCL;
+
+import com.ctre.phoenix6.SignalLogger;
 
 public class Robot extends TimedRobot implements Logged {
   private Command m_autonomousCommand;
@@ -53,6 +57,9 @@ public class Robot extends TimedRobot implements Logged {
     // m_autonomousCommand = m_autonomousModesReader.getAutonomousMode(lastSelectedAuto);
 
     Monologue.setupMonologue(this, "Robot", false, false);
+    SignalLogger.start();
+    DataLogManager.start();
+    URCL.start();
   }
 
   @Override
