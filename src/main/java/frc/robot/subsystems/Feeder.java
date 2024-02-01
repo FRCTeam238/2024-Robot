@@ -10,8 +10,10 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import monologue.Annotations.Log;
+import monologue.Logged;
 
-public class Feeder extends SubsystemBase {
+public class Feeder extends SubsystemBase implements Logged {
   /** Creates a new Feeder. */
   CANSparkMax feederMotor = new CANSparkMax(feederId, MotorType.kBrushless);
 
@@ -23,8 +25,14 @@ public class Feeder extends SubsystemBase {
     feederMotor.set(speed);
   }
 
+  @Log.NT
   public boolean sensor() {
     return sensorMachine.get();
+  }
+
+  @Log.NT
+  public double getSpeed() {
+    return feederMotor.get();
   }
 
   @Override

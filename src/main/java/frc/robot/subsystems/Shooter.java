@@ -5,12 +5,14 @@ import static frc.robot.Constants.ShooterConstants.*;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import monologue.Annotations.Log;
+import monologue.Logged;
 
-public class Shooter {
+public class Shooter implements Logged {
   TalonFX leftMotor = new TalonFX(0);
   TalonFX rightMotor = new TalonFX(0);
-  double desiredLeftSpeed = 0;
-  double desiredRightSpeed = 0;
+  @Log.NT double desiredLeftSpeed = 0;
+  @Log.NT double desiredRightSpeed = 0;
 
   public Shooter() {
     TalonFXConfiguration config = new TalonFXConfiguration();
@@ -33,10 +35,12 @@ public class Shooter {
     desiredRightSpeed = right;
   }
 
+  @Log.NT
   public double getLeftSpeed() {
     return leftMotor.getVelocity().getValueAsDouble();
   }
 
+  @Log.NT
   public double getRightSpeed() {
     return rightMotor.getVelocity().getValueAsDouble();
   }

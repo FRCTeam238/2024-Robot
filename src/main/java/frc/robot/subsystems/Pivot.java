@@ -13,8 +13,10 @@ import com.revrobotics.SparkPIDController.ArbFFUnits;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.MotionProfile;
+import monologue.Annotations.Log;
+import monologue.Logged;
 
-public class Pivot extends SubsystemBase {
+public class Pivot extends SubsystemBase implements Logged {
 
   CANSparkMax pivotMotor = new CANSparkMax(motor1, MotorType.kBrushless);
   AbsoluteEncoder encoder = pivotMotor.getAbsoluteEncoder(Type.kDutyCycle);
@@ -24,7 +26,6 @@ public class Pivot extends SubsystemBase {
   public Pivot() {
     ff = new ArmFeedforward(kS, kG, kV);
     pivotMotor.getPIDController().setFeedbackDevice(encoder);
-    // TODO: set pid values
     SparkPIDController pidController = pivotMotor.getPIDController();
 
     pidController.setP(kP);
@@ -35,10 +36,14 @@ public class Pivot extends SubsystemBase {
   }
 
   public void setDesiredState(MotionProfile.State state) {
-    double position = state.position;
-    double velocity = state.velocity;
-    double acceleration = state.acceleration;
-    double feed = ff.calculate(position, velocity, acceleration);
+    double desiredPosition = state.position;
+    double desiredVelocity = state.velocity;
+    double desiredAcceleration = state.acceleration;
+    double feed = ff.calculate(desiredPosition, desiredVelocity, desiredAcceleration);
+    this.log("desiredPosition", desiredPosition);
+    this.log("desiredVelocity", desiredVelocity);
+    this.log("desiredAccel", desiredAcceleration);
+    this.log("feed", feed);
 
     // -voltageMax < feed < voltageMax
     if (voltageMax < feed) {
@@ -49,13 +54,15 @@ public class Pivot extends SubsystemBase {
 
     pivotMotor
         .getPIDController()
-        .setReference(position, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
+        .setReference(desiredPosition, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
   }
 
+  @Log.NT
   public double getVelocity() {
     return encoder.getVelocity();
   }
 
+  @Log.NT
   public double getCurrentPosition() {
     return encoder.getPosition();
   }

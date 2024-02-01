@@ -9,8 +9,10 @@ import com.revrobotics.SparkLimitSwitch.Type;
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.MotionProfile;
+import monologue.Annotations.Log;
+import monologue.Logged;
 
-public class Elevator extends SubsystemBase {
+public class Elevator extends SubsystemBase implements Logged {
 
   CANSparkMax leadingMotor = new CANSparkMax(leaderId, MotorType.kBrushless);
   CANSparkMax followerMotor = new CANSparkMax(followerId, MotorType.kBrushless);
@@ -39,15 +41,21 @@ public class Elevator extends SubsystemBase {
 
   public void setDesiredState(MotionProfile.State currentState) {
     double feed = FF.calculate(currentState.velocity, currentState.acceleration);
+    this.log("DesiredPosition", currentState.position);
+    this.log("DesiredVelocity", currentState.velocity);
+    this.log("DesiredAccel", currentState.acceleration);
+    this.log("Feedforward", feed);
     leadingMotor
         .getPIDController()
         .setReference(currentState.position, ControlType.kPosition, 0, feed);
   }
 
+  @Log.NT
   public double getVelocity() {
     return leadingMotor.getEncoder().getVelocity();
   }
 
+  @Log.NT
   public double getEncoderPosition() {
     return leadingMotor.getEncoder().getPosition();
   }

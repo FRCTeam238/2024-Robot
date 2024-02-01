@@ -134,7 +134,6 @@ public class MotionProfile {
   private Timings timings;
   private Timer timer;
 
-  private State last, lookback;
   double lastTime = 0;
   private TransitionStates states;
   private ProfileType type;
@@ -152,8 +151,6 @@ public class MotionProfile {
 
     // Choose a profile type and calculate it. This will populate the Timings object and
     // TransitionStates object as necessary
-    last = new State(initial.velocity, initial.position, initial.acceleration);
-    lookback = new State(0, 0, 0);
     if (current.velocity > constraints.velocityTolerance
         || goal.velocity != 0
         || type == ProfileType.TRAPEZOID) {
