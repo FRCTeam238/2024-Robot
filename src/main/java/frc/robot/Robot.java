@@ -4,101 +4,101 @@
 
 package frc.robot;
 
-import java.util.List;
-
-import frc.robot.commands.TrajectoryDriveCommand;
-import org.frc238.lib.autonomous.AutonomousModesReader;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.TrajectoryDriveCommand;
 import frc.robot.subsystems.Drivetrain;
+import java.util.List;
+import org.frc238.lib.autonomous.AutonomousModesReader;
 
 public class Robot extends TimedRobot {
-    private Command m_autonomousCommand;
+  private Command m_autonomousCommand;
 
-    private AutonomousModesReader m_autonomousModesReader;
-    private List<String> autoNames;
-    private SendableChooser<String> autoChooser;
-    private String lastSelectedAuto;
+  private AutonomousModesReader m_autonomousModesReader;
+  private List<String> autoNames;
+  private SendableChooser<String> autoChooser;
+  private String lastSelectedAuto;
 
-    public static Drivetrain drivetrain = new Drivetrain();
-    public static OI oi = new OI();
+  public static Drivetrain drivetrain = new Drivetrain();
+  public static OI oi = new OI();
 
-    @Override
-    public void robotInit() {
-        // m_autonomousModesReader = new AutonomousModesReader(new DataFileAutonomousModeDataSource("/amode238.txt"));
-        //
-        // autoNames = m_autonomousModesReader.GetAutoNames();
-        // autoChooser = new SendableChooser<String>();
-        // autoChooser.setDefaultOption("Default Auto", autoNames.get(0));
-        // for (String name : autoNames) {
-        //     autoChooser.addOption(name, name);
-        // }
-        // SmartDashboard.putData("Auto choices", autoChooser);
-        // lastSelectedAuto = autoChooser.getSelected();
-        // m_autonomousCommand = m_autonomousModesReader.getAutonomousMode(lastSelectedAuto);
+  @Override
+  public void robotInit() {
+    // m_autonomousModesReader = new AutonomousModesReader(new
+    // DataFileAutonomousModeDataSource("/amode238.txt"));
+    //
+    // autoNames = m_autonomousModesReader.GetAutoNames();
+    // autoChooser = new SendableChooser<String>();
+    // autoChooser.setDefaultOption("Default Auto", autoNames.get(0));
+    // for (String name : autoNames) {
+    //     autoChooser.addOption(name, name);
+    // }
+    // SmartDashboard.putData("Auto choices", autoChooser);
+    // lastSelectedAuto = autoChooser.getSelected();
+    // m_autonomousCommand = m_autonomousModesReader.getAutonomousMode(lastSelectedAuto);
 
+  }
 
+  @Override
+  public void robotPeriodic() {
+    CommandScheduler.getInstance().run();
+
+    // if (lastSelectedAuto != autoChooser.getSelected()) {
+    //     m_autonomousCommand =
+    // m_autonomousModesReader.getAutonomousMode(autoChooser.getSelected());
+    // }
+    //
+    // lastSelectedAuto = autoChooser.getSelected();
+    //
+  }
+
+  @Override
+  public void disabledInit() {}
+
+  @Override
+  public void disabledPeriodic() {}
+
+  @Override
+  public void disabledExit() {}
+
+  @Override
+  public void autonomousInit() {
+    m_autonomousCommand = new TrajectoryDriveCommand("NewPath", true, 1);
+
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
     }
+  }
 
-    @Override
-    public void robotPeriodic() {
-        CommandScheduler.getInstance().run();
+  @Override
+  public void autonomousPeriodic() {}
 
-        // if (lastSelectedAuto != autoChooser.getSelected()) {
-        //     m_autonomousCommand = m_autonomousModesReader.getAutonomousMode(autoChooser.getSelected());
-        // }
-        //
-        // lastSelectedAuto = autoChooser.getSelected();
-        //
+  @Override
+  public void autonomousExit() {}
+
+  @Override
+  public void teleopInit() {
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
     }
+  }
 
-    @Override
-    public void disabledInit() {}
+  @Override
+  public void teleopPeriodic() {}
 
-    @Override
-    public void disabledPeriodic() {}
+  @Override
+  public void teleopExit() {}
 
-    @Override
-    public void disabledExit() {}
+  @Override
+  public void testInit() {
+    CommandScheduler.getInstance().cancelAll();
+  }
 
-    @Override
-    public void autonomousInit() {
-        m_autonomousCommand = new TrajectoryDriveCommand("NewPath", true, 1);
+  @Override
+  public void testPeriodic() {}
 
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.schedule();
-        }
-    }
-
-    @Override
-    public void autonomousPeriodic() {}
-
-    @Override
-    public void autonomousExit() {}
-
-    @Override
-    public void teleopInit() {
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.cancel();
-        }
-    }
-
-    @Override
-    public void teleopPeriodic() {}
-
-    @Override
-    public void teleopExit() {}
-
-    @Override
-    public void testInit() {
-        CommandScheduler.getInstance().cancelAll();
-    }
-
-    @Override
-    public void testPeriodic() {}
-
-    @Override
-    public void testExit() {}
+  @Override
+  public void testExit() {}
 }
