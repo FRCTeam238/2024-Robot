@@ -3,6 +3,7 @@ package frc.robot;
 public class Constants {
   public class IntakeConstants {
     public static int kID = 0;
+    public static double intakeSpeed = 0;
   }
 
   public class ShooterConstants {
@@ -41,6 +42,7 @@ public class Constants {
   public class FeederConstants {
     public static final int feederId = 0;
     public static final int sensorId = 0;
+    public static final double speed = 0;
   }
 
   public class ElevatorConstants {

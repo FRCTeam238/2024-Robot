@@ -5,10 +5,12 @@ import static frc.robot.Constants.ShooterConstants.*;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import monologue.Annotations.Log;
 import monologue.Logged;
 
-public class Shooter implements Logged {
+public class Shooter extends SubsystemBase implements Logged {
   TalonFX leftMotor = new TalonFX(0);
   TalonFX rightMotor = new TalonFX(0);
   @Log.NT double desiredLeftSpeed = 0;
@@ -33,6 +35,11 @@ public class Shooter implements Logged {
     rightMotor.setControl(rightVelocityVoltage);
     desiredLeftSpeed = left;
     desiredRightSpeed = right;
+  }
+
+  public void setWheelTargetSpeed(){
+    //does math
+    setSpeed(0, 0);
   }
 
   @Log.NT
