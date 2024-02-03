@@ -100,5 +100,8 @@ public class Constants {
 
     public static final double turnTolerance = 0;
     public static final double velocityTolerance = 0.1;
+    public static final double positionTolerance = 0.05;
+    public static final double xandyvelocityTolerance = 0.05;
+  
   }
 }

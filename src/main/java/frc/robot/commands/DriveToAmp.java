@@ -13,15 +13,19 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.Utils;
 
-public class TargetDT extends Command {
+public class DriveToAmp extends Command {
 
-  PIDController pid; 
+  PIDController pidRotation, pidX, pidY; 
 
   /** Creates a new TargetDT. */
-  public TargetDT() {
+  public DriveToAmp() {
     addRequirements(Robot.drivetrain);
-    pid = new PIDController(kPAngular, kIAngular, kDAngular);
-    pid.setTolerance(turnTolerance, velocityTolerance);
+    pidRotation = new PIDController(kPAngular, kIAngular, kDAngular);
+    pidRotation.setTolerance(turnTolerance, velocityTolerance);
+    pidX = new PIDController(kP, kI, kD);
+    pidY = new PIDController(kP, kI, kD);
+    pidX.setTolerance(positionTolerance, xandyvelocityTolerance);
+    pidY.setTolerance(positionTolerance, xandyvelocityTolerance);
   }
 
   // Called when the command is initially scheduled.
@@ -31,15 +35,13 @@ public class TargetDT extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double[] joyValues = OI.getSwerveJoystickValues();
-
-    double speakerLocation = getSpeakerAngle();
-    double robotAngle = Robot.drivetrain.getPose().getRotation().getRadians();
+    Pose2d ampLocation = Utils.ampLocation();
+    Pose2d currentLocation = Robot.drivetrain.getPose();
 
     Robot.drivetrain.drive(
-        joyValues[0] * maxVelocityMetersPerSec,
-        joyValues[1] * maxVelocityMetersPerSec,
-        pid.calculate(robotAngle, speakerLocation)
+        pidX.calculate(currentLocation.getX(), ampLocation.getX()),
+        pidY.calculate(currentLocation.getY(), ampLocation.getY()),
+        pidRotation.calculate(currentLocation.getRotation().getRadians(), ampLocation.getRotation().getRadians())
     );
 
   }
@@ -48,16 +50,12 @@ public class TargetDT extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return pid.atSetpoint();
+    return pidRotation.atSetpoint() && pidX.atSetpoint() && pidY.atSetpoint();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-
-  private double getSpeakerAngle() {
-    Pose2d currentPosition = Robot.drivetrain.getPose();
-    Pose2d speakerLocation = Utils.speakerLocation();
-    return currentPosition.minus(speakerLocation).getRotation().getRadians();
+  public void end(boolean interrupted) {
+    Robot.drivetrain.drive(0, 0, 0);
   }
 }
