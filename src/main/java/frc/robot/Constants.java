@@ -1,5 +1,9 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.util.Units;
+
 public class Constants {
   public class IntakeConstants {
     public static int kID = 0;
@@ -56,5 +60,45 @@ public class Constants {
     public static final double kG = 0;
     public static final double kV = 0;
     public static final double kA = 0;
+  }
+
+  public class DriveConstants {
+
+    public static final boolean fieldRelative = true;
+
+    public static final int frontRightDriveCANId = 0;
+    public static final int backRightDriveCANId = 2;
+    public static final int backLeftDriveCANId = 4;
+    public static final int frontLeftDriveCANId = 6;
+
+    public static final int frontRightTurnCANId = 1;
+    public static final int backRightTurnCANId = 3;
+    public static final int backLeftTurnCANId = 5;
+    public static final int frontLeftTurnCANId = 7;
+
+    public static final double kP = 1;
+    public static final double kI = 0;
+    public static final double kD = 0;
+
+    public static final double kPAngular = 1;
+    public static final double kIAngular = 0;
+    public static final double kDAngular = 0;
+
+    public static final double maxVelocityMetersPerSec = 4.86;
+    public static final double maxAccelerationMetersPerSec2 = 100; // TODO: make this a real number
+
+    public static final double kTrackWidth = Units.inchesToMeters(20);
+    public static final double kWheelBase = Units.inchesToMeters(20);
+    public static final SwerveDriveKinematics kDriveKinematics =
+        new SwerveDriveKinematics(
+            new Translation2d(kWheelBase / 2, kTrackWidth / 2),
+            new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
+            new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
+            new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
+
+    public static double maxAngularVelocityRadsPerSec = 2 * Math.PI;
+
+    public static final double turnTolerance = 0;
+    public static final double velocityTolerance = 0.1;
   }
 }

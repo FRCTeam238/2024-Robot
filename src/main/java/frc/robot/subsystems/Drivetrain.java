@@ -11,18 +11,19 @@ import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import static frc.robot.Constants.DriveConstants.*;
 
 /** for swerve */
 public class Drivetrain extends SubsystemBase {
 
   SwerveModule frontLeft =
-      new SwerveModule(DriveConstants.frontLeftDriveCANId, DriveConstants.frontLeftTurnCANId);
+      new SwerveModule(frontLeftDriveCANId, frontLeftTurnCANId);
   SwerveModule frontRight =
-      new SwerveModule(DriveConstants.frontRightDriveCANId, DriveConstants.frontRightTurnCANId);
+      new SwerveModule(frontRightDriveCANId, frontRightTurnCANId);
   SwerveModule backLeft =
-      new SwerveModule(DriveConstants.backLeftDriveCANId, DriveConstants.backLeftTurnCANId);
+      new SwerveModule(backLeftDriveCANId, backLeftTurnCANId);
   SwerveModule backRight =
-      new SwerveModule(DriveConstants.backRightDriveCANId, DriveConstants.backRightTurnCANId);
+      new SwerveModule(backRightDriveCANId, backRightTurnCANId);
 
   SwerveDriveOdometry odometry;
 
@@ -34,7 +35,7 @@ public class Drivetrain extends SubsystemBase {
     gyro = new AHRS(Port.kMXP);
     odometry =
         new SwerveDriveOdometry(
-            DriveConstants.kDriveKinematics,
+            kDriveKinematics,
             gyro.getRotation2d(),
             new SwerveModulePosition[] {
               frontLeft.getPosition(),
@@ -65,22 +66,22 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumberArray(
         "swerve/wheelLocations",
         new double[] {
-          new Translation2d(DriveConstants.kWheelBase / 2, DriveConstants.kTrackWidth / 2).getX(),
-          new Translation2d(DriveConstants.kWheelBase / 2, DriveConstants.kTrackWidth / 2).getY(),
-          new Translation2d(DriveConstants.kWheelBase / 2, -DriveConstants.kTrackWidth / 2).getX(),
-          new Translation2d(DriveConstants.kWheelBase / 2, -DriveConstants.kTrackWidth / 2).getY(),
-          new Translation2d(-DriveConstants.kWheelBase / 2, DriveConstants.kTrackWidth / 2).getX(),
-          new Translation2d(-DriveConstants.kWheelBase / 2, DriveConstants.kTrackWidth / 2).getY(),
-          new Translation2d(-DriveConstants.kWheelBase / 2, -DriveConstants.kTrackWidth / 2).getX(),
-          new Translation2d(-DriveConstants.kWheelBase / 2, -DriveConstants.kTrackWidth / 2).getY(),
+          new Translation2d(kWheelBase / 2, kTrackWidth / 2).getX(),
+          new Translation2d(kWheelBase / 2, kTrackWidth / 2).getY(),
+          new Translation2d(kWheelBase / 2, -kTrackWidth / 2).getX(),
+          new Translation2d(kWheelBase / 2, -kTrackWidth / 2).getY(),
+          new Translation2d(-kWheelBase / 2, kTrackWidth / 2).getX(),
+          new Translation2d(-kWheelBase / 2, kTrackWidth / 2).getY(),
+          new Translation2d(-kWheelBase / 2, -kTrackWidth / 2).getX(),
+          new Translation2d(-kWheelBase / 2, -kTrackWidth / 2).getY(),
         });
     SmartDashboard.putString("swerve/rotationUnit", "radians");
-    SmartDashboard.putNumber("swerve/sizeLeftRight", DriveConstants.kTrackWidth);
-    SmartDashboard.putNumber("swerve/sizeFrontBack", DriveConstants.kWheelBase);
+    SmartDashboard.putNumber("swerve/sizeLeftRight", kTrackWidth);
+    SmartDashboard.putNumber("swerve/sizeFrontBack", kWheelBase);
     SmartDashboard.putString("swerve/forwardDirection", "up");
     SmartDashboard.putNumber(
-        "swerve/maxAngularVelocity", DriveConstants.maxAngularVelocityRadsPerSec);
-    SmartDashboard.putNumber("swerve/maxSpeed", DriveConstants.maxVelocityMetersPerSec);
+        "swerve/maxAngularVelocity", maxAngularVelocityRadsPerSec);
+    SmartDashboard.putNumber("swerve/maxSpeed", maxVelocityMetersPerSec);
   }
 
   public void updateTelemetry() {
@@ -107,10 +108,10 @@ public class Drivetrain extends SubsystemBase {
         });
     SmartDashboard.putNumber("swerve/robotRotation", gyro.getRotation2d().getRadians());
     ChassisSpeeds measuredChassisSpeeds =
-        DriveConstants.kDriveKinematics.toChassisSpeeds(
+        kDriveKinematics.toChassisSpeeds(
             frontLeft.getState(), frontRight.getState(), backLeft.getState(), backRight.getState());
     ChassisSpeeds desiredChassisSpeeds =
-        DriveConstants.kDriveKinematics.toChassisSpeeds(
+        kDriveKinematics.toChassisSpeeds(
             frontLeft.getDesiredState(),
             frontRight.getDesiredState(),
             backLeft.getDesiredState(),
@@ -152,8 +153,8 @@ public class Drivetrain extends SubsystemBase {
   public void drive(double xSpeed, double ySpeed, double rot) {
 
     var swerveModuleStates =
-        DriveConstants.kDriveKinematics.toSwerveModuleStates(
-            DriveConstants.fieldRelative
+        kDriveKinematics.toSwerveModuleStates(
+            fieldRelative
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
 
@@ -161,7 +162,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void driveWithChassisSpeeds(ChassisSpeeds speeds) {
-    var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(speeds);
+    var swerveModuleStates = kDriveKinematics.toSwerveModuleStates(speeds);
     setModuleStates(swerveModuleStates);
   }
 
@@ -174,7 +175,7 @@ public class Drivetrain extends SubsystemBase {
 
   public void setModuleStates(SwerveModuleState[] states) {
 
-    SwerveDriveKinematics.desaturateWheelSpeeds(states, DriveConstants.maxVelocityMetersPerSec);
+    SwerveDriveKinematics.desaturateWheelSpeeds(states, maxVelocityMetersPerSec);
 
     frontLeft.setDesiredState(states[0]);
     frontRight.setDesiredState(states[1]);
@@ -214,42 +215,5 @@ public class Drivetrain extends SubsystemBase {
 
   public double getTurnRate() {
     return gyro.getRate();
-  }
-
-  public static class DriveConstants {
-
-    public static final boolean fieldRelative = true;
-
-    public static final int frontRightDriveCANId = 0;
-    public static final int backRightDriveCANId = 2;
-    public static final int backLeftDriveCANId = 4;
-    public static final int frontLeftDriveCANId = 6;
-
-    public static final int frontRightTurnCANId = 1;
-    public static final int backRightTurnCANId = 3;
-    public static final int backLeftTurnCANId = 5;
-    public static final int frontLeftTurnCANId = 7;
-
-    public static final double kP = 1;
-    public static final double kI = 0;
-    public static final double kD = 0;
-
-    public static final double kPAngular = 1;
-    public static final double kIAngular = 0;
-    public static final double kDAngular = 0;
-
-    public static final double maxVelocityMetersPerSec = 4.86;
-    public static final double maxAccelerationMetersPerSec2 = 100; // TODO: make this a real number
-
-    public static final double kTrackWidth = Units.inchesToMeters(20);
-    public static final double kWheelBase = Units.inchesToMeters(20);
-    public static final SwerveDriveKinematics kDriveKinematics =
-        new SwerveDriveKinematics(
-            new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-            new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-            new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
-            new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
-
-    public static double maxAngularVelocityRadsPerSec = 2 * Math.PI;
-  }
+  }  
 }
