@@ -50,4 +50,10 @@ public class Utils {
     return new Pose2d(1.84, 7.738, new Rotation2d(Math.PI/2));
   }
 
+  public static double getSpeakerDistance() {
+    Pose2d currentPosition = Robot.drivetrain.getPose();
+    Pose2d speakerLocation = Utils.speakerLocation();
+    return currentPosition.getTranslation().getDistance(speakerLocation.getTranslation());
+  }
+
 }

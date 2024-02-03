@@ -7,6 +7,7 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Utils;
 import monologue.Annotations.Log;
 import monologue.Logged;
 
@@ -38,7 +39,8 @@ public class Shooter extends SubsystemBase implements Logged {
   }
 
   public void setWheelTargetSpeed(){
-    //does math
+    double distance = Utils.getSpeakerDistance();
+    //Do some math
     setSpeed(0, 0);
   }
 
@@ -52,7 +54,7 @@ public class Shooter extends SubsystemBase implements Logged {
     return rightMotor.getVelocity().getValueAsDouble();
   }
 
-  boolean isAtSpeed() {
+  public boolean isAtSpeed() {
     if (getLeftSpeed() <= desiredLeftSpeed + 0.3 && getLeftSpeed() >= desiredLeftSpeed - 0.3) {
       return getRightSpeed() <= desiredRightSpeed + 0.3
           && getRightSpeed() > desiredRightSpeed - 0.3;

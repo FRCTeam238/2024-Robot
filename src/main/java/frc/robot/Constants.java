@@ -41,6 +41,8 @@ public class Constants {
 
     public static int currentLimit;
     public static int motor1;
+
+    public static final double pivotTolerance = 0.1;
   }
 
   public class FeederConstants {
@@ -60,6 +62,8 @@ public class Constants {
     public static final double kG = 0;
     public static final double kV = 0;
     public static final double kA = 0;
+
+    public static final double elevatorTolerance = .1;
   }
 
   public class DriveConstants {
