@@ -11,6 +11,7 @@ import frc.robot.Utils;
 import frc.robot.subsystems.Drivetrain;
 import java.util.function.Supplier;
 import org.frc238.lib.autonomous.AutonomousModeAnnotation;
+import static frc.robot.Constants.DriveConstants.*;
 
 /** TrajectoryDriveCommand */
 @AutonomousModeAnnotation(parameterNames = {"TrajectoryName", "resetPosition", "maxVelocity"})
@@ -35,19 +36,19 @@ public class TrajectoryDriveCommand extends SequentialCommandGroup {
     Supplier<Pose2d> pose = drivetrain::getPose;
     PIDController xController =
         new PIDController(
-            Drivetrain.DriveConstants.kP,
-            Drivetrain.DriveConstants.kI,
-            Drivetrain.DriveConstants.kD);
+            kP,
+            kI,
+            kD);
     PIDController yController =
         new PIDController(
-            Drivetrain.DriveConstants.kP,
-            Drivetrain.DriveConstants.kI,
-            Drivetrain.DriveConstants.kD);
+            kP,
+            kI,
+            kD);
     PIDController rotationController =
         new PIDController(
-            Drivetrain.DriveConstants.kPAngular,
-            Drivetrain.DriveConstants.kIAngular,
-            Drivetrain.DriveConstants.kDAngular);
+            kPAngular,
+            kIAngular,
+            kDAngular);
 
     // creates a command that sets the position of the robot to the starting point of the trajectory
     Command resetPos =

@@ -5,10 +5,13 @@ import static frc.robot.Constants.ShooterConstants.*;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Utils;
 import monologue.Annotations.Log;
 import monologue.Logged;
 
-public class Shooter implements Logged {
+public class Shooter extends SubsystemBase implements Logged {
   TalonFX leftMotor = new TalonFX(0);
   TalonFX rightMotor = new TalonFX(0);
   @Log.NT double desiredLeftSpeed = 0;
@@ -35,6 +38,12 @@ public class Shooter implements Logged {
     desiredRightSpeed = right;
   }
 
+  public void setWheelTargetSpeed(){
+    double distance = Utils.getSpeakerDistance();
+    //Do some math
+    setSpeed(0, 0);
+  }
+
   @Log.NT
   public double getLeftSpeed() {
     return leftMotor.getVelocity().getValueAsDouble();
@@ -45,7 +54,7 @@ public class Shooter implements Logged {
     return rightMotor.getVelocity().getValueAsDouble();
   }
 
-  boolean isAtSpeed() {
+  public boolean isAtSpeed() {
     if (getLeftSpeed() <= desiredLeftSpeed + 0.3 && getLeftSpeed() >= desiredLeftSpeed - 0.3) {
       return getRightSpeed() <= desiredRightSpeed + 0.3
           && getRightSpeed() > desiredRightSpeed - 0.3;
