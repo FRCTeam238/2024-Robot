@@ -8,6 +8,7 @@ public class Constants {
   public class IntakeConstants {
     public static int kID = 0;
     public static double intakeSpeed = 0;
+    public static double ejectTime = 2;
   }
 
   public class ShooterConstants {
@@ -46,9 +47,10 @@ public class Constants {
     public static double maxAccel = 0;
     public static double maxVelocity = 0;
     public static double velocityTolerance = 0;
-
     public static final double velocityMaxError = 0;
     public static final double positionMaxError = 0;
+
+    public static final double intakePosition = 0;
   }
 
   public class FeederConstants {
@@ -76,11 +78,10 @@ public class Constants {
     public static final double maxAccel = 0;
     public static final double maxVel = 0;
     public static final double velocityTolerance = 0;
-
     public static final double velocityMaxError = 0;
     public static final double positionMaxError = 0;
 
-    public static final double elevatorTolerance = .1;
+    public static final double intakePosition = 0;
   }
 
   public class DriveConstants {
