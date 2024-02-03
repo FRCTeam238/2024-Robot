@@ -36,11 +36,19 @@ public class Constants {
 
     public static int currentLimit;
     public static int motor1;
+
+    public static double maxJerk = 0;
+    public static double maxAccel = 0;
+    public static double maxVelocity = 0;
+    public static double velocityTolerance = 0;
+
   }
 
   public class FeederConstants {
     public static final int feederId = 0;
     public static final int sensorId = 0;
+    public static final double ejectRunTime = 4;//seconds
+    public static final double ejectPercent = -0.5;
   }
 
   public class ElevatorConstants {
@@ -54,5 +62,14 @@ public class Constants {
     public static final double kG = 0;
     public static final double kV = 0;
     public static final double kA = 0;
+
+    public static final double maxElevatorJerk = 0;
+    public static final double maxAccel = 0;
+    public static final double maxVel = 0;
+    public static final double velocityTolerance = 0;
+
+    public static final double velocityMaxError = 0;
+    public static final double positionMaxError = 0;
+
   }
 }

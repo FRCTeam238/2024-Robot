@@ -59,4 +59,11 @@ public class Elevator extends SubsystemBase implements Logged {
   public double getEncoderPosition() {
     return leadingMotor.getEncoder().getPosition();
   }
+
+  /**
+   * gets the current velocity and encoder position as a {@link MotionProfile.State}
+   */
+  public MotionProfile.State getState() {
+    return new MotionProfile.State(getEncoderPosition(), getVelocity());
+  }
 }
