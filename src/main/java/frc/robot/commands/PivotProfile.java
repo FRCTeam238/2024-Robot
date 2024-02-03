@@ -5,8 +5,6 @@ import frc.robot.MotionProfile;
 import frc.robot.Robot;
 import frc.robot.subsystems.Pivot;
 
-import static frc.robot.Constants.ElevatorConstants.positionMaxError;
-import static frc.robot.Constants.ElevatorConstants.velocityMaxError;
 import static frc.robot.Constants.PivotConstants.*;
 
 

@@ -55,8 +55,8 @@ public class AimShooter extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean elevatorOnTarget = Math.abs(desiredElevatorHeight - Robot.elevator.getEncoderPosition()) < ElevatorConstants.elevatorTolerance;
-    boolean pivotOnTarget = Math.abs(desiredPivotAngle - Robot.pivot.getCurrentPosition()) < PivotConstants.pivotTolerance;
+    boolean elevatorOnTarget = Math.abs(desiredElevatorHeight - Robot.elevator.getEncoderPosition()) < ElevatorConstants.positionMaxError;
+    boolean pivotOnTarget = Math.abs(desiredPivotAngle - Robot.pivot.getCurrentPosition()) < PivotConstants.positionMaxError;
     return elevatorOnTarget && pivotOnTarget && Robot.shooter.isAtSpeed();
   }
 
