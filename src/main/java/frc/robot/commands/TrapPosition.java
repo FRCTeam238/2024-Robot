@@ -14,6 +14,9 @@ public class TrapPosition extends ParallelCommandGroup {
   public TrapPosition() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+      new ElevatorProfile(new State(ElevatorConstants.trapPosition), "TrapPosition"),
+      new PivotProfile(new State(PivotConstants.trapPosition), "TrapPosition")
+    );
   }
 }

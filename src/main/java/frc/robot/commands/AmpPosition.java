@@ -15,8 +15,8 @@ public class AmpPosition extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ElevatorProfile(new State(ElevatorConstants.AmpPosition), "AmpPosition"),
-      new PivotProfile(new State(PivotConstants.AmpPosition), "Amp Position")
+      new ElevatorProfile(new State(ElevatorConstants.ampPosition), "AmpPosition"),
+      new PivotProfile(new State(PivotConstants.ampPosition), "AmpPosition")
     );
   }
 }

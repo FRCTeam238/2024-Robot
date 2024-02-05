@@ -14,6 +14,9 @@ public class ScoreTrap extends SequentialCommandGroup {
   public ScoreTrap() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+      new TrapPosition(),
+      new EjectNote()
+    );
   }
 }
