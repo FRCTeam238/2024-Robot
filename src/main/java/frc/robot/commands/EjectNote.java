@@ -1,14 +1,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.subsystems.Feeder;
 import static frc.robot.Constants.FeederConstants.*;
 
 public class EjectNote extends Command {
     private final Feeder feeder;
 
-    public EjectNote(Feeder feeder) {
-        this.feeder = feeder;
+    public EjectNote() {
+        this.feeder = Robot.feeder;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         addRequirements(this.feeder);
