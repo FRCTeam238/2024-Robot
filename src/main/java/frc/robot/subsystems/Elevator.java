@@ -7,7 +7,17 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkLimitSwitch.Type;
 import edu.wpi.first.math.controller.ElevatorFeedforward;
+import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.Voltage;
+
+import static edu.wpi.first.units.Units.Volts;
+import static edu.wpi.first.units.Units.Seconds;
+
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Mechanism;
 import frc.robot.MotionProfile;
 import monologue.Annotations.Log;
 import monologue.Logged;
@@ -19,8 +29,23 @@ public class Elevator extends SubsystemBase implements Logged {
 
   protected ElevatorFeedforward FF = new ElevatorFeedforward(kS, kG, kV, kA);
 
+  SysIdRoutine sysID = new SysIdRoutine(
+    new Config(
+      Volts.of(.3).per(Seconds.of(1)), Volts.of(3), null 
+    ),
+    new Mechanism(this::moveByVoltage, null, this));
+
   public Elevator() {
     configureMotorController();
+  }
+
+
+  public Command sysIdQuasistatic(SysIdRoutine.Direction direction) {
+    return sysID.quasistatic(direction);
+  }
+
+  public Command sysIdDynamic(SysIdRoutine.Direction direction) {
+    return sysID.dynamic(direction);
   }
 
   private void configureMotorController() {
@@ -37,6 +62,10 @@ public class Elevator extends SubsystemBase implements Logged {
 
   public void moveByPercentOutput(double percent) {
     leadingMotor.set(percent);
+  }
+
+  public void moveByVoltage(Measure<Voltage> volts) {
+    leadingMotor.setVoltage(volts.magnitude());
   }
 
   public void setDesiredState(MotionProfile.State currentState) {

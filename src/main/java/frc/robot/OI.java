@@ -5,6 +5,7 @@ import static frc.robot.Constants.OperatorConstants.*;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.Drive;
 
 /** OI */
@@ -20,6 +21,9 @@ public class OI {
 
   public OI() {
     Robot.drivetrain.setDefaultCommand(new Drive());
+
+    operatorController.a().whileTrue(Robot.elevator.sysIdDynamic(Direction.kForward));
+    operatorController.b().whileTrue(Robot.elevator.sysIdQuasistatic(Direction.kReverse));
   }
 
   public static double[] getSwerveJoystickValues() {
