@@ -51,6 +51,9 @@ public class Constants {
     public static final double positionMaxError = 0;
 
     public static final double intakePosition = 0;
+    public static final double ampPosition = 0;
+    public static final double trapPosition = 0;
+    public static final double climbPosition = 0;
   }
 
   public class FeederConstants {
@@ -82,6 +85,9 @@ public class Constants {
     public static final double positionMaxError = 0;
 
     public static final double intakePosition = 0;
+    public static final double ampPosition = 0;
+    public static final double trapPosition = 0;
+    public static final double climbPosition = 0;
   }
 
   public class DriveConstants {
