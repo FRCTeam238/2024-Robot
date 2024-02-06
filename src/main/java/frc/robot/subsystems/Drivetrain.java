@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -12,6 +14,8 @@ import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.DriveConstants.*;
+
+import org.photonvision.EstimatedRobotPose;
 
 /** for swerve */
 public class Drivetrain extends SubsystemBase {
@@ -25,7 +29,8 @@ public class Drivetrain extends SubsystemBase {
   SwerveModule backRight =
       new SwerveModule(backRightDriveCANId, backRightTurnCANId);
 
-  SwerveDriveOdometry odometry;
+  //SwerveDriveOdometry odometry;
+  SwerveDrivePoseEstimator odometry;
 
   AHRS gyro;
 
@@ -34,7 +39,7 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     gyro = new AHRS(Port.kMXP);
     odometry =
-        new SwerveDriveOdometry(
+        new SwerveDrivePoseEstimator(
             kDriveKinematics,
             gyro.getRotation2d(),
             new SwerveModulePosition[] {
@@ -42,7 +47,7 @@ public class Drivetrain extends SubsystemBase {
               frontRight.getPosition(),
               backLeft.getPosition(),
               backRight.getPosition()
-            });
+            }, new Pose2d());
     initializeTelemetry();
   }
 
@@ -134,7 +139,12 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public Pose2d getPose() {
-    return odometry.getPoseMeters();
+    return odometry.getEstimatedPosition();
+  }
+
+  public void updatePoseEstimate(EstimatedRobotPose estimate)
+  {
+    odometry.addVisionMeasurement(estimate.estimatedPose.toPose2d(), estimate.timestampSeconds);
   }
 
   public void resetOdometry(Pose2d pose) {
