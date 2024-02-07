@@ -24,6 +24,10 @@ public class OI {
 
     operatorController.a().whileTrue(Robot.elevator.sysIdDynamic(Direction.kForward));
     operatorController.b().whileTrue(Robot.elevator.sysIdQuasistatic(Direction.kReverse));
+
+    operatorController.x().whileTrue(Robot.pivot.sysIdDynamic(Direction.kForward));    
+    operatorController.y().whileTrue(Robot.pivot.sysIdQuasistatic(Direction.kReverse));
+
   }
 
   public static double[] getSwerveJoystickValues() {
