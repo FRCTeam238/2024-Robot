@@ -33,6 +33,8 @@ public class Robot extends TimedRobot implements Logged {
   private SendableChooser<String> autoChooser;
   private String lastSelectedAuto;
 
+  public static Constants.RobotState state = Constants.RobotState.INTAKE;
+
   public static Drivetrain drivetrain = new Drivetrain();
   public static Elevator elevator = new Elevator();
   public static Intake intake = new Intake();
@@ -110,6 +112,8 @@ public class Robot extends TimedRobot implements Logged {
     }
   }
 
+
+
   @Override
   public void teleopPeriodic() {}
 
@@ -126,4 +130,8 @@ public class Robot extends TimedRobot implements Logged {
 
   @Override
   public void testExit() {}
+
+  public static Constants.RobotState getState() {
+    return state;
+  }
 }

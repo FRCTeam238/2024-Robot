@@ -5,9 +5,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.Constants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.PivotConstants;
 import frc.robot.MotionProfile.State;
+import frc.robot.Robot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,6 +21,7 @@ public class AmpPosition extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new RunCommand(() -> Robot.state = Constants.RobotState.AMP),
       new ElevatorProfile(new State(ElevatorConstants.ampPosition), "AmpPosition"),
       new PivotProfile(new State(PivotConstants.ampPosition), "AmpPosition")
     );

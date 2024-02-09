@@ -7,9 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
-public class LaunchNode extends Command {
+public class LaunchNote extends Command {
   /** Creates a new LaunchNode. */
-  public LaunchNode() {
+  public LaunchNote() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.feeder, Robot.shooter);
   }

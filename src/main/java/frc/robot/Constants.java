@@ -134,6 +134,13 @@ public class Constants {
     public static final double xandyvelocityTolerance = 0.05;
   }
 
+  public enum RobotState {
+    AMP,
+    TRAP,
+    INTAKE,
+    TARGET
+  }
+
   public class VisionConstants {
     public static Transform3d frontCameraTransform = new Transform3d(0, 0, 0, new Rotation3d(0,0,0));
     public static Transform3d backCameraTransform = new Transform3d(0, 0, 0, new Rotation3d(0,0,0));

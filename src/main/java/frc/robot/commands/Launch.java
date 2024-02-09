@@ -16,7 +16,7 @@ public class Launch extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new Target(),
-      new LaunchNode()
+      new LaunchNote()
     );
   }
 }
