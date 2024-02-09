@@ -57,17 +57,17 @@ public class Utils {
         return new Pose2d(
           4.641 - Constants.DriveConstants.stageOffset / 2,
           4.498 + Constants.DriveConstants.stageOffset * Math.sqrt(3) / 2,
-          new Rotation2d(Math.PI * 2 / 3));// or Blue
+          new Rotation2d(Math.PI * 5 / 3));// or Blue
       }
       return new Pose2d(
         11.904 + Constants.DriveConstants.stageOffset / 2,
         3.713 - Constants.DriveConstants.stageOffset * Math.sqrt(3) / 2,
-        new Rotation2d(Math.PI * 5 / 3));
+        new Rotation2d(Math.PI * 2 / 3));
     }
     return new Pose2d(
       11.904 + Constants.DriveConstants.stageOffset / 2,
       3.713 - Constants.DriveConstants.stageOffset * Math.sqrt(3) / 2,
-      new Rotation2d(Math.PI * 5 / 3));
+      new Rotation2d(Math.PI * 2 / 3));
   }
 
   public static Pose2d stageRight() {
@@ -77,17 +77,17 @@ public class Utils {
         return new Pose2d(
           11.904 + Constants.DriveConstants.stageOffset / 2,
           4.498 + Constants.DriveConstants.stageOffset * Math.sqrt(3) / 2,
-          new Rotation2d(Math.PI / 3));// or Blue
+          new Rotation2d(Math.PI * 4 / 3));// or Blue
       }
       return new Pose2d(
         4.641 + Constants.DriveConstants.stageOffset / 2,
         3.713 - Constants.DriveConstants.stageOffset * Math.sqrt(3) / 2,
-        new Rotation2d(Math.PI * 4 / 3));
+        new Rotation2d(Math.PI / 3));
     }
     return new Pose2d(
       4.641 + Constants.DriveConstants.stageOffset / 2,
       3.713 - Constants.DriveConstants.stageOffset * Math.sqrt(3) / 2,
-      new Rotation2d(Math.PI * 4 / 3));
+      new Rotation2d(Math.PI / 3));
   }
 
   public static Pose2d stageCenter() {
@@ -97,17 +97,17 @@ public class Utils {
         return new Pose2d(
           11.220 - Constants.DriveConstants.stageOffset,
           4.105,
-          new Rotation2d(Math.PI));// or Blue
+          new Rotation2d(0));// or Blue
       }
       return new Pose2d(
         5.320 + Constants.DriveConstants.stageOffset,
         4.105,
-        new Rotation2d(0));
+        new Rotation2d(Math.PI));
     }
     return new Pose2d(
       5.320 + Constants.DriveConstants.stageOffset,
       4.105,
-      new Rotation2d(0));
+      new Rotation2d(Math.PI));
   }
 
   public static double getSpeakerDistance() {
