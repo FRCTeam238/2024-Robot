@@ -8,12 +8,15 @@ import edu.wpi.first.math.util.Units;
 
 public class Constants {
   public class IntakeConstants {
-    public static int kID = 0;
+    public static int kID = 13;
     public static double intakeSpeed = 0;
     public static double ejectTime = 2;
   }
 
   public class ShooterConstants {
+
+    public static int leftMotorId = 8;
+    public static int rightMotorId = 7;
     public static double kP;
     public static double kI;
     public static double kD;
@@ -43,7 +46,7 @@ public class Constants {
     public static double kD;
 
     public static int currentLimit;
-    public static int motor1;
+    public static int motor1 = 2;
 
     public static double maxJerk = 0;
     public static double maxAccel = 0;
@@ -59,7 +62,7 @@ public class Constants {
   }
 
   public class FeederConstants {
-    public static final int feederId = 0;
+    public static final int feederId = 6;
     public static final int sensorId = 0;
 
     public static final double ejectRunTime = 4;//seconds
@@ -68,8 +71,8 @@ public class Constants {
   }
 
   public class ElevatorConstants {
-    public static final int leaderId = 0;
-    public static final int followerId = 0;
+    public static final int leaderId = 3;
+    public static final int followerId = 12;
     public static final double kP = 0;
     public static final double kI = 0;
     public static final double kD = 0;
@@ -96,15 +99,15 @@ public class Constants {
 
     public static final boolean fieldRelative = true;
 
-    public static final int frontRightDriveCANId = 0;
-    public static final int backRightDriveCANId = 2;
+    public static final int frontRightDriveCANId = 14;
+    public static final int frontLeftDriveCANId = 15;
+    public static final int backRightDriveCANId = 1;
     public static final int backLeftDriveCANId = 4;
-    public static final int frontLeftDriveCANId = 6;
 
-    public static final int frontRightTurnCANId = 1;
-    public static final int backRightTurnCANId = 3;
-    public static final int backLeftTurnCANId = 5;
-    public static final int frontLeftTurnCANId = 7;
+    public static final int frontRightTurnCANId = 10;
+    public static final int backRightTurnCANId = 5;
+    public static final int backLeftTurnCANId = 4;
+    public static final int frontLeftTurnCANId = 11;
 
     public static final double kP = 1;
     public static final double kI = 0;
@@ -144,7 +147,9 @@ public class Constants {
   }
 
   public class VisionConstants {
+    //TODO: change these to not zeroes please
     public static Transform3d frontCameraTransform = new Transform3d(0, 0, 0, new Rotation3d(0,0,0));
+    //TODO: change these to not zeroes please
     public static Transform3d backCameraTransform = new Transform3d(0, 0, 0, new Rotation3d(0,0,0));
   }
 }
