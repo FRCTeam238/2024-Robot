@@ -4,7 +4,6 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
-import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
@@ -112,7 +111,7 @@ public class Constants {
 
     public static final double maxElevatorJerk = 0;
     public static final double maxAccel = 0;
-    public static final double maxVel = 0;
+    public static final double maxVelocity = 0;
     public static final double velocityTolerance = 0;
     public static final double velocityMaxError = 0;
     public static final double positionMaxError = 0;
