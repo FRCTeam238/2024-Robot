@@ -7,6 +7,7 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Utils;
 import monologue.Annotations.Log;
 import monologue.Logged;
@@ -40,8 +41,8 @@ public class Shooter extends SubsystemBase implements Logged {
 
   public void setWheelTargetSpeed(){
     double distance = Utils.getSpeakerDistance();
-    //Do some math
-    setSpeed(0, 0);
+    double avgSpeed = rpmTree.get(distance);
+    setSpeed(avgSpeed, avgSpeed); //TODO: find out if different sides should be different speeds?
   }
 
   @Log.NT

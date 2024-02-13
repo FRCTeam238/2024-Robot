@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.MotionProfile;
@@ -36,19 +35,30 @@ public class AimShooter extends Command {
   @Override
   public void execute() {
     double distance = Utils.getSpeakerDistance();
-    //Here we need to do math to make distance into height, pivot angle and wheel speed. Store elevator and pivot in class fields.
+
+    desiredPivotAngle = PivotConstants.pivotAngles.get(distance);
 
     MotionProfile elevatorProfile = new MotionProfile(
       new State(desiredElevatorHeight), 
       new State(Robot.elevator.getEncoderPosition(), Robot.elevator.getVelocity()), 
-      new MotionConstraints(0, 0, 0, 0), //TODO: Replace with constants from elevator section
+      new MotionConstraints(
+              ElevatorConstants.maxElevatorJerk,
+              ElevatorConstants.maxAccel,
+              ElevatorConstants.maxVelocity,
+              ElevatorConstants.velocityTolerance
+      ),
       ProfileType.AUTO);
     Robot.elevator.setDesiredState(elevatorProfile.sample());
 
     MotionProfile pivotProfile = new MotionProfile(
       new State(desiredPivotAngle), 
       new State(Robot.pivot.getCurrentPosition(), Robot.pivot.getVelocity()), 
-      new MotionConstraints(0, 0, 0, 0), //TODO: Replace with constants from pivot section
+      new MotionConstraints(
+              PivotConstants.maxJerk,
+              PivotConstants.maxAccel,
+              PivotConstants.maxVelocity,
+              PivotConstants.velocityTolerance
+      ), //TODO: Replace with constants from pivot section
       ProfileType.AUTO);
     Robot.pivot.setDesiredState(pivotProfile.sample());
 

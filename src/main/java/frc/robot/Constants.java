@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
@@ -22,6 +23,20 @@ public class Constants {
     public static double kD;
     public static double kFF;
     public static double shooterTolerance = 0.3; // TODO: see  if another value is better.
+
+
+    public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
+
+    static {
+      //DISCLAIMER: numbers are subject to change
+      rpmTree.put(1.2065, 1432.39);
+      rpmTree.put(2.66065,1671.13);
+      rpmTree.put(4.1021, 2053.1);
+      rpmTree.put(5.2832, 2578.31);
+      rpmTree.put(7.7216, 3485.49);
+      rpmTree.put(10.1346, 4058.45);
+    }
+
   }
 
   public class OperatorConstants {
@@ -59,6 +74,18 @@ public class Constants {
     public static final double ampPosition = 0;
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
+
+    public static InterpolatingDoubleTreeMap pivotAngles = new InterpolatingDoubleTreeMap();
+
+    static {
+      pivotAngles.put(1.2065, 60.);
+      pivotAngles.put(2.66065, 43.);
+      pivotAngles.put(4.1021, 32.);
+      pivotAngles.put(5.2832, 25.);
+      pivotAngles.put(7.7216, 18.);
+      pivotAngles.put(10.1346, 15.);
+    }
+
   }
 
   public class FeederConstants {
@@ -84,7 +111,7 @@ public class Constants {
 
     public static final double maxElevatorJerk = 0;
     public static final double maxAccel = 0;
-    public static final double maxVel = 0;
+    public static final double maxVelocity = 0;
     public static final double velocityTolerance = 0;
     public static final double velocityMaxError = 0;
     public static final double positionMaxError = 0;

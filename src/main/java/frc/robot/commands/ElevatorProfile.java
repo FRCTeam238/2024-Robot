@@ -20,7 +20,7 @@ public class ElevatorProfile extends Command {
         // addRequirements() method (which takes a vararg of Subsystem)
         addRequirements(this.elevator);
         this.goal = goal;
-        constraints = new MotionProfile.MotionConstraints(maxElevatorJerk, maxAccel, maxVel, velocityTolerance);
+        constraints = new MotionProfile.MotionConstraints(maxElevatorJerk, maxAccel, maxVelocity, velocityTolerance);
 
     }
 
