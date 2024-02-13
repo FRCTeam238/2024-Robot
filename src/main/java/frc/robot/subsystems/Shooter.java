@@ -28,6 +28,21 @@ public class Shooter extends SubsystemBase implements Logged {
     rightMotor.setInverted(true);
     leftMotor.getConfigurator().apply(config);
     rightMotor.getConfigurator().apply(config);
+
+    rightMotor.getVelocity().setUpdateFrequency(100); //Set update frequency to 100 Hert, 10ms
+    rightMotor.getClosedLoopError().setUpdateFrequency(50);
+    rightMotor.getClosedLoopOutput().setUpdateFrequency(50);
+    rightMotor.getSupplyVoltage().setUpdateFrequency(20);
+    rightMotor.getSupplyCurrent().setUpdateFrequency(20);
+    rightMotor.getStatorCurrent().setUpdateFrequency(20);
+    rightMotor.optimizeBusUtilization();
+    leftMotor.getVelocity().setUpdateFrequency(100); //Set update frequency to 100 Hert, 10ms
+    leftMotor.getClosedLoopError().setUpdateFrequency(50);
+    leftMotor.getClosedLoopOutput().setUpdateFrequency(50);
+    leftMotor.getSupplyVoltage().setUpdateFrequency(20);
+    leftMotor.getSupplyCurrent().setUpdateFrequency(20);
+    leftMotor.getStatorCurrent().setUpdateFrequency(20);
+    leftMotor.optimizeBusUtilization();
   }
 
   public void setSpeed(double left, double right) {

@@ -4,6 +4,7 @@ import static frc.robot.Constants.ElevatorConstants.*;
 
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkLimitSwitch.Type;
 import edu.wpi.first.math.controller.ElevatorFeedforward;
@@ -33,6 +34,22 @@ public class Elevator extends SubsystemBase implements Logged {
     leadingMotor.getPIDController().setI(kI);
     leadingMotor.getPIDController().setD(kD);
     leadingMotor.getPIDController().setOutputRange(-0.2, 1);
+
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 5); //Applied output, used by follower
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 10); //Motor velocity
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 10); //Motor position from internal encoder.
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 65535); //Absolute encoder position and angle
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 65535); //Absolute encoder velocity, not currently used, leave at default
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 50); //Applied output
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 50); //Motor velocity
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 50); //Motor position from internal encoder.
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 65535); //Absolute encoder position and angle
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 65535); //Absolute encoder velocity, not currently used, leave at default
+
   }
 
   public void moveByPercentOutput(double percent) {

@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.FeederConstants.*;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,7 +20,13 @@ public class Feeder extends SubsystemBase implements Logged {
 
   DigitalInput sensorMachine = new DigitalInput(sensorId);
 
-  public Feeder() {}
+  public Feeder() {
+    feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 65535); //Motor position from internal encoder. Not used
+    feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
+    feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
+    feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 65535); //Absolute encoder position and angle. Not used
+    feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 65535); //Absolute encoder velocity, not used
+  }
 
   public void rollerController(double speed) {
     feederMotor.set(speed);
