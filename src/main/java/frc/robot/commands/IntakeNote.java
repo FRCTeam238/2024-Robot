@@ -19,7 +19,7 @@ public class IntakeNote extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.feeder.rollerController(speed);
+    Robot.feeder.rollerController(feedSpeed);
     Robot.intake.setSpeed(intakeSpeed);
    
   }

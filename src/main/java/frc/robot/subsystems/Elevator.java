@@ -34,6 +34,9 @@ public class Elevator extends SubsystemBase implements Logged {
     leadingMotor.getPIDController().setI(kI);
     leadingMotor.getPIDController().setD(kD);
     leadingMotor.getPIDController().setOutputRange(-0.2, 1);
+    //Convert Spark unit (rotations) into inches of elevator travel
+    leadingMotor.getEncoder().setPositionConversionFactor(inchesPerRev/gearing);
+    leadingMotor.getEncoder().setVelocityConversionFactor(60*inchesPerRev/gearing); //Native rotation unit is RPM
 
     leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 5); //Applied output, used by follower
     leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 10); //Motor velocity

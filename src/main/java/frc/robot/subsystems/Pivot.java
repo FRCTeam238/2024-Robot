@@ -34,6 +34,8 @@ public class Pivot extends SubsystemBase implements Logged {
     pidController.setD(kD);
     pivotMotor.setSmartCurrentLimit(currentLimit);
     pivotMotor.setIdleMode(IdleMode.kBrake);
+    encoder.setPositionConversionFactor(2*Math.PI*46/18); //Convert rotations to rads then multiply by gearing
+    encoder.setVelocityConversionFactor((2*Math.PI/60)*46/18); //Convert rotations to rads/s then multiply by gearing
 
     pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 100); //Motor position from internal encoder. Not currently used, 
     pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
