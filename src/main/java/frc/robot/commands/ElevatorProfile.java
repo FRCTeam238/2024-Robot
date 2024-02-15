@@ -35,8 +35,14 @@ public class ElevatorProfile extends Command {
 
     @Override
     public void execute() {
-        currentState = profile.sample();
-        elevator.setDesiredState(currentState);
+        if(goal.position < 6 && Robot.pivot.getCurrentPosition() > .5)
+        {
+            //Pivot is currently in position to collide with swerves, wait for it to clear
+            //TODO: Any better way to handle this? Should these be made constants?
+        } else {
+            currentState = profile.sample();
+            elevator.setDesiredState(currentState);
+        }
     }
 
     @Override

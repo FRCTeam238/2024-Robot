@@ -35,8 +35,14 @@ public class PivotProfile extends Command {
 
     @Override
     public void execute() {
-        MotionProfile.State sample = profile.sample();
-        pivot.setDesiredState(sample);
+        if(goal.position > .5 && Robot.elevator.getEncoderPosition() < 6)
+        {
+            //Pivot will collide with swerves, wait for elevator to go up
+            //TODO: Better way to do this? Should these be constants?
+        } else {
+            MotionProfile.State sample = profile.sample();
+            pivot.setDesiredState(sample);
+        }
 
     }
 
