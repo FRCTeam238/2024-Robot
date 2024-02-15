@@ -19,7 +19,7 @@ public class OI {
   static DriveType driveType = DriveType.XBOX;
 
   public OI() {
-    Robot.drivetrain.setDefaultCommand(new Drive());
+
   }
 
   public static double[] getSwerveJoystickValues() {
