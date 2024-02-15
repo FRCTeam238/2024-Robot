@@ -154,14 +154,14 @@ public class Constants {
     public static final double maxVelocityMetersPerSec = 4.86;
     public static final double maxAccelerationMetersPerSec2 = 100; // TODO: make this a real number
 
-    public static final double kTrackWidth = Units.inchesToMeters(20);
-    public static final double kWheelBase = Units.inchesToMeters(20);
+    public static final double kTrackWidth = Units.inchesToMeters(20.75);
+    public static final double kWheelBase = Units.inchesToMeters(20.75);
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
-            new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-            new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-            new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
-            new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
+            new Translation2d((kWheelBase / 2) - 2, kTrackWidth / 2),
+            new Translation2d((kWheelBase / 2) - 2, -kTrackWidth / 2),
+            new Translation2d((-kWheelBase / 2) - 2, kTrackWidth / 2),
+            new Translation2d((-kWheelBase / 2) - 2, -kTrackWidth / 2));
 
     public static double maxAngularVelocityRadsPerSec = 2 * Math.PI;
 
