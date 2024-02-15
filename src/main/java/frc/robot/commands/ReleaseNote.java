@@ -15,6 +15,7 @@ public class ReleaseNote extends SequentialCommandGroup {
                 Map.ofEntries(
                         Map.entry(Constants.RobotState.INTAKE, new Launch()),
                         Map.entry(Constants.RobotState.TARGET, new Launch()),
+                        Map.entry(Constants.RobotState.SPEAKER, new Launch()),
                         Map.entry(Constants.RobotState.AMP, new ScoreAmp()),
                         Map.entry(Constants.RobotState.TRAP, new ScoreTrap())
                 ),

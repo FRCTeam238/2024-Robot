@@ -177,7 +177,8 @@ public class Constants {
     AMP,
     TRAP,
     INTAKE,
-    TARGET
+    TARGET,
+    SPEAKER
   }
 
   public class VisionConstants {
