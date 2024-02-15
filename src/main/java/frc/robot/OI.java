@@ -16,7 +16,7 @@ public class OI {
   public static CommandXboxController driverController = new CommandXboxController(3);
   public static CommandXboxController operatorController = new CommandXboxController(0);
 
-  static DriveType driveType = DriveType.JOYSTICK;
+  static DriveType driveType = DriveType.XBOX;
 
   public OI() {
     Robot.drivetrain.setDefaultCommand(new Drive());
