@@ -99,7 +99,7 @@ public class Constants {
   }
 
   public class ElevatorConstants {
-    public static final int leaderId = 3;
+    public static final int leaderId = 2;
     public static final int followerId = 12;
     public static final double kP = 0.05;
     public static final double kI = 0;
@@ -157,10 +157,10 @@ public class Constants {
     public static final double kWheelBase = Units.inchesToMeters(20.75);
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
-            new Translation2d((kWheelBase / 2) - 2, kTrackWidth / 2),
-            new Translation2d((kWheelBase / 2) - 2, -kTrackWidth / 2),
-            new Translation2d((-kWheelBase / 2) - 2, kTrackWidth / 2),
-            new Translation2d((-kWheelBase / 2) - 2, -kTrackWidth / 2));
+            new Translation2d((kWheelBase / 2) - .0508, kTrackWidth / 2),
+            new Translation2d((kWheelBase / 2) - .0508, -kTrackWidth / 2),
+            new Translation2d((-kWheelBase / 2) - .0508, kTrackWidth / 2),
+            new Translation2d((-kWheelBase / 2) - .0508, -kTrackWidth / 2));
 
     public static double maxAngularVelocityRadsPerSec = 2 * Math.PI;
 

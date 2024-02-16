@@ -167,9 +167,10 @@ public class Drivetrain extends SubsystemBase {
 
     var swerveModuleStates =
         kDriveKinematics.toSwerveModuleStates(
+            ChassisSpeeds.discretize(
             fieldRelative
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
-                : new ChassisSpeeds(xSpeed, ySpeed, rot));
+                : new ChassisSpeeds(xSpeed, ySpeed, rot), .02));
 
     setModuleStates(swerveModuleStates);
   }
