@@ -11,10 +11,13 @@ import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.PivotConstants;
 import frc.robot.MotionProfile.State;
 import frc.robot.Robot;
+import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+
+@AutonomousModeAnnotation(parameterNames = {})
 public class IntakePosition extends ParallelCommandGroup {
   /** Creates a new IntakePosition. */
   public IntakePosition() {

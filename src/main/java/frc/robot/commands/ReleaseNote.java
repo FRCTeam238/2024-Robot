@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 
 import java.util.Map;
 
+@AutonomousModeAnnotation(parameterNames = {})
 public class ReleaseNote extends SequentialCommandGroup {
 
     public ReleaseNote() {

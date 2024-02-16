@@ -34,6 +34,8 @@ public class OI {
         };
       }
       case XBOX -> {
+        System.out.println(driverController.getLeftY());
+        System.out.println(-MathUtil.applyDeadband(driverController.getLeftY(), xboxControllerDeadzone));
         return new double[] {
           // applyDeadband will do the absolute value stuff for us and make the zero point start at
           // the deadzone edge
