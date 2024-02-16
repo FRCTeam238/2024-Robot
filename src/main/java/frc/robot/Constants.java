@@ -26,8 +26,7 @@ public class Constants {
 
   public class OperatorConstants {
     public static double driverJoystickDeadzone = .1;
-    public static double xboxControllerDeadzone =
-        .075; // TODO: find good deadzone values for the xbox controllers
+    public static double xboxControllerDeadzone = .075; // TODO: find good deadzone values for the xbox controllers
 
     public enum DriveType {
       JOYSTICK,
@@ -102,7 +101,7 @@ public class Constants {
     public static final int frontRightDriveCANId = 14;
     public static final int frontLeftDriveCANId = 15;
     public static final int backRightDriveCANId = 1;
-    public static final int backLeftDriveCANId = 4;
+    public static final int backLeftDriveCANId = 0;
 
     public static final int frontRightTurnCANId = 10;
     public static final int backRightTurnCANId = 5;

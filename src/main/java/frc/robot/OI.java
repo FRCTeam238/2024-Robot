@@ -16,7 +16,7 @@ public class OI {
   public static CommandXboxController driverController = new CommandXboxController(3);
   public static CommandXboxController operatorController = new CommandXboxController(0);
 
-  static DriveType driveType = DriveType.JOYSTICK;
+  static DriveType driveType = DriveType.XBOX;
 
   public OI() {
     Robot.drivetrain.setDefaultCommand(new Drive());
@@ -34,6 +34,8 @@ public class OI {
         };
       }
       case XBOX -> {
+        System.out.println(driverController.getLeftY());
+        System.out.println(-MathUtil.applyDeadband(driverController.getLeftY(), xboxControllerDeadzone));
         return new double[] {
           // applyDeadband will do the absolute value stuff for us and make the zero point start at
           // the deadzone edge
