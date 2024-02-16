@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.TrajectoryDriveCommand;
@@ -21,6 +22,7 @@ import java.util.List;
 import monologue.Logged;
 import monologue.Monologue;
 import org.frc238.lib.autonomous.AutonomousModesReader;
+import org.frc238.lib.autonomous.DataFileAutonomousModeDataSource;
 import org.littletonrobotics.urcl.URCL;
 
 import com.ctre.phoenix6.SignalLogger;
@@ -45,18 +47,7 @@ public class Robot extends TimedRobot implements Logged {
 
   @Override
   public void robotInit() {
-    // m_autonomousModesReader = new AutonomousModesReader(new
-    // DataFileAutonomousModeDataSource("/amode238.txt"));
-    //
-    // autoNames = m_autonomousModesReader.GetAutoNames();
-    // autoChooser = new SendableChooser<String>();
-    // autoChooser.setDefaultOption("Default Auto", autoNames.get(0));
-    // for (String name : autoNames) {
-    //     autoChooser.addOption(name, name);
-    // }
-    // SmartDashboard.putData("Auto choices", autoChooser);
-    // lastSelectedAuto = autoChooser.getSelected();
-    // m_autonomousCommand = m_autonomousModesReader.getAutonomousMode(lastSelectedAuto);
+   
 
     Monologue.setupMonologue(this, "Robot", false, false);
     SignalLogger.start();
@@ -92,7 +83,7 @@ public class Robot extends TimedRobot implements Logged {
   @Override
   public void autonomousInit() {
 
-    m_autonomousCommand = new TrajectoryDriveCommand("NewPath", true, 1);
+    // m_autonomousCommand = new TrajectoryDriveCommand("NewPath", true, 1);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
