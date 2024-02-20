@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -18,6 +20,8 @@ import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.Shooter;
+
+import java.nio.file.FileSystem;
 import java.util.List;
 import monologue.Logged;
 import monologue.Monologue;
@@ -30,7 +34,7 @@ import com.ctre.phoenix6.SignalLogger;
 public class Robot extends TimedRobot implements Logged {
   private Command m_autonomousCommand;
 
-  private AutonomousModesReader m_autonomousModesReader;
+  private AutonomousModesReader amodeReader;
   private List<String> autoNames;
   private SendableChooser<String> autoChooser;
   private String lastSelectedAuto;
@@ -53,6 +57,14 @@ public class Robot extends TimedRobot implements Logged {
     SignalLogger.start();
     DataLogManager.start();
     URCL.start();
+    amodeReader = new AutonomousModesReader(new DataFileAutonomousModeDataSource(Filesystem.getDeployDirectory() + "/amode238.txt"));
+    autoChooser = new SendableChooser<>();
+    autoNames = amodeReader.GetAutoNames();
+    for (String name : autoNames) {
+      autoChooser.setDefaultOption(name, name);
+    }
+    SmartDashboard.putData(autoChooser);
+    
   }
 
   @Override
@@ -60,13 +72,13 @@ public class Robot extends TimedRobot implements Logged {
     CommandScheduler.getInstance().run();
     Monologue.updateAll();
 
-    // if (lastSelectedAuto != autoChooser.getSelected()) {
-    //     m_autonomousCommand =
-    // m_autonomousModesReader.getAutonomousMode(autoChooser.getSelected());
-    // }
-    //
-    // lastSelectedAuto = autoChooser.getSelected();
-    //
+    if (lastSelectedAuto != autoChooser.getSelected()) {
+        m_autonomousCommand =
+      amodeReader.getAutonomousMode(autoChooser.getSelected());
+    }
+    
+    lastSelectedAuto = autoChooser.getSelected();
+    
   }
 
   @Override
