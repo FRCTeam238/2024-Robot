@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -36,6 +39,8 @@ public class Drivetrain extends SubsystemBase {
   SwerveDrivePoseEstimator odometry;
 
   AHRS gyro;
+  Rotation2d rotationTarget;
+  PIDController headingController;
 
   StructPublisher<Pose2d> publisher;
 
@@ -52,6 +57,8 @@ public class Drivetrain extends SubsystemBase {
               backRight.getPosition()
             }, new Pose2d());
     initializeTelemetry();
+    headingController = new PIDController(kPAngular, kIAngular, kDAngular);
+    headingController.enableContinuousInput(-Math.PI, Math.PI);
   }
 
   @Override
@@ -164,13 +171,18 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void drive(double xSpeed, double ySpeed, double rot) {
+    rotationTarget.plus(Rotation2d.fromRadians(rot*.02));
+    double rate = headingController.calculate(
+      MathUtil.angleModulus(odometry.getEstimatedPosition().getRotation().getRadians()),
+      rotationTarget.getRadians()
+    );
 
     var swerveModuleStates =
         kDriveKinematics.toSwerveModuleStates(
             ChassisSpeeds.discretize(
             fieldRelative
-                ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
-                : new ChassisSpeeds(xSpeed, ySpeed, rot), .02));
+                ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rate, gyro.getRotation2d())
+                : new ChassisSpeeds(xSpeed, ySpeed, rate), .02));
 
     setModuleStates(swerveModuleStates);
   }
@@ -221,6 +233,11 @@ public class Drivetrain extends SubsystemBase {
 
   public void zeroHeading() {
     gyro.reset();
+    rotationTarget = odometry.getEstimatedPosition().getRotation();
+  }
+
+  public void initHeadingController() {
+    rotationTarget = odometry.getEstimatedPosition().getRotation();
   }
 
   public Command zeroHeadingCommand() {
