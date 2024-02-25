@@ -54,6 +54,11 @@ public class Shooter extends SubsystemBase implements Logged {
     desiredRightSpeed = right;
   }
 
+  public void coast(){
+    leftMotor.set(0);
+    rightMotor.set(0);
+  }
+
   public void setWheelTargetSpeed(){
     double distance = Utils.getSpeakerDistance();
     double avgSpeed = rpmTree.get(distance);

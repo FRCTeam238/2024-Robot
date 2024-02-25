@@ -76,7 +76,9 @@ public class AimShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.shooter.setSpeed(0, 0);
+    if(interrupted){
+      Robot.shooter.coast();
+    }
   }
 
 }
