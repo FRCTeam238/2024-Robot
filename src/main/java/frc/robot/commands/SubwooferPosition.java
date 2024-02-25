@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import org.frc238.lib.autonomous.AutonomousModeAnnotation;
+
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Constants;
@@ -15,13 +17,14 @@ import frc.robot.Robot;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SpeakerPosition extends ParallelCommandGroup {
+@AutonomousModeAnnotation(parameterNames = {})
+public class SubwooferPosition extends ParallelCommandGroup {
   /** Creates a new AmpPosition. */
-  public SpeakerPosition() {
+  public SubwooferPosition() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new RunCommand(() -> Robot.state = Constants.RobotState.SPEAKER),
+      new RunCommand(() -> Robot.state = Constants.RobotState.SUBWOOFER),
       new ElevatorProfile(new State(ElevatorConstants.speakerPosition), "SpeakerPosition"),
       new PivotProfile(new State(PivotConstants.speakerPosition), "SpeakerPosition")
     );

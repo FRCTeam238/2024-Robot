@@ -15,9 +15,9 @@ public class ScoreNote extends SequentialCommandGroup {
         // we will check if we are in either ampPosition or literally anything else
         addCommands(new SelectCommand<>(
                 Map.ofEntries(
-                        Map.entry(Constants.RobotState.INTAKE, new LaunchGroup()),
+                        Map.entry(Constants.RobotState.INTAKE, new LaunchSubwooferGroup()),
                         Map.entry(Constants.RobotState.TARGET, new LaunchGroup()),
-                        Map.entry(Constants.RobotState.SPEAKER, new LaunchSpeakerGroup()),
+                        Map.entry(Constants.RobotState.SUBWOOFER, new LaunchSubwooferGroup()),
                         Map.entry(Constants.RobotState.AMP, new ScoreAmpGroup()),
                         Map.entry(Constants.RobotState.TRAP, new ScoreTrapGroup())
                 ),

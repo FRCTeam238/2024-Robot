@@ -22,8 +22,10 @@ public class Constants {
     public static double kI;
     public static double kD;
     public static double kFF;
-    public static double shooterTolerance = 0.3; // TODO: see  if another value is better.
+    public static double shooterTolerance = 20;
 
+    public static double subwooferLeft = 2000;
+    public static double subwooferRight = 1500;
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
 
@@ -177,7 +179,7 @@ public class Constants {
     TRAP,
     INTAKE,
     TARGET,
-    SPEAKER
+    SUBWOOFER
   }
 
   public class VisionConstants {

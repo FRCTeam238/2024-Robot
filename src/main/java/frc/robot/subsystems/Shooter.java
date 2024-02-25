@@ -8,7 +8,9 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.Utils;
+import frc.robot.Constants.RobotState;
 import monologue.Annotations.Log;
 import monologue.Logged;
 
@@ -60,9 +62,14 @@ public class Shooter extends SubsystemBase implements Logged {
   }
 
   public void setWheelTargetSpeed(){
-    double distance = Utils.getSpeakerDistance();
-    double avgSpeed = rpmTree.get(distance);
-    setSpeed(avgSpeed, avgSpeed); //TODO: find out if different sides should be different speeds?
+    if(Robot.state == RobotState.SUBWOOFER)
+    {
+      setSpeed(subwooferLeft, subwooferRight);
+    } else {
+      double distance = Utils.getSpeakerDistance();
+      double avgSpeed = rpmTree.get(distance);
+      setSpeed(avgSpeed, avgSpeed); //TODO: find out if different sides should be different speeds?
+    }
   }
 
   @Log.NT
@@ -76,9 +83,9 @@ public class Shooter extends SubsystemBase implements Logged {
   }
 
   public boolean isAtSpeed() {
-    if (getLeftSpeed() <= desiredLeftSpeed + 0.3 && getLeftSpeed() >= desiredLeftSpeed - 0.3) {
-      return getRightSpeed() <= desiredRightSpeed + 0.3
-          && getRightSpeed() > desiredRightSpeed - 0.3;
+    if (getLeftSpeed() <= desiredLeftSpeed + shooterTolerance && getLeftSpeed() >= desiredLeftSpeed - shooterTolerance) {
+      return getRightSpeed() <= desiredRightSpeed + shooterTolerance
+          && getRightSpeed() > desiredRightSpeed - shooterTolerance;
     } else {
       return false;
     }
