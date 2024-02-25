@@ -11,13 +11,13 @@ import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 @AutonomousModeAnnotation(parameterNames = {})
-public class Launch extends SequentialCommandGroup {
+public class LaunchGroup extends SequentialCommandGroup {
   /** Creates a new Launch. */
-  public Launch() {
+  public LaunchGroup() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new Target(),
+      new TargetFromDistance(),
       new LaunchNote()
     );
   }

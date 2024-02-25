@@ -13,12 +13,12 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.Utils;
 
-public class TargetDT extends Command {
+public class AimDT extends Command {
 
   PIDController pid; 
 
   /** Creates a new TargetDT. */
-  public TargetDT() {
+  public AimDT() {
     addRequirements(Robot.drivetrain);
     pid = new PIDController(kPAngular, kIAngular, kDAngular);
     pid.setTolerance(turnTolerance, velocityTolerance);

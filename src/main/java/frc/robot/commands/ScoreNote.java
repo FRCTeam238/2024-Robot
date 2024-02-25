@@ -9,17 +9,17 @@ import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 import java.util.Map;
 
 @AutonomousModeAnnotation(parameterNames = {})
-public class ReleaseNote extends SequentialCommandGroup {
+public class ScoreNote extends SequentialCommandGroup {
 
-    public ReleaseNote() {
+    public ScoreNote() {
         // we will check if we are in either ampPosition or literally anything else
         addCommands(new SelectCommand<>(
                 Map.ofEntries(
-                        Map.entry(Constants.RobotState.INTAKE, new Launch()),
-                        Map.entry(Constants.RobotState.TARGET, new Launch()),
-                        Map.entry(Constants.RobotState.SPEAKER, new Launch()),
-                        Map.entry(Constants.RobotState.AMP, new ScoreAmp()),
-                        Map.entry(Constants.RobotState.TRAP, new ScoreTrap())
+                        Map.entry(Constants.RobotState.INTAKE, new LaunchGroup()),
+                        Map.entry(Constants.RobotState.TARGET, new LaunchGroup()),
+                        Map.entry(Constants.RobotState.SPEAKER, new LaunchSpeakerGroup()),
+                        Map.entry(Constants.RobotState.AMP, new ScoreAmpGroup()),
+                        Map.entry(Constants.RobotState.TRAP, new ScoreTrapGroup())
                 ),
                 Robot::getState
         ));
