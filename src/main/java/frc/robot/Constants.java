@@ -73,11 +73,11 @@ public class Constants {
     public static final double positionMaxError = 0.009; //.5 degrees
 
     //Positions should all be in radians where 0 = horizontal
-    public static final double intakePosition = 0;
-    public static final double ampPosition = 0;
+    public static final double intakePosition = Units.degreesToRadians(30);
+    public static final double ampPosition = Units.degreesToRadians(30);
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
-    public static final double speakerPosition = 1.05; //~60 degrees
+    public static final double subwooferPosition = Units.degreesToRadians(60);
 
     public static InterpolatingDoubleTreeMap pivotAngles = new InterpolatingDoubleTreeMap();
 
@@ -124,7 +124,7 @@ public class Constants {
 
     //All positions should be in inches
     public static final double intakePosition = 0;
-    public static final double ampPosition = 0;
+    public static final double ampPosition = 23;
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
     public static final double speakerPosition = 6;
