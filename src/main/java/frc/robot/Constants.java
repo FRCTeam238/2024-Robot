@@ -108,6 +108,8 @@ public class Constants {
     public static final double kI = 0;
     public static final double kD = 0;
     public static final int currentLimit = 40;
+    public static final float softForwardLimit = 25;
+    public static final float softReverseLimit = 0.25f;
     public static final double kS = 0.1;
     public static final double kG = 0.42;
     public static final double kV = .31; //V*s/in
