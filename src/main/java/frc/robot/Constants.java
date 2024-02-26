@@ -127,7 +127,7 @@ public class Constants {
     public static final double ampPosition = 23;
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
-    public static final double speakerPosition = 6;
+    public static final double subwooferPosition = 6;
 
     public final static double gearing = 12; // 4:1 gear ratio
     public final static double inchesPerRev = 1.5 * Math.PI; // 1.5" diameter pulley

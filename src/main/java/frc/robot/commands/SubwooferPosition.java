@@ -25,8 +25,8 @@ public class SubwooferPosition extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new RunCommand(() -> Robot.state = Constants.RobotState.SUBWOOFER),
-      new ElevatorProfile(new State(ElevatorConstants.speakerPosition), "SpeakerPosition"),
-      new PivotProfile(new State(PivotConstants.speakerPosition), "SpeakerPosition")
+      new ElevatorProfile(new State(ElevatorConstants.subwooferPosition), "SubwooferPosition"),
+      new PivotProfile(new State(PivotConstants.subwooferPosition), "SubwooferPosition")
     );
   }
 }
