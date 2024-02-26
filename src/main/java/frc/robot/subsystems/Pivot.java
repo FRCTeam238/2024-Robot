@@ -20,7 +20,7 @@ import monologue.Logged;
 
 public class Pivot extends SubsystemBase implements Logged {
 
-  CANSparkMax pivotMotor = new CANSparkMax(motor1, MotorType.kBrushless);
+  CANSparkMax pivotMotor = new CANSparkMax(pivotID, MotorType.kBrushless);
   AbsoluteEncoder encoder = pivotMotor.getAbsoluteEncoder(Type.kDutyCycle);
 
   ArmFeedforward ff;

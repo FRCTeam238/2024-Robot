@@ -63,7 +63,7 @@ public class Constants {
     public static double kD;
 
     public static int currentLimit = 40;
-    public static int motor1 = 2;
+    public static int pivotID = 3;
 
     public static double maxJerk = 10000;
     public static double maxAccel = 10;
@@ -93,7 +93,7 @@ public class Constants {
   }
 
   public class FeederConstants {
-    public static final int feederId = 6;
+    public static final int feederId = 7;
     public static final int sensorId = 0;
 
     public static final double ejectRunTime = 4;//seconds
