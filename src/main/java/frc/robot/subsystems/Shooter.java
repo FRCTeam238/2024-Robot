@@ -6,6 +6,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -45,6 +46,8 @@ public class Shooter extends SubsystemBase implements Logged {
     leftMotor.getSupplyCurrent().setUpdateFrequency(20);
     leftMotor.getStatorCurrent().setUpdateFrequency(20);
     leftMotor.optimizeBusUtilization();
+
+    Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
   }
 
   public void setSpeed(double left, double right) {

@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkLimitSwitch.Type;
 import edu.wpi.first.math.controller.ElevatorFeedforward;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.MotionProfile;
 import monologue.Annotations.Log;
@@ -22,6 +23,7 @@ public class Elevator extends SubsystemBase implements Logged {
 
   public Elevator() {
     configureMotorController();
+    Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
   }
 
   private void configureMotorController() {

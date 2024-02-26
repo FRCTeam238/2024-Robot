@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import monologue.Annotations.Log;
 import monologue.Logged;
@@ -26,6 +27,8 @@ public class Feeder extends SubsystemBase implements Logged {
     feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
     feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 65535); //Absolute encoder position and angle. Not used
     feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 65535); //Absolute encoder velocity, not used
+
+    Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
   }
 
   public void rollerController(double speed) {

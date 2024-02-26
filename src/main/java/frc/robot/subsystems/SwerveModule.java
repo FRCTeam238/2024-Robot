@@ -11,6 +11,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Timer;
 
 public class SwerveModule {
 
@@ -80,6 +81,8 @@ public class SwerveModule {
     driveMotor.optimizeBusUtilization();
 
     m_desiredState.angle = new Rotation2d(turnEncoder.getPosition());
+
+    Timer.delay(.01); //Pause between subsystems to ease CAN traffic at startup
   }
 
   public SwerveModuleState getState() {

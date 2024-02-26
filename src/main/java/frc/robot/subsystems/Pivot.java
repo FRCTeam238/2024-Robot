@@ -12,6 +12,7 @@ import com.revrobotics.SparkAbsoluteEncoder.Type;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.SparkPIDController.ArbFFUnits;
 import edu.wpi.first.math.controller.ArmFeedforward;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.MotionProfile;
 import monologue.Annotations.Log;
@@ -43,6 +44,7 @@ public class Pivot extends SubsystemBase implements Logged {
     pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 10); //Absolute encoder position and angle
     pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 10); //Absolute encoder velocity
 
+    Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
   }
 
   public void setDesiredState(MotionProfile.State state) {
