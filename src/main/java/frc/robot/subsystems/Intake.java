@@ -16,6 +16,7 @@ public class Intake extends SubsystemBase implements Logged {
   CANSparkMax intakeMotor = new CANSparkMax(kID, MotorType.kBrushless);
 
   public Intake() {
+    intakeMotor.setInverted(true);
     intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 65535); //Motor position from internal encoder. Not currently used, 
     intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
     intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
