@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.ElevatorConstants.*;
 
 import com.revrobotics.CANSparkBase.ControlType;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkMax;
@@ -30,6 +31,8 @@ public class Elevator extends SubsystemBase implements Logged {
     followerMotor.follow(leadingMotor, true);
     followerMotor.setSmartCurrentLimit(currentLimit);
     leadingMotor.setSmartCurrentLimit(currentLimit);
+    followerMotor.setIdleMode(IdleMode.kBrake);
+    leadingMotor.setIdleMode(IdleMode.kBrake);
     leadingMotor.getForwardLimitSwitch(Type.kNormallyOpen).enableLimitSwitch(false);
     leadingMotor.getReverseLimitSwitch(Type.kNormallyOpen).enableLimitSwitch(false);
     leadingMotor.getPIDController().setP(kP);
