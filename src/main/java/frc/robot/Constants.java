@@ -26,6 +26,7 @@ public class Constants {
 
     public static double subwooferLeft = 2000;
     public static double subwooferRight = 1500;
+    public static double shotTime = .5;
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
 
