@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.math.estimator.PoseEstimator;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -11,6 +13,8 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructPublisher;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -163,13 +167,26 @@ public class Drivetrain extends SubsystemBase {
         pose);
   }
 
+  public Rotation2d getFieldRelativeOffset() {
+    if (DriverStation.getAlliance().isPresent()) {
+      if (DriverStation.getAlliance().get() == Alliance.Blue) {
+       return odometry.getEstimatedPosition().getRotation(); 
+      } else {
+        return odometry.getEstimatedPosition().getRotation().minus(new Rotation2d().fromDegrees(180));
+      }
+    } else {
+      return odometry.getEstimatedPosition().getRotation();
+    }
+  }
+
+
   public void drive(double xSpeed, double ySpeed, double rot) {
 
     var swerveModuleStates =
         kDriveKinematics.toSwerveModuleStates(
             ChassisSpeeds.discretize(
             fieldRelative
-                ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
+                ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, getFieldRelativeOffset())
                 : new ChassisSpeeds(xSpeed, ySpeed, rot), .02));
 
     setModuleStates(swerveModuleStates);
