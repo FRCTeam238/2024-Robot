@@ -27,7 +27,7 @@ public class Elevator extends SubsystemBase implements Logged {
   }
 
   private void configureMotorController() {
-    followerMotor.follow(leadingMotor);
+    followerMotor.follow(leadingMotor, true);
     followerMotor.setSmartCurrentLimit(currentLimit);
     leadingMotor.setSmartCurrentLimit(currentLimit);
     leadingMotor.getForwardLimitSwitch(Type.kNormallyOpen).enableLimitSwitch(false);
