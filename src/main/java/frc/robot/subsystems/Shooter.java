@@ -17,8 +17,8 @@ import monologue.Annotations.Log;
 import monologue.Logged;
 
 public class Shooter extends SubsystemBase implements Logged {
-  TalonFX leftMotor = new TalonFX(0);
-  TalonFX rightMotor = new TalonFX(0);
+  TalonFX leftMotor = new TalonFX(leftMotorId);
+  TalonFX rightMotor = new TalonFX(rightMotorId);
   @Log.NT double desiredLeftSpeed = 0;
   @Log.NT double desiredRightSpeed = 0;
 
@@ -30,7 +30,8 @@ public class Shooter extends SubsystemBase implements Logged {
     config.Slot0.kV = kFF;
     config.CurrentLimits.SupplyCurrentLimit = 30;
 
-    rightMotor.setInverted(true);
+    rightMotor.setInverted(false);
+    leftMotor.setInverted(true);
     rightMotor.setNeutralMode(NeutralModeValue.Coast);
     leftMotor.setNeutralMode(NeutralModeValue.Coast);
     leftMotor.getConfigurator().apply(config);
@@ -52,6 +53,11 @@ public class Shooter extends SubsystemBase implements Logged {
     leftMotor.optimizeBusUtilization();
 
     Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
+  }
+
+  public void setPercent(double left, double right) {
+    leftMotor.set(left);
+    rightMotor.set(right);
   }
 
   public void setSpeed(double left, double right) {

@@ -42,11 +42,11 @@ public class Robot extends TimedRobot implements Logged {
   public static Constants.RobotState state = Constants.RobotState.INTAKE;
 
   public static Drivetrain drivetrain = new Drivetrain();
-  public static Elevator elevator;// = new Elevator();
+  public static Elevator elevator = new Elevator();
   public static Intake intake = new Intake();
-  public static Feeder feeder;// = new Feeder();
-  public static Pivot pivot;// = new Pivot();
-  public static Shooter shooter;// = new Shooter();
+  public static Feeder feeder = new Feeder();
+  public static Pivot pivot = new Pivot();
+  public static Shooter shooter = new Shooter();
   public static OI oi = new OI();
 
   @Override

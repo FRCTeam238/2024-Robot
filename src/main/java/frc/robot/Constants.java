@@ -102,6 +102,10 @@ public class Constants {
   }
 
   public class ElevatorConstants {
+    public enum ElevatorDirection {
+      UP,
+      DOWN
+    }
     public static final int leaderId = 2;
     public static final int followerId = 12;
     public static final double kP = 0.05;
@@ -116,15 +120,15 @@ public class Constants {
     public static final double kA = 0.0016; //V*s/in^2
 
     public static final double maxElevatorJerk = 10000;
-    public static final double maxAccel = 50; //in/s^2 Max = 450?
-    public static final double maxVelocity = 10;//in/s Max = 36?
+    public static final double maxAccel = 200; //in/s^2 Max = 450?
+    public static final double maxVelocity = 30;//in/s Max = 36?
     public static final double velocityTolerance = 0.5;
     public static final double velocityMaxError = 0.2;
     public static final double positionMaxError = 0.5;
 
     //All positions should be in inches
     public static final double intakePosition = 0;
-    public static final double ampPosition = 23;
+    public static final double ampPosition = 16;//23;
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
     public static final double subwooferPosition = 6;

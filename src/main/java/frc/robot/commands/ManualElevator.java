@@ -6,39 +6,45 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
-import org.frc238.lib.autonomous.AutonomousModeAnnotation;
+import frc.robot.Constants.ElevatorConstants;
+import frc.robot.Constants.ElevatorConstants.ElevatorDirection;
+import frc.robot.subsystems.Elevator;
 
-import static frc.robot.Constants.FeederConstants.*;
-import static frc.robot.Constants.IntakeConstants.*;
-
-@AutonomousModeAnnotation(parameterNames = {})
-public class IntakeNote extends Command {
-  /** Creates a new IntakeNote. */
-  public IntakeNote() {
+public class ManualElevator extends Command {
+  Elevator elevator = Robot.elevator;
+  ElevatorDirection direction;
+  /** Creates a new ManualElevator. */
+  public ManualElevator(ElevatorConstants.ElevatorDirection direction) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.feeder, Robot.intake);
+    addRequirements(elevator);
+    this.direction = direction;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-   
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.feeder.rollerController(feedSpeed);
-    Robot.intake.setSpeed(intakeSpeed);
+    switch (direction) {
+      case DOWN:
+        elevator.setSpeed(-0.1);
+        break;
+      case UP:
+        elevator.setSpeed(0.1);
+        break;
+      default:
+        elevator.setSpeed(0);
+        break;
 
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.feeder.rollerController(0);
-    Robot.intake.setSpeed(0);
-    
+    elevator.setSpeed(0);
   }
 
   // Returns true when the command should end.

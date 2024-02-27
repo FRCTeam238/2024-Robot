@@ -28,6 +28,10 @@ public class Elevator extends SubsystemBase implements Logged {
     Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
   }
 
+  public void setSpeed(double speed) {
+    leadingMotor.set(speed);
+  }
+
   private void configureMotorController() {
     followerMotor.follow(leadingMotor, true);
     followerMotor.setSmartCurrentLimit(currentLimit);
@@ -38,8 +42,8 @@ public class Elevator extends SubsystemBase implements Logged {
     leadingMotor.getReverseLimitSwitch(Type.kNormallyOpen).enableLimitSwitch(false);
     leadingMotor.setSoftLimit(SoftLimitDirection.kForward, softForwardLimit);
     leadingMotor.setSoftLimit(SoftLimitDirection.kReverse, softReverseLimit);
-    //leadingMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
-    //leadingMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
+    leadingMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
+    leadingMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
     leadingMotor.getPIDController().setP(kP);
     leadingMotor.getPIDController().setI(kI);
     leadingMotor.getPIDController().setD(kD);
