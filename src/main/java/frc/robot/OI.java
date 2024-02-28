@@ -14,6 +14,7 @@ import frc.robot.commands.Drive;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.IntakePosition;
 import frc.robot.commands.ManualElevator;
+import frc.robot.commands.ManualPivot;
 import frc.robot.commands.RunShooterStupid;
 import frc.robot.commands.ScoreNote;
 import frc.robot.commands.SubwooferPosition;
@@ -40,8 +41,10 @@ public class OI {
     SmartDashboard.putData(driveTypeChooser);
 
 
-    operatorController.axisGreaterThan(5, 0.1).whileTrue(new ManualElevator(ElevatorDirection.UP));
-    operatorController.axisLessThan(5, -0.1).whileTrue(new ManualElevator(ElevatorDirection.DOWN));
+    operatorController.axisGreaterThan(5, 0.1).whileTrue(new ManualElevator(ElevatorDirection.UP)); //RightY
+    operatorController.axisLessThan(5, -0.1).whileTrue(new ManualElevator(ElevatorDirection.DOWN));           //Right Y
+    operatorController.axisGreaterThan(1, 0.1).whileTrue(new ManualPivot()); //Left Y
+    operatorController.axisLessThan(1, -0.1).whileTrue(new ManualPivot());           //Left Y
 
     operatorController.rightBumper().whileTrue(new ScoreNote());
 

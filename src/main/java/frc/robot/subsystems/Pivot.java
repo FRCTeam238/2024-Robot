@@ -78,6 +78,11 @@ public class Pivot extends SubsystemBase implements Logged {
     }
   }
 
+  public void setSpeed(double speed)
+  {
+    pivotMotor.set(speed);
+  }
+
   @Log.NT
   public double getVelocity() {
     return encoder.getVelocity();
