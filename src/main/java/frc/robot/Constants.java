@@ -58,7 +58,7 @@ public class Constants {
     public static double kG = .15;
     public static double kV = 2.99; //V*s/rad
 
-    public static double kP = 1; //estimating max error tolerance should result in an output of at least .05
+    public static double kP = 1;
     public static double kI;
     public static double kD;
 
@@ -69,12 +69,12 @@ public class Constants {
     public static double maxAccel = 20;
     public static double maxVelocity = 1; //Max is 3.89?
     public static double velocityTolerance = .05;
-    public static final double velocityMaxError = 0.005; //~.25 degrees/s
-    public static final double positionMaxError = 0.009; //.5 degrees
+    public static final double velocityMaxError = 0.05;
+    public static final double positionMaxError = 0.03; 
 
     //Positions should all be in radians where 0 = horizontal
     public static final double intakePosition = Units.degreesToRadians(30);
-    public static final double ampPosition = Units.degreesToRadians(15);
+    public static final double ampPosition = Units.degreesToRadians(30);
     public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
     public static final double subwooferPosition = Units.degreesToRadians(60);
@@ -119,7 +119,7 @@ public class Constants {
     public static final double kV = .31; //V*s/in
     public static final double kA = 0.0016; //V*s/in^2
 
-    public static final double maxElevatorJerk = 10000;
+    public static final double maxElevatorJerk = 5000;
     public static final double maxAccel = 200; //in/s^2 Max = 450?
     public static final double maxVelocity = 30;//in/s Max = 36?
     public static final double velocityTolerance = 0.5;
@@ -128,7 +128,7 @@ public class Constants {
 
     //All positions should be in inches
     public static final double intakePosition = 0;
-    public static final double ampPosition = 16;//23;
+    public static final double ampPosition = 23;
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
     public static final double subwooferPosition = 8;

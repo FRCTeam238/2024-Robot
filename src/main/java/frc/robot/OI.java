@@ -15,6 +15,7 @@ import frc.robot.commands.IntakeNote;
 import frc.robot.commands.IntakePosition;
 import frc.robot.commands.ManualElevator;
 import frc.robot.commands.RunShooterStupid;
+import frc.robot.commands.ScoreNote;
 import frc.robot.commands.SubwooferPosition;
 import frc.robot.commands.TrapPosition;
 
@@ -42,10 +43,12 @@ public class OI {
     operatorController.axisGreaterThan(5, 0.1).whileTrue(new ManualElevator(ElevatorDirection.UP));
     operatorController.axisLessThan(5, -0.1).whileTrue(new ManualElevator(ElevatorDirection.DOWN));
 
-    operatorController.rightBumper().whileTrue(new RunShooterStupid());
+    operatorController.rightBumper().whileTrue(new ScoreNote());
 
     operatorController.a().onTrue(new IntakePosition());
     operatorController.x().onTrue(new SubwooferPosition());
+    operatorController.b().onTrue(new SubwooferPosition());
+    operatorController.y().onTrue(new AmpPosition());
     operatorController.leftBumper().whileTrue(new IntakeNote());
   }
 

@@ -67,10 +67,15 @@ public class Pivot extends SubsystemBase implements Logged {
     } else if (-voltageMax > feed) {
       feed = -voltageMax;
     }
-
-    pivotMotor
+    if(getCurrentPosition() < 2) //if not past rollover, control normally
+    {
+      pivotMotor
         .getPIDController()
         .setReference(desiredPosition, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
+    } else
+    {
+      pivotMotor.set(.05);  //If past rollover, slowly move back towards rollover point
+    }
   }
 
   @Log.NT
