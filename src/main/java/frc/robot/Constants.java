@@ -127,7 +127,7 @@ public class Constants {
     public static final double positionMaxError = 0.5;
 
     //All positions should be in inches
-    public static final double intakePosition = 0;
+    public static final double intakePosition = .5;
     public static final double ampPosition = 23;
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
