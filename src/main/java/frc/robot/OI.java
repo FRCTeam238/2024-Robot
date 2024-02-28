@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.ElevatorConstants.ElevatorDirection;
 import frc.robot.commands.AmpPosition;
+import frc.robot.commands.ClearNote;
 import frc.robot.commands.Drive;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.IntakePosition;
@@ -52,7 +53,8 @@ public class OI {
     operatorController.x().onTrue(new SubwooferPosition());
     operatorController.b().onTrue(new SubwooferPosition());
     operatorController.y().onTrue(new AmpPosition());
-    operatorController.leftBumper().whileTrue(new IntakeNote());
+    operatorController.povDown().whileTrue(new IntakeNote());
+    operatorController.povUp().whileTrue(new ClearNote());
   }
 
   private static boolean getSlowmode() {
