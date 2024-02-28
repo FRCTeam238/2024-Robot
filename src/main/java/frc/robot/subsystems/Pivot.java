@@ -78,6 +78,26 @@ public class Pivot extends SubsystemBase implements Logged {
     }
   }
 
+  public void holdPosition()
+  {
+    if(getCurrentPosition() < 2)
+    {
+      double feed = ff.calculate(getCurrentPosition(), 0, 0);
+      if (voltageMax < feed) {
+        feed = voltageMax;
+      } else if (-voltageMax > feed) {
+        feed = -voltageMax;
+      }
+      pivotMotor
+        .getPIDController()
+        .setReference(getCurrentPosition(), ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
+    } else {
+      pivotMotor
+        .getPIDController()
+        .setReference(getCurrentPosition(), ControlType.kPosition, 0);
+    }
+  }
+
   public void setSpeed(double speed)
   {
     pivotMotor.set(speed);

@@ -86,6 +86,13 @@ public class Elevator extends SubsystemBase implements Logged {
         .setReference(currentState.position, ControlType.kPosition, 0, feed);
   }
 
+  public void holdPosition() {
+    double feed = FF.calculate(0, 0);
+    leadingMotor
+        .getPIDController()
+        .setReference(getEncoderPosition(), ControlType.kPosition, 0, feed);
+  }
+
   @Log.NT
   public double getVelocity() {
     return leadingMotor.getEncoder().getVelocity();

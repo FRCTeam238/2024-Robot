@@ -34,7 +34,7 @@ public class ManualPivot extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    pivot.setSpeed(0);
+    pivot.holdPosition();
   }
 
   // Returns true when the command should end.
