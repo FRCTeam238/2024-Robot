@@ -18,26 +18,26 @@ public class Constants {
 
     public static int leftMotorId = 8;
     public static int rightMotorId = 7;
-    public static double kP;
+    public static double kP = .01;
     public static double kI;
     public static double kD;
-    public static double kFF;
-    public static double shooterTolerance = 20;
+    public static double kFF = 0.01328;
+    public static double shooterTolerance = 20 / 60; //20 RPM, convert to RPS
 
-    public static double subwooferLeft = 2000;
-    public static double subwooferRight = 1500;
+    public static double subwooferLeft = 2000 / 60; //convert to RPS
+    public static double subwooferRight = 1800 / 60; //convert to RPS
     public static double shotTime = .5;
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
 
     static {
       //DISCLAIMER: numbers are subject to change
-      rpmTree.put(1.2065, 1432.39);
-      rpmTree.put(2.66065,1671.13);
-      rpmTree.put(4.1021, 2053.1);
-      rpmTree.put(5.2832, 2578.31);
-      rpmTree.put(7.7216, 3485.49);
-      rpmTree.put(10.1346, 4058.45);
+      rpmTree.put(1.2065, 1432.39 / 60);
+      rpmTree.put(2.66065, 1671.13 / 60);
+      rpmTree.put(4.1021, 2053.1 / 60);
+      rpmTree.put(5.2832, 2578.31 / 60);
+      rpmTree.put(7.7216, 3485.49 / 60);
+      rpmTree.put(10.1346, 4058.45 / 60);
     }
 
   }
