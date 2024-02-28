@@ -33,6 +33,9 @@ public class Pivot extends SubsystemBase implements Logged {
     pidController.setP(kP);
     pidController.setI(kI);
     pidController.setD(kD);
+    pidController.setPositionPIDWrappingEnabled(true);
+    pidController.setPositionPIDWrappingMinInput(0);
+    pidController.setPositionPIDWrappingMaxInput(2.4586);
     pivotMotor.setSmartCurrentLimit(currentLimit);
     pivotMotor.setIdleMode(IdleMode.kBrake);
     pivotMotor.setInverted(true);

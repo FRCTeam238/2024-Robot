@@ -25,8 +25,8 @@ public class AmpPosition extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new RunCommand(() -> Robot.state = Constants.RobotState.AMP),
-      new ElevatorProfile(new State(ElevatorConstants.ampPosition), "AmpPosition")
-      //new PivotProfile(new State(PivotConstants.ampPosition), "AmpPosition")
+      //new ElevatorProfile(new State(ElevatorConstants.ampPosition), "AmpPosition")
+      new PivotProfile(new State(PivotConstants.ampPosition), "AmpPosition")
     );
   }
 }

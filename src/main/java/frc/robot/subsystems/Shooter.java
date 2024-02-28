@@ -29,6 +29,7 @@ public class Shooter extends SubsystemBase implements Logged {
     config.Slot0.kD = kD;
     config.Slot0.kV = kFF;
     config.CurrentLimits.SupplyCurrentLimit = 30;
+    config.CurrentLimits.StatorCurrentLimit = 80;
 
     rightMotor.setInverted(false);
     leftMotor.setInverted(true);

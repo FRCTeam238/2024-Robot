@@ -10,7 +10,7 @@ import edu.wpi.first.math.util.Units;
 public class Constants {
   public class IntakeConstants {
     public static int kID = 13;
-    public static double intakeSpeed = 0;
+    public static double intakeSpeed = 1;
     public static double ejectTime = 2;
   }
 
@@ -54,11 +54,11 @@ public class Constants {
 
   public class PivotConstants {
     public static double voltageMax = 12;
-    public static double kS = .1;
-    public static double kG = .17;
+    public static double kS = .07;
+    public static double kG = .15;
     public static double kV = 2.99; //V*s/rad
 
-    public static double kP = 5; //estimating max error tolerance should result in an output of at least .05
+    public static double kP = 1; //estimating max error tolerance should result in an output of at least .05
     public static double kI;
     public static double kD;
 
@@ -66,7 +66,7 @@ public class Constants {
     public static int pivotID = 3;
 
     public static double maxJerk = 10000;
-    public static double maxAccel = 10;
+    public static double maxAccel = 20;
     public static double maxVelocity = 1; //Max is 3.89?
     public static double velocityTolerance = .05;
     public static final double velocityMaxError = 0.005; //~.25 degrees/s
@@ -74,8 +74,8 @@ public class Constants {
 
     //Positions should all be in radians where 0 = horizontal
     public static final double intakePosition = Units.degreesToRadians(30);
-    public static final double ampPosition = Units.degreesToRadians(30);
-    public static final double trapPosition = 0;
+    public static final double ampPosition = Units.degreesToRadians(15);
+    public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
     public static final double subwooferPosition = Units.degreesToRadians(60);
 
@@ -93,12 +93,12 @@ public class Constants {
   }
 
   public class FeederConstants {
-    public static final int feederId = 7;
+    public static final int feederId = 6;
     public static final int sensorId = 0;
 
     public static final double ejectRunTime = 4;//seconds
     public static final double ejectPercent = -0.5;
-    public static final double feedSpeed = 1;
+    public static final double feedSpeed = 0.65;
   }
 
   public class ElevatorConstants {
@@ -131,7 +131,7 @@ public class Constants {
     public static final double ampPosition = 16;//23;
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
-    public static final double subwooferPosition = 6;
+    public static final double subwooferPosition = 8;
 
     public final static double gearing = 12; // 4:1 gear ratio
     public final static double inchesPerRev = 1.5 * Math.PI; // 1.5" diameter pulley

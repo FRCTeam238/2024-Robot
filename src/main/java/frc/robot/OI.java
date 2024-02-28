@@ -6,20 +6,23 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.ElevatorConstants.ElevatorDirection;
 import frc.robot.commands.AmpPosition;
 import frc.robot.commands.Drive;
 import frc.robot.commands.IntakeNote;
+import frc.robot.commands.IntakePosition;
 import frc.robot.commands.ManualElevator;
 import frc.robot.commands.RunShooterStupid;
 import frc.robot.commands.SubwooferPosition;
+import frc.robot.commands.TrapPosition;
 
 /** OI */
 public class OI {
 
-  public static Joystick leftJoystick = new Joystick(2);
-  public static Joystick rightJoystick = new Joystick(1);
+  public static CommandJoystick leftJoystick = new CommandJoystick(2);
+  public static CommandJoystick rightJoystick = new CommandJoystick(1);
 
   public static CommandXboxController driverController = new CommandXboxController(3);
   public static CommandXboxController operatorController = new CommandXboxController(0);
@@ -29,23 +32,25 @@ public class OI {
 
   public OI() {
     Robot.drivetrain.setDefaultCommand(new Drive());
-    OI.driverController.start().onTrue(Robot.drivetrain.zeroHeadingCommand());
+    leftJoystick.button(3).onTrue(Robot.drivetrain.zeroHeadingCommand());
     driveTypeChooser = new SendableChooser<>();
     driveTypeChooser.addOption("XBOX", DriveType.XBOX);
     driveTypeChooser.setDefaultOption("JOYSTICK", DriveType.JOYSTICK);
     SmartDashboard.putData(driveTypeChooser);
 
-    operatorController.axisGreaterThan(4, 0.5).whileTrue(new ManualElevator(ElevatorDirection.UP));
-    operatorController.axisLessThan(4, -0.5).whileTrue(new ManualElevator(ElevatorDirection.DOWN));
+
+    operatorController.axisGreaterThan(5, 0.1).whileTrue(new ManualElevator(ElevatorDirection.UP));
+    operatorController.axisLessThan(5, -0.1).whileTrue(new ManualElevator(ElevatorDirection.DOWN));
 
     operatorController.rightBumper().whileTrue(new RunShooterStupid());
 
-    operatorController.a().whileTrue(new AmpPosition());
+    operatorController.a().onTrue(new IntakePosition());
+    operatorController.x().onTrue(new SubwooferPosition());
     operatorController.leftBumper().whileTrue(new IntakeNote());
   }
 
   private static boolean getSlowmode() {
-    return driverController.getHID().getAButton() || leftJoystick.getRawButton(2) || rightJoystick.getRawButton(2);
+    return driverController.getHID().getAButton() || leftJoystick.getHID().getRawButton(2) || rightJoystick.getHID().getRawButton(2);
 
   }
 

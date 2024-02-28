@@ -22,7 +22,7 @@ public class TrapPosition extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new RunCommand(() -> Robot.state = Constants.RobotState.TRAP),
-      new ElevatorProfile(new State(ElevatorConstants.trapPosition), "TrapPosition"),
+      //new ElevatorProfile(new State(ElevatorConstants.trapPosition), "TrapPosition"),
       new PivotProfile(new State(PivotConstants.trapPosition), "TrapPosition")
     );
   }
