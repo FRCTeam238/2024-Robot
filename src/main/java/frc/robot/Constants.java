@@ -18,10 +18,10 @@ public class Constants {
 
     public static int leftMotorId = 8;
     public static int rightMotorId = 7;
-    public static double kP = .01;
+    public static double kP = .5;
     public static double kI;
     public static double kD;
-    public static double kFF = 0.01328;
+    public static double kFF = 0.1328;
     public static double shooterTolerance = 20 / 60; //20 RPM, convert to RPS
 
     public static double subwooferLeft = 2000 / 60; //convert to RPS
