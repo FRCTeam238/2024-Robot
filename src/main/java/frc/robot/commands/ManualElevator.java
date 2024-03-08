@@ -23,7 +23,9 @@ public class ManualElevator extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    elevator.setCommand("Manual");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -46,6 +48,7 @@ public class ManualElevator extends Command {
   @Override
   public void end(boolean interrupted) {
     elevator.holdPosition();
+    elevator.setCommand("None");
   }
 
   // Returns true when the command should end.

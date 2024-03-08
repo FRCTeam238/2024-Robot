@@ -20,6 +20,7 @@ public class Elevator extends SubsystemBase implements Logged {
 
   CANSparkMax leadingMotor = new CANSparkMax(leaderId, MotorType.kBrushless);
   CANSparkMax followerMotor = new CANSparkMax(followerId, MotorType.kBrushless);
+  @Log String command;
 
   protected ElevatorFeedforward FF = new ElevatorFeedforward(kS, kG, kV, kA);
 
@@ -30,6 +31,11 @@ public class Elevator extends SubsystemBase implements Logged {
 
   public void setSpeed(double speed) {
     leadingMotor.set(speed);
+  }
+
+  public void setCommand(String name)
+  {
+    
   }
 
   private void configureMotorController() {
