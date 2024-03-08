@@ -22,7 +22,7 @@ public class IntakeNote extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   
+    Robot.feeder.setCommand("Intake");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,7 +38,7 @@ public class IntakeNote extends Command {
   public void end(boolean interrupted) {
     Robot.feeder.rollerController(0);
     Robot.intake.setSpeed(0);
-    
+    Robot.feeder.setCommand("None");
   }
 
   // Returns true when the command should end.

@@ -17,6 +17,11 @@ public class EjectNote extends Command {
     }
 
     @Override
+    public void initialize() {
+        feeder.setCommand("EjectNote");
+    }
+
+    @Override
     public void execute() {
         feeder.rollerController(ejectPercent);
 
@@ -25,6 +30,6 @@ public class EjectNote extends Command {
     @Override
     public void end(boolean interrupted) {
         feeder.rollerController(0);
-
+        feeder.setCommand("None");
     }
 }

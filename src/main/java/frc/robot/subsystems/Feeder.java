@@ -20,6 +20,7 @@ public class Feeder extends SubsystemBase implements Logged {
   CANSparkMax feederMotor = new CANSparkMax(feederId, MotorType.kBrushless);
 
   DigitalInput sensorMachine = new DigitalInput(sensorId);
+  @Log String command;
 
   public Feeder() {
     feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 65535); //Motor position from internal encoder. Not used
@@ -30,6 +31,10 @@ public class Feeder extends SubsystemBase implements Logged {
 
     feederMotor.setSmartCurrentLimit(30);
     Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
+  }
+
+  public void setCommand(String name) {
+    command = name;
   }
 
   public void rollerController(double speed) {
