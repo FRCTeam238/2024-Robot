@@ -1,5 +1,12 @@
 {
   "autonomousModes" : [ {
+    "name" : "CenterLeaveNoShoot",
+    "commands" : [ {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Center_Leave", "true", "0" ],
+      "parallelType" : "None"
+    } ]
+  }, {
     "name" : "Center_2GP",
     "commands" : [ {
       "name" : "LaunchSubwooferGroupAuto",
