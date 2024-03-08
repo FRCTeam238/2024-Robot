@@ -38,6 +38,7 @@ public class Drivetrain extends SubsystemBase implements Logged {
   SwerveDrivePoseEstimator odometry;
   AHRS gyro;
   PIDController x, y, theta;
+  @Log String command;
 
   public Drivetrain() {
     gyro = new AHRS(Port.kMXP);
@@ -72,6 +73,11 @@ public class Drivetrain extends SubsystemBase implements Logged {
   @Log.NT
   public Pose2d getPose() {
     return odometry.getEstimatedPosition();
+  }
+
+  public void setCommand(String name)
+  {
+    command = name;
   }
 
   public void updatePoseEstimate(EstimatedRobotPose estimate)

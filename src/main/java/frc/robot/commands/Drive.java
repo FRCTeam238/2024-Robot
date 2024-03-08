@@ -17,7 +17,9 @@ public class Drive extends Command {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    drivetrain.setCommand("Drive");
+  }
 
   @Override
   public void execute() {

@@ -26,7 +26,9 @@ public class AimDT extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    Robot.drivetrain.setCommand("AimDT");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

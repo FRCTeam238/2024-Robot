@@ -33,24 +33,6 @@ public class TrajectoryDriveCommand extends SequentialCommandGroup {
   public TrajectoryDriveCommand(String pathName, boolean resetPosition, double maxVelocity) {
     ChoreoTrajectory trajectory = Choreo.getTrajectory(pathName);
 
-    // reference to the method used to get the current pose
-    Supplier<Pose2d> pose = drivetrain::getPose;
-    PIDController xController =
-        new PIDController(
-            kP,
-            kI,
-            kD);
-    PIDController yController =
-        new PIDController(
-            kP,
-            kI,
-            kD);
-    PIDController rotationController =
-        new PIDController(
-            kPAngular,
-            kIAngular,
-            kDAngular);
-
     // creates a command that sets the position of the robot to the starting point of the trajectory
     Command resetPos =
         drivetrain.runOnce(() -> drivetrain.resetOdometry(DriverStation.getAlliance().get() == DriverStation.Alliance.Red
@@ -61,14 +43,17 @@ public class TrajectoryDriveCommand extends SequentialCommandGroup {
       addCommands(resetPos);
     }
 
+    addCommands(drivetrain.runOnce(() -> drivetrain.setCommand("Traj-"+pathName)));
+
     Command swerveCommand =
         Choreo.choreoSwerveCommand(
             trajectory,
-            pose,
+            drivetrain::getPose,
             drivetrain::choreoController,
             drivetrain::driveWithChassisSpeeds,
             Utils::isPathReversed);
 
     addCommands(swerveCommand);
+    addCommands(drivetrain.runOnce(() -> drivetrain.setCommand("None")));
   }
 }
