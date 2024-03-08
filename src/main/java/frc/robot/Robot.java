@@ -13,6 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.ElevatorConstants;
+import frc.robot.Constants.FeederConstants;
+import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.PivotConstants;
 import frc.robot.commands.TrajectoryDriveCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
@@ -23,6 +28,7 @@ import frc.robot.subsystems.Shooter;
 
 import java.nio.file.FileSystem;
 import java.util.List;
+import java.util.Map;
 
 import monologue.Annotations;
 import monologue.Annotations.Log;
@@ -61,7 +67,17 @@ public class Robot extends TimedRobot implements Logged {
     SignalLogger.start();
     DataLogManager.start();
     DriverStation.startDataLog(DataLogManager.getLog());
-    URCL.start();
+    URCL.start(Map.ofEntries(
+      Map.entry(PivotConstants.pivotID, "Pivot"),
+      Map.entry(IntakeConstants.kID, "Intake"),
+      Map.entry(FeederConstants.feederId, "Feeder"),
+      Map.entry(ElevatorConstants.leaderId, "ElevatorLeader"),
+      Map.entry(ElevatorConstants.followerId, "ElevatorFollower"),
+      Map.entry(DriveConstants.backLeftTurnCANId, "BL Steer"),
+      Map.entry(DriveConstants.backRightTurnCANId, "BR Steer"),
+      Map.entry(DriveConstants.frontLeftTurnCANId, "FL Steer"),
+      Map.entry(DriveConstants.frontRightTurnCANId, "FR Steer")
+    ));
     amodeReader = new AutonomousModesReader(new DataFileAutonomousModeDataSource(Filesystem.getDeployDirectory() + "/amode238.txt"));
     autoChooser = new SendableChooser<>();
     autoNames = amodeReader.GetAutoNames();
