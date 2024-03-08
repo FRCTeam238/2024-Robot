@@ -58,7 +58,7 @@ public class AimShooter extends Command {
               PivotConstants.maxAccel,
               PivotConstants.maxVelocity,
               PivotConstants.velocityTolerance
-      ), //TODO: Replace with constants from pivot section
+      ),
       ProfileType.AUTO);
     Robot.pivot.setDesiredState(pivotProfile.sample());
 

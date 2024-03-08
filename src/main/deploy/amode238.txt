@@ -78,7 +78,7 @@
       "parallelType" : "None"
     }, {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Center_4GP.4", "false", "0" ],
+      "parameters" : [ "", "false", "0" ],
       "parallelType" : "Parallel"
     }, {
       "name" : "TargetSubwoofer",
@@ -98,7 +98,7 @@
       "parallelType" : "Deadline_Leader"
     }, {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Center_4GP.5", "false", "0" ],
+      "parameters" : [ "", "false", "0" ],
       "parallelType" : "Deadline_Follower"
     }, {
       "name" : "Delay",
@@ -110,7 +110,7 @@
       "parallelType" : "Parallel"
     }, {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Center_4GP.6", "false", "0" ],
+      "parameters" : [ "", "false", "0" ],
       "parallelType" : "Parallel"
     }, {
       "name" : "LaunchSubwooferGroupAuto",
@@ -126,6 +126,31 @@
     }, {
       "name" : "TrajectoryDriveCommand",
       "parameters" : [ "Center_Leave", "true", "0" ],
+      "parallelType" : "None"
+    } ]
+  }, {
+    "name" : "JustShoot",
+    "commands" : [ {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    } ]
+  }, {
+    "name" : "LeaveLeftNoShoot",
+    "commands" : [ {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Left_Leave", "true", "0" ],
+      "parallelType" : "None"
+    } ]
+  }, {
+    "name" : "LeaveRightNoShoot",
+    "commands" : [ {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "LeaveAutoRight_NEW", "true", "0" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "16" ],
       "parallelType" : "None"
     } ]
   }, {
@@ -148,7 +173,7 @@
       "parallelType" : "Deadline_Follower"
     }, {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Left_2GP.2", "false", "0" ],
+      "parameters" : [ "", "false", "0" ],
       "parallelType" : "None"
     }, {
       "name" : "LaunchSubwooferGroupAuto",
@@ -202,6 +227,13 @@
     }, {
       "name" : "TrajectoryDriveCommand",
       "parameters" : [ "Right_Leave", "true", "0" ],
+      "parallelType" : "None"
+    } ]
+  }, {
+    "name" : "whoopsydaisy",
+    "commands" : [ {
+      "name" : "Delay",
+      "parameters" : [ "16" ],
       "parallelType" : "None"
     } ]
   } ]

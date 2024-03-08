@@ -28,7 +28,7 @@ public class Feeder extends SubsystemBase implements Logged {
     feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 65535); //Absolute encoder position and angle. Not used
     feederMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 65535); //Absolute encoder velocity, not used
 
-    feederMotor.setSmartCurrentLimit(20);
+    feederMotor.setSmartCurrentLimit(30);
     Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
   }
 

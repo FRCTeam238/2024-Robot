@@ -23,7 +23,7 @@ public class Intake extends SubsystemBase implements Logged {
     intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 65535); //Absolute encoder position and angle
     intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 65535); //Absolute encoder velocity, not currently used, leave at default
 
-    intakeMotor.setSmartCurrentLimit(40);
+    intakeMotor.setSmartCurrentLimit(80);
     Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
   }
 

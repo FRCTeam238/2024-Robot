@@ -18,14 +18,14 @@ public class Constants {
 
     public static int leftMotorId = 8;
     public static int rightMotorId = 7;
-    public static double kP = .5;
+    public static double kP = .125; //prev: 0.5 | these changes prevent motor losing power
     public static double kI;
     public static double kD;
-    public static double kFF = 0.1328;
-    public static double shooterTolerance = 20 / 60; //20 RPM, convert to RPS
+    public static double kFF = 0.1328/2; //prev: 0.1328 | these changes prevent motor losing power
+    public static double shooterTolerance = 30 / 60; //30 RPM, convert to RPS
 
-    public static double subwooferLeft = 2000 / 60; //convert to RPS
-    public static double subwooferRight = 1800 / 60; //convert to RPS
+    public static double subwooferLeft = 6650 / 60; //convert to RPS | value * 1.33 = output shaft rps
+    public static double subwooferRight = 6150 / 60; //convert to RPS
     public static double shotTime = .5;
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
@@ -74,10 +74,11 @@ public class Constants {
 
     //Positions should all be in radians where 0 = horizontal
     public static final double intakePosition = Units.degreesToRadians(30);
-    public static final double ampPosition = Units.degreesToRadians(30);
+    public static final double ampPosition = Units.degreesToRadians(22);
     public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
-    public static final double subwooferPosition = Units.degreesToRadians(60);
+    public static final double subwooferPosition = Units.degreesToRadians(50);
+    public static final double feedOutPosition = Units.degreesToRadians(15);
 
     public static InterpolatingDoubleTreeMap pivotAngles = new InterpolatingDoubleTreeMap();
 
@@ -97,7 +98,7 @@ public class Constants {
     public static final int sensorId = 0;
 
     public static final double ejectRunTime = 4;//seconds
-    public static final double ejectPercent = -0.5;
+    public static final double ejectPercent = -0.6;
     public static final double feedSpeed = 0.65;
   }
 
@@ -128,10 +129,11 @@ public class Constants {
 
     //All positions should be in inches
     public static final double intakePosition = .5;
-    public static final double ampPosition = 23;
+    public static final double ampPosition = 25;
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
     public static final double subwooferPosition = 8;
+    public static final double feedOutPosition = 0;
 
     public final static double gearing = 12; // 4:1 gear ratio
     public final static double inchesPerRev = 1.5 * Math.PI; // 1.5" diameter pulley
@@ -186,7 +188,8 @@ public class Constants {
     TRAP,
     INTAKE,
     TARGET,
-    SUBWOOFER
+    SUBWOOFER,
+    FEEDOUT
   }
 
   public class VisionConstants {

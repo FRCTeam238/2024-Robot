@@ -23,6 +23,9 @@ import frc.robot.subsystems.Shooter;
 
 import java.nio.file.FileSystem;
 import java.util.List;
+
+import monologue.Annotations;
+import monologue.Annotations.Log;
 import monologue.Logged;
 import monologue.Monologue;
 import org.frc238.lib.autonomous.AutonomousModesReader;
@@ -39,6 +42,7 @@ public class Robot extends TimedRobot implements Logged {
   private SendableChooser<String> autoChooser;
   private String lastSelectedAuto;
 
+  @Log.NT
   public static Constants.RobotState state = Constants.RobotState.INTAKE;
 
   public static Drivetrain drivetrain = new Drivetrain();
@@ -56,6 +60,7 @@ public class Robot extends TimedRobot implements Logged {
     Monologue.setupMonologue(this, "Robot", false, false);
     SignalLogger.start();
     DataLogManager.start();
+    DriverStation.startDataLog(DataLogManager.getLog());
     URCL.start();
     amodeReader = new AutonomousModesReader(new DataFileAutonomousModeDataSource(Filesystem.getDeployDirectory() + "/amode238.txt"));
     autoChooser = new SendableChooser<>();

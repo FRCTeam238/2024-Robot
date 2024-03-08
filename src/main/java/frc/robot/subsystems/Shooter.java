@@ -28,7 +28,7 @@ public class Shooter extends SubsystemBase implements Logged {
     config.Slot0.kI = kI;
     config.Slot0.kD = kD;
     config.Slot0.kV = kFF;
-    config.CurrentLimits.SupplyCurrentLimit = 30;
+    config.CurrentLimits.SupplyCurrentLimit = 40;
     config.CurrentLimits.StatorCurrentLimit = 80;
 
     rightMotor.setInverted(false);
@@ -78,7 +78,7 @@ public class Shooter extends SubsystemBase implements Logged {
   public void setWheelTargetSpeed(){
     if(Robot.state == RobotState.SUBWOOFER)
     {
-      setSpeed(subwooferLeft, subwooferRight);
+      setSpeed(subwooferLeft, -subwooferRight);
     } else {
       double distance = Utils.getSpeakerDistance();
       double avgSpeed = rpmTree.get(distance);
@@ -96,6 +96,7 @@ public class Shooter extends SubsystemBase implements Logged {
     return rightMotor.getVelocity().getValueAsDouble();
   }
 
+  @Log.NT
   public boolean isAtSpeed() {
     if (getLeftSpeed() <= desiredLeftSpeed + shooterTolerance && getLeftSpeed() >= desiredLeftSpeed - shooterTolerance) {
       return getRightSpeed() <= desiredRightSpeed + shooterTolerance

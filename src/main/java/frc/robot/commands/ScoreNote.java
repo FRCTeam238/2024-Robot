@@ -19,7 +19,9 @@ public class ScoreNote extends SequentialCommandGroup {
                         Map.entry(Constants.RobotState.TARGET, new LaunchGroup()),
                         Map.entry(Constants.RobotState.SUBWOOFER, new LaunchSubwooferGroup()),
                         Map.entry(Constants.RobotState.AMP, new ScoreAmpGroup()),
-                        Map.entry(Constants.RobotState.TRAP, new ScoreTrapGroup())
+                        Map.entry(Constants.RobotState.TRAP, new ScoreTrapGroup()),
+                        Map.entry(Constants.RobotState.FEEDOUT, new FeedOutNoteGroup())
+
                 ),
                 Robot::getState
         ));

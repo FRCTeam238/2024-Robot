@@ -20,12 +20,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import monologue.Annotations;
+import monologue.Annotations.Log;
+import monologue.Logged;
 import org.photonvision.EstimatedRobotPose;
 
 import static frc.robot.Constants.DriveConstants.*;
 
 /** for swerve */
-public class Drivetrain extends SubsystemBase {
+public class Drivetrain extends SubsystemBase implements Logged {
 
   SwerveModule frontLeft =
       new SwerveModule(frontLeftDriveCANId, frontLeftTurnCANId);
@@ -145,6 +148,7 @@ public class Drivetrain extends SubsystemBase {
         });
   }
 
+  @Log.NT
   public Pose2d getPose() {
     return odometry.getEstimatedPosition();
   }
@@ -172,7 +176,7 @@ public class Drivetrain extends SubsystemBase {
       if (DriverStation.getAlliance().get() == Alliance.Blue) {
        return odometry.getEstimatedPosition().getRotation(); 
       } else {
-        return odometry.getEstimatedPosition().getRotation().minus(new Rotation2d().fromDegrees(180));
+        return odometry.getEstimatedPosition().getRotation();//.minus(new Rotation2d().fromDegrees(180)); // DO NOT USE IF WE DONT RUN A PATH
       }
     } else {
       return odometry.getEstimatedPosition().getRotation();
@@ -244,6 +248,7 @@ public class Drivetrain extends SubsystemBase {
     return Commands.runOnce(()->{this.zeroHeading();});
   }
 
+  @Log.NT
   public double getHeading() {
     return gyro.getRotation2d().getDegrees();
   }
