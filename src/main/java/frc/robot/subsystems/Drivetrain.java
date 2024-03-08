@@ -73,7 +73,6 @@ public class Drivetrain extends SubsystemBase implements Logged {
   }
 
   public void resetOdometry(Pose2d pose) {
-
     odometry.resetPosition(
         gyro.getRotation2d(),
         new SwerveModulePosition[] {
@@ -90,7 +89,7 @@ public class Drivetrain extends SubsystemBase implements Logged {
       if (DriverStation.getAlliance().get() == Alliance.Blue) {
        return odometry.getEstimatedPosition().getRotation(); 
       } else {
-        return odometry.getEstimatedPosition().getRotation();//.minus(new Rotation2d().fromDegrees(180)); // DO NOT USE IF WE DONT RUN A PATH
+        return odometry.getEstimatedPosition().getRotation().minus(Rotation2d.fromDegrees(180)); // DO NOT USE IF WE DONT RUN A PATH
       }
     } else {
       return odometry.getEstimatedPosition().getRotation();
