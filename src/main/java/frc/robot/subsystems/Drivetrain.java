@@ -1,7 +1,9 @@
 package frc.robot.subsystems;
 
+import com.choreo.lib.ChoreoTrajectoryState;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -35,6 +37,7 @@ public class Drivetrain extends SubsystemBase implements Logged {
 
   SwerveDrivePoseEstimator odometry;
   AHRS gyro;
+  PIDController x, y, theta;
 
   public Drivetrain() {
     gyro = new AHRS(Port.kMXP);
@@ -48,6 +51,10 @@ public class Drivetrain extends SubsystemBase implements Logged {
               backLeft.getPosition(),
               backRight.getPosition()
             }, new Pose2d());
+
+    x = new PIDController(kP, kI, kD);
+    y = new PIDController(kP, kI, kD);
+    theta = new PIDController(kPAngular, kIAngular, kDAngular);
   }
 
   @Override
@@ -172,4 +179,20 @@ public class Drivetrain extends SubsystemBase implements Logged {
   public double getTurnRate() {
     return gyro.getRate();
   }  
+
+  public ChassisSpeeds choreoController(Pose2d currentPose, ChoreoTrajectoryState referenceState)
+  {
+    log("TrajPose", referenceState.getPose());
+    double xFF = referenceState.velocityX;
+    double yFF = referenceState.velocityY;
+    double rotationFF = referenceState.angularVelocity;
+
+    double xFeedback = x.calculate(currentPose.getX(), referenceState.x);
+    double yFeedback = y.calculate(currentPose.getY(), referenceState.y);
+    double rotationFeedback =
+          theta.calculate(currentPose.getRotation().getRadians(), referenceState.heading);
+
+      return ChassisSpeeds.fromFieldRelativeSpeeds(
+          xFF + xFeedback, yFF + yFeedback, rotationFF + rotationFeedback, currentPose.getRotation());
+  }
 }

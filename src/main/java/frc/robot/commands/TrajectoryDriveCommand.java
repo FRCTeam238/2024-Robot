@@ -65,9 +65,7 @@ public class TrajectoryDriveCommand extends SequentialCommandGroup {
         Choreo.choreoSwerveCommand(
             trajectory,
             pose,
-            xController,
-            yController,
-            rotationController,
+            drivetrain::choreoController,
             drivetrain::driveWithChassisSpeeds,
             Utils::isPathReversed);
 
