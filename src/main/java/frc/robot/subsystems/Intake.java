@@ -14,6 +14,7 @@ import monologue.Logged;
 public class Intake extends SubsystemBase implements Logged {
 
   CANSparkMax intakeMotor = new CANSparkMax(kID, MotorType.kBrushless);
+  @Log String command;
 
   public Intake() {
     intakeMotor.setInverted(true);
@@ -25,6 +26,11 @@ public class Intake extends SubsystemBase implements Logged {
 
     intakeMotor.setSmartCurrentLimit(80);
     Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
+  }
+
+  public void setCommand(String name)
+  {
+    command = name;
   }
 
   public void setSpeed(double speed) {
