@@ -18,6 +18,7 @@ public class SpoolShooter extends Command {
   @Override
   public void initialize() {
     Robot.shooter.setWheelTargetSpeed();
+    Robot.shooter.setCommand("SpoolShooter");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -30,6 +31,7 @@ public class SpoolShooter extends Command {
     if(interrupted){
       Robot.shooter.coast();
     }
+    Robot.shooter.setCommand("None");
   }
 
   // Returns true when the command should end.

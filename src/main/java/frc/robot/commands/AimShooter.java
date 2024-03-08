@@ -29,6 +29,9 @@ public class AimShooter extends Command {
   @Override
   public void initialize() {
     Robot.state = Constants.RobotState.TARGET;
+    Robot.elevator.setCommand("AimShooter");
+    Robot.pivot.setCommand("AimShooter");
+    Robot.shooter.setCommand("AimShooter");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -79,6 +82,9 @@ public class AimShooter extends Command {
     if(interrupted){
       Robot.shooter.coast();
     }
+    Robot.elevator.setCommand("None");
+    Robot.pivot.setCommand("None");
+    Robot.shooter.setCommand("None");
   }
 
 }

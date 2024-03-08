@@ -31,6 +31,7 @@ public class PivotProfile extends Command {
 
         MotionProfile.State currentState = new MotionProfile.State(pivot.getCurrentPosition(), pivot.getVelocity());
         profile = new MotionProfile(goal, currentState, constraints, MotionProfile.ProfileType.AUTO);
+        pivot.setCommand(getName());
     }
 
     @Override
@@ -54,6 +55,6 @@ public class PivotProfile extends Command {
 
     @Override
     public void end(boolean interrupted) {
-
+        pivot.setCommand("None");
     }
 }

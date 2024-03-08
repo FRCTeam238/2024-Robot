@@ -9,7 +9,6 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.Utils;
 import frc.robot.Constants.RobotState;
@@ -19,8 +18,9 @@ import monologue.Logged;
 public class Shooter extends SubsystemBase implements Logged {
   TalonFX leftMotor = new TalonFX(leftMotorId);
   TalonFX rightMotor = new TalonFX(rightMotorId);
-  @Log.NT double desiredLeftSpeed = 0;
-  @Log.NT double desiredRightSpeed = 0;
+  @Log double desiredLeftSpeed = 0;
+  @Log double desiredRightSpeed = 0;
+  @Log String command;
 
   public Shooter() {
     TalonFXConfiguration config = new TalonFXConfiguration();
@@ -54,6 +54,10 @@ public class Shooter extends SubsystemBase implements Logged {
     leftMotor.optimizeBusUtilization();
 
     Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
+  }
+
+  public void setCommand(String name){
+    command = name;
   }
 
   public void setPercent(double left, double right) {

@@ -14,7 +14,6 @@ public class ElevatorProfile extends Command {
     private final MotionProfile.MotionConstraints constraints;
     private MotionProfile profile;
     private MotionProfile.State currentState;
-    String name;
 
     public ElevatorProfile(MotionProfile.State goal, String name) {
         // each subsystem used by the command must be passed into the
@@ -22,7 +21,7 @@ public class ElevatorProfile extends Command {
         addRequirements(this.elevator);
         this.goal = goal;
         constraints = new MotionProfile.MotionConstraints(maxElevatorJerk, maxAccel, maxVelocity, velocityTolerance);
-        this.name = name;
+        setName(name);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class ElevatorProfile extends Command {
         currentState = new MotionProfile.State(elevator.getEncoderPosition(), elevator.getVelocity());
 
         profile = new MotionProfile(goal, currentState, constraints, MotionProfile.ProfileType.AUTO);
-        elevator.setCommand(name);
+        elevator.setCommand(getName());
     }
 
     @Override

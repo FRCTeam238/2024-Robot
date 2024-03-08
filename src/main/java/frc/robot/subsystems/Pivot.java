@@ -22,7 +22,7 @@ public class Pivot extends SubsystemBase implements Logged {
 
   CANSparkMax pivotMotor = new CANSparkMax(pivotID, MotorType.kBrushless);
   AbsoluteEncoder encoder = pivotMotor.getAbsoluteEncoder(Type.kDutyCycle);
-
+  @Log String command;
   ArmFeedforward ff;
 
   public Pivot() {
@@ -49,6 +49,11 @@ public class Pivot extends SubsystemBase implements Logged {
     pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 10); //Absolute encoder velocity
 
     Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
+  }
+
+  public void setCommand(String name)
+  {
+    command = name;
   }
 
   public void setDesiredState(MotionProfile.State state) {
