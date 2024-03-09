@@ -55,7 +55,7 @@ repositories {
 // Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
 // Also defines JUnit 5.
 dependencies {
-    implementation 'com.github.shueja:Monologue:v1.0.0-beta5'
+    implementation 'com.github.shueja:Monologue:v1.0.0-beta6'
 
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
