@@ -1,0 +1,475 @@
+{
+  "version": "3.0.2",
+  "layout": [
+    {
+      "type": 2,
+      "fields": [
+        "NT:/Robot/drivetrain/command",
+        "NT:/Robot/elevator/command",
+        "NT:/Robot/pivot/command",
+        "NT:/Robot/intake/command",
+        "NT:/Robot/feeder/command",
+        "NT:/Robot/shooter/command"
+      ],
+      "title": "Commands"
+    },
+    {
+      "type": 5,
+      "fields": [],
+      "listFields": [
+        [
+          {
+            "type": "Ghost",
+            "key": "NT:/Robot/drivetrain/TrajPose",
+            "sourceTypeIndex": 1,
+            "sourceType": "Pose2d"
+          },
+          {
+            "type": "Robot",
+            "key": "NT:/Robot/drivetrain/getPose",
+            "sourceTypeIndex": 1,
+            "sourceType": "Pose2d"
+          }
+        ]
+      ],
+      "options": {
+        "game": "2024 Field",
+        "unitDistance": "meters",
+        "unitRotation": "radians",
+        "origin": "center",
+        "size": 0.75,
+        "allianceBumpers": "auto",
+        "allianceOrigin": "blue",
+        "orientation": "blue left, red right"
+      },
+      "configHidden": false,
+      "title": "Odo"
+    },
+    {
+      "type": 9,
+      "fields": [
+        {
+          "key": "NT:/Robot/drivetrain/DesiredStates",
+          "sourceTypeIndex": 1,
+          "sourceType": "SwerveModuleState[]"
+        },
+        {
+          "key": "NT:/Robot/drivetrain/getSwerveModuleStates",
+          "sourceTypeIndex": 1,
+          "sourceType": "SwerveModuleState[]"
+        },
+        {
+          "key": "NT:/Robot/drivetrain/getPose/rotation",
+          "sourceTypeIndex": 1,
+          "sourceType": "Rotation2d"
+        }
+      ],
+      "listFields": [],
+      "options": {
+        "maxSpeed": 4.5,
+        "rotationUnits": "radians",
+        "arrangement": "0,1,2,3",
+        "sizeLeftRight": 0.65,
+        "sizeFrontBack": 0.65,
+        "forwardDirection": "up"
+      },
+      "configHidden": false,
+      "title": "Swerve"
+    },
+    {
+      "type": 1,
+      "legends": {
+        "left": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/pivot/desiredPosition",
+              "color": "#2b66a2",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/pivot/getCurrentPosition",
+              "color": "#e5b31b",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/pivot/desiredVelocity",
+              "color": "#af2437",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/pivot/getVelocity",
+              "color": "#80588e",
+              "show": true
+            }
+          ]
+        },
+        "discrete": {
+          "fields": [
+            {
+              "key": "NT:/Robot/pivot/command",
+              "color": "#e48b32",
+              "show": true
+            }
+          ]
+        },
+        "right": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": []
+        }
+      },
+      "title": "Pivot"
+    },
+    {
+      "type": 1,
+      "legends": {
+        "left": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/elevator/DesiredPosition",
+              "color": "#2b66a2",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/elevator/getEncoderPosition",
+              "color": "#e5b31b",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/elevator/DesiredVelocity",
+              "color": "#af2437",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/elevator/getVelocity",
+              "color": "#80588e",
+              "show": true
+            }
+          ]
+        },
+        "discrete": {
+          "fields": [
+            {
+              "key": "NT:/Robot/elevator/command",
+              "color": "#e48b32",
+              "show": true
+            }
+          ]
+        },
+        "right": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": []
+        }
+      },
+      "title": "Elevator"
+    },
+    {
+      "type": 1,
+      "legends": {
+        "left": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/shooter/desiredLeftSpeed",
+              "color": "#2b66a2",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/shooter/desiredRightSpeed",
+              "color": "#e5b31b",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/shooter/getLeftSpeed",
+              "color": "#af2437",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/shooter/getRightSpeed",
+              "color": "#80588e",
+              "show": true
+            }
+          ]
+        },
+        "discrete": {
+          "fields": [
+            {
+              "key": "NT:/Robot/shooter/isAtSpeed",
+              "color": "#e48b32",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/shooter/command",
+              "color": "#aacaee",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/feeder/getSpeed",
+              "color": "#c0b487",
+              "show": true
+            }
+          ]
+        },
+        "right": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": []
+        }
+      },
+      "title": "Shooter"
+    },
+    {
+      "type": 1,
+      "legends": {
+        "left": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": []
+        },
+        "discrete": {
+          "fields": [
+            {
+              "key": "NT:/Robot/intake/getSpeed",
+              "color": "#2b66a2",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/feeder/getSpeed",
+              "color": "#e5b31b",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/feeder/sensor",
+              "color": "#af2437",
+              "show": true
+            }
+          ]
+        },
+        "right": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": []
+        }
+      },
+      "title": "Intake"
+    },
+    {
+      "type": 1,
+      "legends": {
+        "left": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/drivetrain/DesiredStates/0/angle/value",
+              "color": "#2b66a2",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/drivetrain/getSwerveModuleStates/0/angle/value",
+              "color": "#e5b31b",
+              "show": true
+            }
+          ]
+        },
+        "discrete": {
+          "fields": []
+        },
+        "right": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/drivetrain/DesiredStates/0/speed",
+              "color": "#af2437",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/drivetrain/getSwerveModuleStates/0/speed",
+              "color": "#80588e",
+              "show": true
+            }
+          ]
+        }
+      },
+      "title": "FL"
+    },
+    {
+      "type": 1,
+      "legends": {
+        "left": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/drivetrain/DesiredStates/1/angle/value",
+              "color": "#2b66a2",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/drivetrain/getSwerveModuleStates/1/angle/value",
+              "color": "#e5b31b",
+              "show": true
+            }
+          ]
+        },
+        "discrete": {
+          "fields": []
+        },
+        "right": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/drivetrain/DesiredStates/1/speed",
+              "color": "#af2437",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/drivetrain/getSwerveModuleStates/1/speed",
+              "color": "#80588e",
+              "show": true
+            }
+          ]
+        }
+      },
+      "title": "FR"
+    },
+    {
+      "type": 1,
+      "legends": {
+        "left": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/drivetrain/DesiredStates/2/angle/value",
+              "color": "#2b66a2",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/drivetrain/getSwerveModuleStates/2/angle/value",
+              "color": "#e5b31b",
+              "show": true
+            }
+          ]
+        },
+        "discrete": {
+          "fields": []
+        },
+        "right": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/drivetrain/DesiredStates/2/speed",
+              "color": "#af2437",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/drivetrain/getSwerveModuleStates/2/speed",
+              "color": "#80588e",
+              "show": true
+            }
+          ]
+        }
+      },
+      "title": "BL"
+    },
+    {
+      "type": 1,
+      "legends": {
+        "left": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/drivetrain/getSwerveModuleStates/3/angle/value",
+              "color": "#2b66a2",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/drivetrain/DesiredStates/3/angle/value",
+              "color": "#e5b31b",
+              "show": true
+            }
+          ]
+        },
+        "discrete": {
+          "fields": []
+        },
+        "right": {
+          "lockedRange": null,
+          "unitConversion": {
+            "type": null,
+            "factor": 1
+          },
+          "fields": [
+            {
+              "key": "NT:/Robot/drivetrain/DesiredStates/3/speed",
+              "color": "#af2437",
+              "show": true
+            },
+            {
+              "key": "NT:/Robot/drivetrain/getSwerveModuleStates/3/speed",
+              "color": "#80588e",
+              "show": true
+            }
+          ]
+        }
+      },
+      "title": "BR"
+    }
+  ]
+}
