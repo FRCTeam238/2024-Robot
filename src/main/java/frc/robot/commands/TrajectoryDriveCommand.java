@@ -1,18 +1,16 @@
 package frc.robot.commands;
 
+import static frc.robot.Constants.DriveConstants.*;
+
 import com.choreo.lib.Choreo;
 import com.choreo.lib.ChoreoTrajectory;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.Utils;
 import frc.robot.subsystems.Drivetrain;
-import java.util.function.Supplier;
 import org.frc238.lib.autonomous.AutonomousModeAnnotation;
-import static frc.robot.Constants.DriveConstants.*;
 
 /** TrajectoryDriveCommand */
 @AutonomousModeAnnotation(parameterNames = {"TrajectoryName", "resetPosition", "maxVelocity"})
@@ -35,15 +33,18 @@ public class TrajectoryDriveCommand extends SequentialCommandGroup {
 
     // creates a command that sets the position of the robot to the starting point of the trajectory
     Command resetPos =
-        drivetrain.runOnce(() -> drivetrain.resetOdometry(DriverStation.getAlliance().get() == DriverStation.Alliance.Red
-                ? trajectory.flipped().getInitialPose()
-                : trajectory.getInitialPose()));
+        drivetrain.runOnce(
+            () ->
+                drivetrain.resetOdometry(
+                    DriverStation.getAlliance().get() == DriverStation.Alliance.Red
+                        ? trajectory.flipped().getInitialPose()
+                        : trajectory.getInitialPose()));
     resetPos.addRequirements(drivetrain);
     if (resetPosition) {
       addCommands(resetPos);
     }
 
-    addCommands(drivetrain.runOnce(() -> drivetrain.setCommand("Traj-"+pathName)));
+    addCommands(drivetrain.runOnce(() -> drivetrain.setCommand("Traj-" + pathName)));
 
     Command swerveCommand =
         Choreo.choreoSwerveCommand(

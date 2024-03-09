@@ -5,15 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.OI;
-import frc.robot.Robot;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.ElevatorConstants.ElevatorDirection;
+import frc.robot.OI;
+import frc.robot.Robot;
 import frc.robot.subsystems.Elevator;
 
 public class ManualElevator extends Command {
   Elevator elevator = Robot.elevator;
   ElevatorDirection direction;
+
   /** Creates a new ManualElevator. */
   public ManualElevator(ElevatorConstants.ElevatorDirection direction) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -40,7 +41,6 @@ public class ManualElevator extends Command {
       default:
         elevator.setSpeed(0);
         break;
-
     }
   }
 

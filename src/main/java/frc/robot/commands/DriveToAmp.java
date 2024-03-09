@@ -14,7 +14,7 @@ import frc.robot.Utils;
 
 public class DriveToAmp extends Command {
 
-  PIDController pidRotation, pidX, pidY; 
+  PIDController pidRotation, pidX, pidY;
 
   /** Creates a new TargetDT. */
   public DriveToAmp() {
@@ -42,11 +42,9 @@ public class DriveToAmp extends Command {
     Robot.drivetrain.drive(
         pidX.calculate(currentLocation.getX(), ampLocation.getX()),
         pidY.calculate(currentLocation.getY(), ampLocation.getY()),
-        pidRotation.calculate(currentLocation.getRotation().getRadians(), ampLocation.getRotation().getRadians())
-    );
-
+        pidRotation.calculate(
+            currentLocation.getRotation().getRadians(), ampLocation.getRotation().getRadians()));
   }
-
 
   // Returns true when the command should end.
   @Override

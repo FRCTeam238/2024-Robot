@@ -5,8 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.Constants;
-import frc.robot.Robot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -16,9 +14,6 @@ public class TargetFromDistance extends ParallelCommandGroup {
   public TargetFromDistance() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new AimShooter(),
-      new AimDT()
-    );
+    addCommands(new AimShooter(), new AimDT());
   }
 }

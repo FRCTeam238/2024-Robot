@@ -26,15 +26,14 @@ public class Elevator extends SubsystemBase implements Logged {
 
   public Elevator() {
     configureMotorController();
-    Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
+    Timer.delay(.02); // Pause between subsystems to ease CAN traffic at startup
   }
 
   public void setSpeed(double speed) {
     leadingMotor.set(speed);
   }
 
-  public void setCommand(String name)
-  {
+  public void setCommand(String name) {
     command = name;
   }
 
@@ -54,27 +53,40 @@ public class Elevator extends SubsystemBase implements Logged {
     leadingMotor.getPIDController().setI(kI);
     leadingMotor.getPIDController().setD(kD);
     leadingMotor.getPIDController().setOutputRange(-0.2, 1);
-    //Convert Spark unit (rotations) into inches of elevator travel
-    leadingMotor.getEncoder().setPositionConversionFactor(inchesPerRev/gearing);
-    leadingMotor.getEncoder().setVelocityConversionFactor((inchesPerRev/gearing)/60); //Native rotation unit is RPM, make In/s
+    // Convert Spark unit (rotations) into inches of elevator travel
+    leadingMotor.getEncoder().setPositionConversionFactor(inchesPerRev / gearing);
+    leadingMotor
+        .getEncoder()
+        .setVelocityConversionFactor(
+            (inchesPerRev / gearing) / 60); // Native rotation unit is RPM, make In/s
     leadingMotor.getEncoder().setAverageDepth(2);
     leadingMotor.getEncoder().setMeasurementPeriod(16);
 
-    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 5); //Applied output, used by follower
-    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 10); //Motor velocity
-    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 10); //Motor position from internal encoder.
-    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
-    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
-    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 65535); //Absolute encoder position and angle
-    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 65535); //Absolute encoder velocity, not currently used, leave at default
-    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 50); //Applied output
-    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 50); //Motor velocity
-    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 50); //Motor position from internal encoder.
-    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
-    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
-    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 65535); //Absolute encoder position and angle
-    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 65535); //Absolute encoder velocity, not currently used, leave at default
-
+    leadingMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus0, 5); // Applied output, used by follower
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 10); // Motor velocity
+    leadingMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus2, 10); // Motor position from internal encoder.
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
+    leadingMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus4, 65535); // Alternate Encoder. Not Used
+    leadingMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus5, 65535); // Absolute encoder position and angle
+    leadingMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus6,
+        65535); // Absolute encoder velocity, not currently used, leave at default
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 50); // Applied output
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 50); // Motor velocity
+    followerMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus2, 50); // Motor position from internal encoder.
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
+    followerMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus4, 65535); // Alternate Encoder. Not Used
+    followerMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus5, 65535); // Absolute encoder position and angle
+    followerMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus6,
+        65535); // Absolute encoder velocity, not currently used, leave at default
   }
 
   public void moveByPercentOutput(double percent) {
@@ -109,9 +121,7 @@ public class Elevator extends SubsystemBase implements Logged {
     return leadingMotor.getEncoder().getPosition();
   }
 
-  /**
-   * gets the current velocity and encoder position as a {@link MotionProfile.State}
-   */
+  /** gets the current velocity and encoder position as a {@link MotionProfile.State} */
   public MotionProfile.State getState() {
     return new MotionProfile.State(getEncoderPosition(), getVelocity());
   }

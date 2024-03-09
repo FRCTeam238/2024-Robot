@@ -28,7 +28,7 @@ public class SpoolShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if(interrupted){
+    if (interrupted) {
       Robot.shooter.coast();
     }
     Robot.shooter.setCommand("None");

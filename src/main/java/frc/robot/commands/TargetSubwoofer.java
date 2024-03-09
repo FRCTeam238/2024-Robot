@@ -4,11 +4,8 @@
 
 package frc.robot.commands;
 
-import org.frc238.lib.autonomous.AutonomousModeAnnotation;
-
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.Constants;
-import frc.robot.Robot;
+import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -19,9 +16,6 @@ public class TargetSubwoofer extends ParallelCommandGroup {
   public TargetSubwoofer() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new SubwooferPosition(),
-      new SpoolShooter()
-    );
+    addCommands(new SubwooferPosition(), new SpoolShooter());
   }
 }

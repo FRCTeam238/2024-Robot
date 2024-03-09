@@ -16,11 +16,6 @@ public class IntakeGroup extends SequentialCommandGroup {
   public IntakeGroup() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new IntakePosition(),
-      new IntakeNote(),
-      new ClearNote().withTimeout(ejectTime)
-    );
-
+    addCommands(new IntakePosition(), new IntakeNote(), new ClearNote().withTimeout(ejectTime));
   }
 }

@@ -19,14 +19,12 @@ import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 @AutonomousModeAnnotation(parameterNames = {})
 public class AmpPosition extends ParallelCommandGroup {
   /** Creates a new AmpPosition. */
-
   public AmpPosition() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new RunCommand(() -> Robot.state = Constants.RobotState.AMP),
-      new ElevatorProfile(new State(ElevatorConstants.ampPosition), "AmpPosition"),
-      new PivotProfile(new State(PivotConstants.ampPosition), "AmpPosition")
-    );
+        new RunCommand(() -> Robot.state = Constants.RobotState.AMP),
+        new ElevatorProfile(new State(ElevatorConstants.ampPosition), "AmpPosition"),
+        new PivotProfile(new State(PivotConstants.ampPosition), "AmpPosition"));
   }
 }

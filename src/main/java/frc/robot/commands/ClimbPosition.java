@@ -18,8 +18,7 @@ public class ClimbPosition extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ElevatorProfile(new State(ElevatorConstants.climbPosition), "ClimbPosition"),
-      new PivotProfile(new State(PivotConstants.climbPosition), "ClimbPosition")
-    );
+        new ElevatorProfile(new State(ElevatorConstants.climbPosition), "ClimbPosition"),
+        new PivotProfile(new State(PivotConstants.climbPosition), "ClimbPosition"));
   }
 }

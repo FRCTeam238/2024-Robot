@@ -18,20 +18,22 @@ public class Constants {
 
     public static int leftMotorId = 8;
     public static int rightMotorId = 7;
-    public static double kP = .125; //prev: 0.5 | these changes prevent motor losing power
+    public static double kP = .125; // prev: 0.5 | these changes prevent motor losing power
     public static double kI;
     public static double kD;
-    public static double kFF = 0.1328/2; //prev: 0.1328 | these changes prevent motor losing power
-    public static double shooterTolerance = 30 / 60; //30 RPM, convert to RPS
+    public static double kFF =
+        0.1328 / 2; // prev: 0.1328 | these changes prevent motor losing power
+    public static double shooterTolerance = 30 / 60; // 30 RPM, convert to RPS
 
-    public static double subwooferLeft = 6650 / 60; //convert to RPS | value * 1.33 = output shaft rps
-    public static double subwooferRight = 6150 / 60; //convert to RPS
+    public static double subwooferLeft =
+        6650 / 60; // convert to RPS | value * 1.33 = output shaft rps
+    public static double subwooferRight = 6150 / 60; // convert to RPS
     public static double shotTime = .5;
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
 
     static {
-      //DISCLAIMER: numbers are subject to change
+      // DISCLAIMER: numbers are subject to change
       rpmTree.put(1.2065, 1432.39 / 60);
       rpmTree.put(2.66065, 1671.13 / 60);
       rpmTree.put(4.1021, 2053.1 / 60);
@@ -39,12 +41,12 @@ public class Constants {
       rpmTree.put(7.7216, 3485.49 / 60);
       rpmTree.put(10.1346, 4058.45 / 60);
     }
-
   }
 
   public class OperatorConstants {
     public static double driverJoystickDeadzone = .1;
-    public static double xboxControllerDeadzone = .075; // TODO: find good deadzone values for the xbox controllers
+    public static double xboxControllerDeadzone =
+        .075; // TODO: find good deadzone values for the xbox controllers
 
     public enum DriveType {
       JOYSTICK,
@@ -56,7 +58,7 @@ public class Constants {
     public static double voltageMax = 12;
     public static double kS = .07;
     public static double kG = .15;
-    public static double kV = 2.99; //V*s/rad
+    public static double kV = 2.99; // V*s/rad
 
     public static double kP = 1;
     public static double kI;
@@ -67,12 +69,12 @@ public class Constants {
 
     public static double maxJerk = 10000;
     public static double maxAccel = 20;
-    public static double maxVelocity = 1; //Max is 3.89?
+    public static double maxVelocity = 1; // Max is 3.89?
     public static double velocityTolerance = .05;
     public static final double velocityMaxError = 0.05;
-    public static final double positionMaxError = 0.03; 
+    public static final double positionMaxError = 0.03;
 
-    //Positions should all be in radians where 0 = horizontal
+    // Positions should all be in radians where 0 = horizontal
     public static final double intakePosition = Units.degreesToRadians(30);
     public static final double ampPosition = Units.degreesToRadians(22);
     public static final double trapPosition = Units.degreesToRadians(30);
@@ -90,14 +92,13 @@ public class Constants {
       pivotAngles.put(7.7216, Units.degreesToRadians(18.));
       pivotAngles.put(10.1346, Units.degreesToRadians(15.));
     }
-
   }
 
   public class FeederConstants {
     public static final int feederId = 6;
     public static final int sensorId = 0;
 
-    public static final double ejectRunTime = 4;//seconds
+    public static final double ejectRunTime = 4; // seconds
     public static final double ejectPercent = -0.6;
     public static final double feedSpeed = 0.65;
   }
@@ -107,6 +108,7 @@ public class Constants {
       UP,
       DOWN
     }
+
     public static final int leaderId = 2;
     public static final int followerId = 12;
     public static final double kP = 0.05;
@@ -117,17 +119,17 @@ public class Constants {
     public static final float softReverseLimit = 0.25f;
     public static final double kS = 0.1;
     public static final double kG = 0.42;
-    public static final double kV = .31; //V*s/in
-    public static final double kA = 0.0016; //V*s/in^2
+    public static final double kV = .31; // V*s/in
+    public static final double kA = 0.0016; // V*s/in^2
 
     public static final double maxElevatorJerk = 5000;
-    public static final double maxAccel = 200; //in/s^2 Max = 450?
-    public static final double maxVelocity = 30;//in/s Max = 36?
+    public static final double maxAccel = 200; // in/s^2 Max = 450?
+    public static final double maxVelocity = 30; // in/s Max = 36?
     public static final double velocityTolerance = 0.5;
     public static final double velocityMaxError = 0.2;
     public static final double positionMaxError = 0.5;
 
-    //All positions should be in inches
+    // All positions should be in inches
     public static final double intakePosition = .5;
     public static final double ampPosition = 25;
     public static final double trapPosition = 0;
@@ -135,8 +137,8 @@ public class Constants {
     public static final double subwooferPosition = 8;
     public static final double feedOutPosition = 0;
 
-    public final static double gearing = 12; // 4:1 gear ratio
-    public final static double inchesPerRev = 1.5 * Math.PI; // 1.5" diameter pulley
+    public static final double gearing = 12; // 4:1 gear ratio
+    public static final double inchesPerRev = 1.5 * Math.PI; // 1.5" diameter pulley
   }
 
   public class DriveConstants {
@@ -193,10 +195,11 @@ public class Constants {
   }
 
   public class VisionConstants {
-    //TODO: change these to not zeroes please
-    public static Transform3d frontCameraTransform = new Transform3d(0, 0, 0, new Rotation3d(0,0,0));
-    //TODO: change these to not zeroes please
-    public static Transform3d backCameraTransform = new Transform3d(0, 0, 0, new Rotation3d(0,0,0));
+    // TODO: change these to not zeroes please
+    public static Transform3d frontCameraTransform =
+        new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
+    // TODO: change these to not zeroes please
+    public static Transform3d backCameraTransform =
+        new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
   }
 }
-

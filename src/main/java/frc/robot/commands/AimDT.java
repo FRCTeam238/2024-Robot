@@ -15,7 +15,7 @@ import frc.robot.Utils;
 
 public class AimDT extends Command {
 
-  PIDController pid; 
+  PIDController pid;
 
   /** Creates a new TargetDT. */
   public AimDT() {
@@ -41,11 +41,8 @@ public class AimDT extends Command {
     Robot.drivetrain.drive(
         joyValues[0] * maxVelocityMetersPerSec,
         joyValues[1] * maxVelocityMetersPerSec,
-        pid.calculate(robotAngle, speakerLocation)
-    );
-
+        pid.calculate(robotAngle, speakerLocation));
   }
-
 
   // Returns true when the command should end.
   @Override

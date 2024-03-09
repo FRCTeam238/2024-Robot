@@ -33,7 +33,7 @@ public class LaunchNote extends Command {
     Robot.shooter.coast();
     Robot.feeder.setCommand("None");
   }
-  
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

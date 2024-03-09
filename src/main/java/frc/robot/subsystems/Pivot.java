@@ -39,20 +39,23 @@ public class Pivot extends SubsystemBase implements Logged {
     pivotMotor.setSmartCurrentLimit(currentLimit);
     pivotMotor.setIdleMode(IdleMode.kBrake);
     pivotMotor.setInverted(true);
-    encoder.setPositionConversionFactor(2*Math.PI*18/46); //Convert rotations to rads then multiply by gearing
-    encoder.setVelocityConversionFactor((2*Math.PI/60)*18/46); //Convert rotations to rads/s then multiply by gearing
+    encoder.setPositionConversionFactor(
+        2 * Math.PI * 18 / 46); // Convert rotations to rads then multiply by gearing
+    encoder.setVelocityConversionFactor(
+        (2 * Math.PI / 60) * 18 / 46); // Convert rotations to rads/s then multiply by gearing
 
-    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 100); //Motor position from internal encoder. Not currently used, 
-    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
-    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
-    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 10); //Absolute encoder position and angle
-    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 10); //Absolute encoder velocity
+    pivotMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus2, 100); // Motor position from internal encoder. Not currently used,
+    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
+    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); // Alternate Encoder. Not Used
+    pivotMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus5, 10); // Absolute encoder position and angle
+    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 10); // Absolute encoder velocity
 
-    Timer.delay(.02); //Pause between subsystems to ease CAN traffic at startup
+    Timer.delay(.02); // Pause between subsystems to ease CAN traffic at startup
   }
 
-  public void setCommand(String name)
-  {
+  public void setCommand(String name) {
     command = name;
   }
 
@@ -72,21 +75,18 @@ public class Pivot extends SubsystemBase implements Logged {
     } else if (-voltageMax > feed) {
       feed = -voltageMax;
     }
-    if(getCurrentPosition() < 2) //if not past rollover, control normally
+    if (getCurrentPosition() < 2) // if not past rollover, control normally
     {
       pivotMotor
-        .getPIDController()
-        .setReference(desiredPosition, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
-    } else
-    {
-      pivotMotor.set(.05);  //If past rollover, slowly move back towards rollover point
+          .getPIDController()
+          .setReference(desiredPosition, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
+    } else {
+      pivotMotor.set(.05); // If past rollover, slowly move back towards rollover point
     }
   }
 
-  public void holdPosition()
-  {
-    if(getCurrentPosition() < 2)
-    {
+  public void holdPosition() {
+    if (getCurrentPosition() < 2) {
       double feed = ff.calculate(getCurrentPosition(), 0, 0);
       if (voltageMax < feed) {
         feed = voltageMax;
@@ -94,17 +94,14 @@ public class Pivot extends SubsystemBase implements Logged {
         feed = -voltageMax;
       }
       pivotMotor
-        .getPIDController()
-        .setReference(getCurrentPosition(), ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
+          .getPIDController()
+          .setReference(getCurrentPosition(), ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
     } else {
-      pivotMotor
-        .getPIDController()
-        .setReference(getCurrentPosition(), ControlType.kPosition, 0);
+      pivotMotor.getPIDController().setReference(getCurrentPosition(), ControlType.kPosition, 0);
     }
   }
 
-  public void setSpeed(double speed)
-  {
+  public void setSpeed(double speed) {
     pivotMotor.set(speed);
   }
 

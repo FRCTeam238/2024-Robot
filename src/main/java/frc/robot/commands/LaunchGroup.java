@@ -16,9 +16,6 @@ public class LaunchGroup extends SequentialCommandGroup {
   public LaunchGroup() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new TargetFromDistance(),
-      new LaunchNote()
-    );
+    addCommands(new TargetFromDistance(), new LaunchNote());
   }
 }

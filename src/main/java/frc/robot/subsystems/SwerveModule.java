@@ -6,7 +6,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.*;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -28,14 +27,17 @@ public class SwerveModule {
     turnMotor = new CANSparkMax(turnCANID, CANSparkLowLevel.MotorType.kBrushless);
     driveMotor = new TalonFX(driveCANID);
 
-    turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 100); //Motor position from internal encoder. Not currently used, 
-    turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); //Analog sensor. Not Used
-    turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); //Alternate Encoder. Not Used
-    turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 10); //Absolute encoder position and angle
-    turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 200); //Absolute encoder velocity, not currently used, leave at default
+    turnMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus2, 100); // Motor position from internal encoder. Not currently used,
+    turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
+    turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); // Alternate Encoder. Not Used
+    turnMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus5, 10); // Absolute encoder position and angle
+    turnMotor.setPeriodicFramePeriod(
+        PeriodicFrame.kStatus6,
+        200); // Absolute encoder velocity, not currently used, leave at default
 
-
-    //turnMotor.restoreFactoryDefaults();
+    // turnMotor.restoreFactoryDefaults();
     turnEncoder = turnMotor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle);
     turnMotor.setInverted(true);
 
@@ -58,7 +60,7 @@ public class SwerveModule {
 
     turnMotor.setSmartCurrentLimit(SwerveModuleConstants.turningCurrentLimit);
     turnMotor.setIdleMode(CANSparkBase.IdleMode.kBrake);
-    //turnMotor.burnFlash();
+    // turnMotor.burnFlash();
 
     var config = new TalonFXConfiguration();
     config.Slot0.kP = SwerveModuleConstants.driveP;
@@ -71,8 +73,8 @@ public class SwerveModule {
     config.CurrentLimits.StatorCurrentLimitEnable = true;
     config.Feedback.SensorToMechanismRatio = 1 / SwerveModuleConstants.kDriveMetersPerRev;
     driveMotor.getConfigurator().apply(config);
-    driveMotor.getVelocity().setUpdateFrequency(100); //Set update frequency to 100 Hert, 10ms
-    driveMotor.getPosition().setUpdateFrequency(100); //Set update frequency to 100 Hert, 10ms
+    driveMotor.getVelocity().setUpdateFrequency(100); // Set update frequency to 100 Hert, 10ms
+    driveMotor.getPosition().setUpdateFrequency(100); // Set update frequency to 100 Hert, 10ms
     driveMotor.getClosedLoopError().setUpdateFrequency(50);
     driveMotor.getClosedLoopOutput().setUpdateFrequency(50);
     driveMotor.getSupplyVoltage().setUpdateFrequency(20);
@@ -82,7 +84,7 @@ public class SwerveModule {
 
     m_desiredState.angle = new Rotation2d(turnEncoder.getPosition());
 
-    Timer.delay(.01); //Pause between subsystems to ease CAN traffic at startup
+    Timer.delay(.01); // Pause between subsystems to ease CAN traffic at startup
   }
 
   public SwerveModuleState getState() {

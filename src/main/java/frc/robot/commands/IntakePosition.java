@@ -24,9 +24,8 @@ public class IntakePosition extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new RunCommand(() -> Robot.state = Constants.RobotState.INTAKE),
-      new ElevatorProfile(new State(ElevatorConstants.intakePosition), "IntakePosition"),
-      new PivotProfile(new State(PivotConstants.intakePosition), "IntakePosition")
-    );
+        new RunCommand(() -> Robot.state = Constants.RobotState.INTAKE),
+        new ElevatorProfile(new State(ElevatorConstants.intakePosition), "IntakePosition"),
+        new PivotProfile(new State(PivotConstants.intakePosition), "IntakePosition"));
   }
 }

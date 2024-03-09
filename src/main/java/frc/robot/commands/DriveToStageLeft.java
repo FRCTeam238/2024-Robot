@@ -4,13 +4,13 @@
 
 package frc.robot.commands;
 
+import static frc.robot.Constants.DriveConstants.*;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 import frc.robot.Utils;
-
-import static frc.robot.Constants.DriveConstants.*;
 
 public class DriveToStageLeft extends Command {
 
@@ -42,11 +42,9 @@ public class DriveToStageLeft extends Command {
     Robot.drivetrain.drive(
         pidX.calculate(currentLocation.getX(), stageLeft.getX()),
         pidY.calculate(currentLocation.getY(), stageLeft.getY()),
-        pidRotation.calculate(currentLocation.getRotation().getRadians(), stageLeft.getRotation().getRadians())
-    );
-
+        pidRotation.calculate(
+            currentLocation.getRotation().getRadians(), stageLeft.getRotation().getRadians()));
   }
-
 
   // Returns true when the command should end.
   @Override

@@ -7,7 +7,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Constants;
-import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.PivotConstants;
 import frc.robot.MotionProfile.State;
 import frc.robot.Robot;
@@ -21,9 +20,8 @@ public class TrapPosition extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new RunCommand(() -> Robot.state = Constants.RobotState.TRAP),
-      //new ElevatorProfile(new State(ElevatorConstants.trapPosition), "TrapPosition"),
-      new PivotProfile(new State(PivotConstants.trapPosition), "TrapPosition")
-    );
+        new RunCommand(() -> Robot.state = Constants.RobotState.TRAP),
+        // new ElevatorProfile(new State(ElevatorConstants.trapPosition), "TrapPosition"),
+        new PivotProfile(new State(PivotConstants.trapPosition), "TrapPosition"));
   }
 }

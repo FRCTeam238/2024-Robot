@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.SignalLogger;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -23,18 +24,14 @@ import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.Shooter;
-
 import java.util.List;
 import java.util.Map;
-
 import monologue.Annotations.Log;
 import monologue.Logged;
 import monologue.Monologue;
 import org.frc238.lib.autonomous.AutonomousModesReader;
 import org.frc238.lib.autonomous.DataFileAutonomousModeDataSource;
 import org.littletonrobotics.urcl.URCL;
-
-import com.ctre.phoenix6.SignalLogger;
 
 public class Robot extends TimedRobot implements Logged {
   private Command m_autonomousCommand;
@@ -44,8 +41,7 @@ public class Robot extends TimedRobot implements Logged {
   private SendableChooser<String> autoChooser;
   private String lastSelectedAuto;
 
-  @Log.NT
-  public static Constants.RobotState state = Constants.RobotState.INTAKE;
+  @Log.NT public static Constants.RobotState state = Constants.RobotState.INTAKE;
 
   public static Drivetrain drivetrain = new Drivetrain();
   public static Elevator elevator = new Elevator();
@@ -57,31 +53,32 @@ public class Robot extends TimedRobot implements Logged {
 
   @Override
   public void robotInit() {
-   
 
     Monologue.setupMonologue(this, "Robot", false, false);
     SignalLogger.start();
     DataLogManager.start();
     DriverStation.startDataLog(DataLogManager.getLog());
-    URCL.start(Map.ofEntries(
-      Map.entry(PivotConstants.pivotID, "Pivot"),
-      Map.entry(IntakeConstants.kID, "Intake"),
-      Map.entry(FeederConstants.feederId, "Feeder"),
-      Map.entry(ElevatorConstants.leaderId, "ElevatorLeader"),
-      Map.entry(ElevatorConstants.followerId, "ElevatorFollower"),
-      Map.entry(DriveConstants.backLeftTurnCANId, "BL Steer"),
-      Map.entry(DriveConstants.backRightTurnCANId, "BR Steer"),
-      Map.entry(DriveConstants.frontLeftTurnCANId, "FL Steer"),
-      Map.entry(DriveConstants.frontRightTurnCANId, "FR Steer")
-    ));
-    amodeReader = new AutonomousModesReader(new DataFileAutonomousModeDataSource(Filesystem.getDeployDirectory() + "/amode238.txt"));
+    URCL.start(
+        Map.ofEntries(
+            Map.entry(PivotConstants.pivotID, "Pivot"),
+            Map.entry(IntakeConstants.kID, "Intake"),
+            Map.entry(FeederConstants.feederId, "Feeder"),
+            Map.entry(ElevatorConstants.leaderId, "ElevatorLeader"),
+            Map.entry(ElevatorConstants.followerId, "ElevatorFollower"),
+            Map.entry(DriveConstants.backLeftTurnCANId, "BL Steer"),
+            Map.entry(DriveConstants.backRightTurnCANId, "BR Steer"),
+            Map.entry(DriveConstants.frontLeftTurnCANId, "FL Steer"),
+            Map.entry(DriveConstants.frontRightTurnCANId, "FR Steer")));
+    amodeReader =
+        new AutonomousModesReader(
+            new DataFileAutonomousModeDataSource(
+                Filesystem.getDeployDirectory() + "/amode238.txt"));
     autoChooser = new SendableChooser<>();
     autoNames = amodeReader.GetAutoNames();
     for (String name : autoNames) {
       autoChooser.setDefaultOption(name, name);
     }
     SmartDashboard.putData(autoChooser);
-    
   }
 
   @Override
@@ -90,12 +87,10 @@ public class Robot extends TimedRobot implements Logged {
     Monologue.updateAll();
 
     if (lastSelectedAuto != autoChooser.getSelected()) {
-        m_autonomousCommand =
-      amodeReader.getAutonomousMode(autoChooser.getSelected());
+      m_autonomousCommand = amodeReader.getAutonomousMode(autoChooser.getSelected());
     }
-    
+
     lastSelectedAuto = autoChooser.getSelected();
-    
   }
 
   @Override
@@ -131,8 +126,6 @@ public class Robot extends TimedRobot implements Logged {
       m_autonomousCommand.cancel();
     }
   }
-
-
 
   @Override
   public void teleopPeriodic() {}

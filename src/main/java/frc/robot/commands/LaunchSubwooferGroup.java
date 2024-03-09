@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -15,9 +14,6 @@ public class LaunchSubwooferGroup extends SequentialCommandGroup {
   public LaunchSubwooferGroup() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new TargetSubwoofer(),
-      new LaunchNote()
-    );
+    addCommands(new TargetSubwoofer(), new LaunchNote());
   }
 }

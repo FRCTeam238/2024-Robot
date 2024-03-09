@@ -1,8 +1,9 @@
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.DriveConstants.*;
+
 import com.choreo.lib.ChoreoTrajectoryState;
 import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -21,19 +22,13 @@ import monologue.Annotations.Log;
 import monologue.Logged;
 import org.photonvision.EstimatedRobotPose;
 
-import static frc.robot.Constants.DriveConstants.*;
-
 /** for swerve */
 public class Drivetrain extends SubsystemBase implements Logged {
 
-  SwerveModule frontLeft =
-      new SwerveModule(frontLeftDriveCANId, frontLeftTurnCANId);
-  SwerveModule frontRight =
-      new SwerveModule(frontRightDriveCANId, frontRightTurnCANId);
-  SwerveModule backLeft =
-      new SwerveModule(backLeftDriveCANId, backLeftTurnCANId);
-  SwerveModule backRight =
-      new SwerveModule(backRightDriveCANId, backRightTurnCANId);
+  SwerveModule frontLeft = new SwerveModule(frontLeftDriveCANId, frontLeftTurnCANId);
+  SwerveModule frontRight = new SwerveModule(frontRightDriveCANId, frontRightTurnCANId);
+  SwerveModule backLeft = new SwerveModule(backLeftDriveCANId, backLeftTurnCANId);
+  SwerveModule backRight = new SwerveModule(backRightDriveCANId, backRightTurnCANId);
 
   SwerveDrivePoseEstimator odometry;
   AHRS gyro;
@@ -51,7 +46,8 @@ public class Drivetrain extends SubsystemBase implements Logged {
               frontRight.getPosition(),
               backLeft.getPosition(),
               backRight.getPosition()
-            }, new Pose2d());
+            },
+            new Pose2d());
 
     x = new PIDController(kP, kI, kD);
     y = new PIDController(kP, kI, kD);
@@ -75,13 +71,11 @@ public class Drivetrain extends SubsystemBase implements Logged {
     return odometry.getEstimatedPosition();
   }
 
-  public void setCommand(String name)
-  {
+  public void setCommand(String name) {
     command = name;
   }
 
-  public void updatePoseEstimate(EstimatedRobotPose estimate)
-  {
+  public void updatePoseEstimate(EstimatedRobotPose estimate) {
     odometry.addVisionMeasurement(estimate.estimatedPose.toPose2d(), estimate.timestampSeconds);
   }
 
@@ -100,24 +94,28 @@ public class Drivetrain extends SubsystemBase implements Logged {
   public Rotation2d getFieldRelativeOffset() {
     if (DriverStation.getAlliance().isPresent()) {
       if (DriverStation.getAlliance().get() == Alliance.Blue) {
-       return odometry.getEstimatedPosition().getRotation(); 
+        return odometry.getEstimatedPosition().getRotation();
       } else {
-        return odometry.getEstimatedPosition().getRotation().minus(Rotation2d.fromDegrees(180)); // DO NOT USE IF WE DONT RUN A PATH
+        return odometry
+            .getEstimatedPosition()
+            .getRotation()
+            .minus(Rotation2d.fromDegrees(180)); // DO NOT USE IF WE DONT RUN A PATH
       }
     } else {
       return odometry.getEstimatedPosition().getRotation();
     }
   }
 
-
   public void drive(double xSpeed, double ySpeed, double rot) {
 
     var swerveModuleStates =
         kDriveKinematics.toSwerveModuleStates(
             ChassisSpeeds.discretize(
-            fieldRelative
-                ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, getFieldRelativeOffset())
-                : new ChassisSpeeds(xSpeed, ySpeed, rot), .02));
+                fieldRelative
+                    ? ChassisSpeeds.fromFieldRelativeSpeeds(
+                        xSpeed, ySpeed, rot, getFieldRelativeOffset())
+                    : new ChassisSpeeds(xSpeed, ySpeed, rot),
+                .02));
     setModuleStates(swerveModuleStates);
   }
 
@@ -128,13 +126,13 @@ public class Drivetrain extends SubsystemBase implements Logged {
 
   public void lockWheels() {
     SwerveModuleState wheelLock[] = {
-    new SwerveModuleState(0, Rotation2d.fromDegrees(45)),
-    new SwerveModuleState(0, Rotation2d.fromDegrees(-45)),
-    new SwerveModuleState(0, Rotation2d.fromDegrees(-45)),
-    new SwerveModuleState(0, Rotation2d.fromDegrees(45))
-  };
-  setModuleStates(wheelLock);
-}
+      new SwerveModuleState(0, Rotation2d.fromDegrees(45)),
+      new SwerveModuleState(0, Rotation2d.fromDegrees(-45)),
+      new SwerveModuleState(0, Rotation2d.fromDegrees(-45)),
+      new SwerveModuleState(0, Rotation2d.fromDegrees(45))
+    };
+    setModuleStates(wheelLock);
+  }
 
   public void setModuleStates(SwerveModuleState[] states) {
     SwerveDriveKinematics.desaturateWheelSpeeds(states, maxVelocityMetersPerSec);
@@ -174,7 +172,10 @@ public class Drivetrain extends SubsystemBase implements Logged {
   }
 
   public Command zeroHeadingCommand() {
-    return Commands.runOnce(()->{this.zeroHeading();});
+    return Commands.runOnce(
+        () -> {
+          this.zeroHeading();
+        });
   }
 
   @Log.NT
@@ -184,10 +185,9 @@ public class Drivetrain extends SubsystemBase implements Logged {
 
   public double getTurnRate() {
     return gyro.getRate();
-  }  
+  }
 
-  public ChassisSpeeds choreoController(Pose2d currentPose, ChoreoTrajectoryState referenceState)
-  {
+  public ChassisSpeeds choreoController(Pose2d currentPose, ChoreoTrajectoryState referenceState) {
     log("TrajPose", referenceState.getPose());
     double xFF = referenceState.velocityX;
     double yFF = referenceState.velocityY;
@@ -196,9 +196,9 @@ public class Drivetrain extends SubsystemBase implements Logged {
     double xFeedback = x.calculate(currentPose.getX(), referenceState.x);
     double yFeedback = y.calculate(currentPose.getY(), referenceState.y);
     double rotationFeedback =
-          theta.calculate(currentPose.getRotation().getRadians(), referenceState.heading);
+        theta.calculate(currentPose.getRotation().getRadians(), referenceState.heading);
 
-      return ChassisSpeeds.fromFieldRelativeSpeeds(
-          xFF + xFeedback, yFF + yFeedback, rotationFF + rotationFeedback, currentPose.getRotation());
+    return ChassisSpeeds.fromFieldRelativeSpeeds(
+        xFF + xFeedback, yFF + yFeedback, rotationFF + rotationFeedback, currentPose.getRotation());
   }
 }

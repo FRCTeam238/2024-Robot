@@ -23,7 +23,7 @@ public class ClearNote extends Command {
   public void initialize() {
     Robot.intake.setSpeed(-intakeSpeed);
     OI.operatorController.getHID().setRumble(RumbleType.kBothRumble, 1);
-    Robot.intake.setCommand("ClearNote"); 
+    Robot.intake.setCommand("ClearNote");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +35,7 @@ public class ClearNote extends Command {
   public void end(boolean interrupted) {
     Robot.intake.setSpeed(0);
     OI.operatorController.getHID().setRumble(RumbleType.kBothRumble, 0);
-    Robot.intake.setCommand("None");  
+    Robot.intake.setCommand("None");
   }
 
   // Returns true when the command should end.

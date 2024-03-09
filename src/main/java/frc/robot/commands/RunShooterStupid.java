@@ -11,6 +11,7 @@ import frc.robot.subsystems.Shooter;
 public class RunShooterStupid extends Command {
   /** Creates a new RunShooterStupid. */
   Shooter shooter = Robot.shooter;
+
   public RunShooterStupid() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
@@ -22,7 +23,7 @@ public class RunShooterStupid extends Command {
     shooter.setCommand("RunShooterStupid");
   }
 
-    // Called every time the scheduler runs while the command is scheduled.
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     shooter.setPercent(0.85, -0.75);

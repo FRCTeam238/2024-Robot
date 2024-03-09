@@ -4,12 +4,12 @@
 
 package frc.robot.commands;
 
+import static frc.robot.Constants.FeederConstants.*;
+import static frc.robot.Constants.IntakeConstants.*;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 import org.frc238.lib.autonomous.AutonomousModeAnnotation;
-
-import static frc.robot.Constants.FeederConstants.*;
-import static frc.robot.Constants.IntakeConstants.*;
 
 @AutonomousModeAnnotation(parameterNames = {})
 public class IntakeNote extends Command {
@@ -31,7 +31,6 @@ public class IntakeNote extends Command {
   public void execute() {
     Robot.feeder.rollerController(feedSpeed);
     Robot.intake.setSpeed(intakeSpeed);
-
   }
 
   // Called once the command ends or is interrupted.
@@ -46,7 +45,7 @@ public class IntakeNote extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-//    return Robot.feeder.sensor();
+    //    return Robot.feeder.sensor();
     return false;
   }
 }
