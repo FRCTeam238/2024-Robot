@@ -35,7 +35,7 @@ public class Elevator extends SubsystemBase implements Logged {
 
   public void setCommand(String name)
   {
-    
+    command = name;
   }
 
   private void configureMotorController() {
