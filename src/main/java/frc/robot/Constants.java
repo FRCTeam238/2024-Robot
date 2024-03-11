@@ -57,8 +57,8 @@ public class Constants {
   public class PivotConstants {
     public static double voltageMax = 12;
     public static double kS = .07;
-    public static double kG = .15;
-    public static double kV = 2.99; // V*s/rad
+    public static double kG = .12;
+    public static double kV = 2.8; // V*s/rad
 
     public static double kP = 1;
     public static double kI;
@@ -76,7 +76,7 @@ public class Constants {
 
     // Positions should all be in radians where 0 = horizontal
     public static final double intakePosition = Units.degreesToRadians(30);
-    public static final double ampPosition = Units.degreesToRadians(22);
+    public static final double ampPosition = Units.degreesToRadians(-30);
     public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
     public static final double subwooferPosition = Units.degreesToRadians(50);
@@ -118,9 +118,9 @@ public class Constants {
     public static final float softForwardLimit = 25;
     public static final float softReverseLimit = 0.25f;
     public static final double kS = 0.1;
-    public static final double kG = 0.42;
+    public static final double kG = 0.37;
     public static final double kV = .31; // V*s/in
-    public static final double kA = 0.0016; // V*s/in^2
+    public static final double kA = 0.0012; // V*s/in^2
 
     public static final double maxElevatorJerk = 5000;
     public static final double maxAccel = 200; // in/s^2 Max = 450?
@@ -137,7 +137,7 @@ public class Constants {
     public static final double subwooferPosition = 8;
     public static final double feedOutPosition = 0;
 
-    public static final double gearing = 12; // 4:1 gear ratio
+    public static final double gearing = 12; // 12:1 gear ratio
     public static final double inchesPerRev = 1.5 * Math.PI; // 1.5" diameter pulley
   }
 
@@ -199,7 +199,7 @@ public class Constants {
     public static Transform3d frontCameraTransform =
         new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
     // TODO: change these to not zeroes please
-    public static Transform3d backCameraTransform =
-        new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
+    public static Transform3d shooterCameraTransform =
+        new Transform3d(-.230, -.282, .62, new Rotation3d(0, Units.degreesToRadians(22), 0));
   }
 }
