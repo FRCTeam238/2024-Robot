@@ -13,7 +13,7 @@ import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 @AutonomousModeAnnotation(parameterNames = {})
 public class TargetSubwoofer extends ParallelCommandGroup {
   /** Creates a new Target. */
-  public TargetSubwoofer() {
+  public  TargetSubwoofer() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new SubwooferPosition(), new SpoolShooter());

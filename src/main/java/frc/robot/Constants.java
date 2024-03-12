@@ -12,6 +12,7 @@ public class Constants {
     public static int kID = 13;
     public static double intakeSpeed = 1;
     public static double ejectTime = 2;
+    public static double stallTime = 0;//TODO: Change to a better number
   }
 
   public class ShooterConstants {

@@ -7,6 +7,8 @@ package frc.robot.commands;
 import static frc.robot.Constants.FeederConstants.*;
 import static frc.robot.Constants.IntakeConstants.*;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 import org.frc238.lib.autonomous.AutonomousModeAnnotation;
@@ -14,6 +16,7 @@ import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 @AutonomousModeAnnotation(parameterNames = {})
 public class IntakeNote extends Command {
   /** Creates a new IntakeNote. */
+  Timer timer = new Timer();
   public IntakeNote() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.feeder, Robot.intake);
@@ -30,7 +33,20 @@ public class IntakeNote extends Command {
   @Override
   public void execute() {
     Robot.feeder.rollerController(feedSpeed);
-    Robot.intake.setSpeed(intakeSpeed);
+    if (Robot.intake.getSpeed() < .3) {
+      timer.start();
+      if (timer.hasElapsed(stallTime)) {
+        Robot.intake.setSpeed(-intakeSpeed);
+        SmartDashboard.putBoolean("isStalling", true);
+      } else {
+        Robot.intake.setSpeed(intakeSpeed);
+      }
+    } else {
+      Robot.intake.setSpeed(intakeSpeed);
+      SmartDashboard.putBoolean("isStalling", false);
+      timer.stop();
+      timer.reset();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +56,7 @@ public class IntakeNote extends Command {
     Robot.intake.setSpeed(0);
     Robot.feeder.setCommand("None");
     Robot.intake.setCommand("None");
+    SmartDashboard.putBoolean("isStalling", false);
   }
 
   // Returns true when the command should end.
