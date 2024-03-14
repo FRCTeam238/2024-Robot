@@ -11,8 +11,11 @@ public class Constants {
   public class IntakeConstants {
     public static int kID = 13;
     public static double intakeSpeed = 1;
-    public static double ejectTime = 2;
-    public static double stallTime = 0;//TODO: Change to a better number
+    public static double ejectSpeed = -1;
+    public static double ejectTime = 2; 
+    public static double spinupDuration = 1; // TODO: Change to a better number
+    public static double stallVelocity = 0; // TODO: Change to a better number
+    public static double reverseDuration = 1; // TODO: Change to a better number
   }
 
   public class ShooterConstants {
@@ -202,5 +205,13 @@ public class Constants {
     // TODO: change these to not zeroes please
     public static Transform3d backCameraTransform =
         new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
+
+    public static boolean updatesInTeleop = true;
+    public static boolean updatesInAuto = true;
+    public static double poseEstimateDistanceTolerance = 1;
+    /**
+     * {@summary units in radians}
+    */
+    public static double poseEstimateRotTolerance = 1;
   }
 }

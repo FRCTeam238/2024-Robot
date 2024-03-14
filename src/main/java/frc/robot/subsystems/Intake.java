@@ -35,6 +35,11 @@ public class Intake extends SubsystemBase implements Logged {
     SmartDashboard.putBoolean("isStalling", false);
   }
 
+  public double getVelocity() {
+      return intakeMotor.getEncoder().getVelocity();
+
+  }
+
   public void setCommand(String name) {
     command = name;
   }
