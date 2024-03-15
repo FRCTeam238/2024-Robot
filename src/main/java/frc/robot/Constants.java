@@ -84,6 +84,7 @@ public class Constants {
     public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
     public static final double subwooferPosition = Units.degreesToRadians(50);
+    public static final double podiumPosition = Units.degreesToRadians(50);
     public static final double feedOutPosition = Units.degreesToRadians(15);
 
     public static InterpolatingDoubleTreeMap pivotAngles = new InterpolatingDoubleTreeMap();
@@ -139,6 +140,7 @@ public class Constants {
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
     public static final double subwooferPosition = 8;
+    public static final double podiumPosition = 8;//TODO: change to real numbers
     public static final double feedOutPosition = 0;
 
     public static final double gearing = 12; // 4:1 gear ratio
@@ -195,6 +197,7 @@ public class Constants {
     INTAKE,
     TARGET,
     SUBWOOFER,
+    PODIUM,
     FEEDOUT
   }
 
