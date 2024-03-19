@@ -25,9 +25,12 @@ public class Constants {
     public static double shooterTolerance = 30. / 60.; // 30 RPM, convert to RPS
 
     public static double subwooferLeft =
-        4000 / 60; // convert to RPS | value * 1.33 = output shaft rps
-    public static double subwooferRight = 3700 / 60; // convert to RPS
+        4000. / 60; // convert to RPS | value * 1.33 = output shaft rps
+    public static double subwooferRight = 3700. / 60; // convert to RPS
+    public static double ampSpeed = 2000. / 60;
+    public static double trapSpeed = 2000. / 60;
     public static double shotTime = .5;
+    public static double speedDifference = 20; //Percent difference in speed for targeted shots
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
 

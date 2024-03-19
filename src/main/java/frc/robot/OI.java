@@ -43,16 +43,15 @@ public class OI implements Logged {
         .whileTrue(new ManualElevator(ElevatorDirection.DOWN)); // Right Y
     operatorController.axisGreaterThan(1, 0.1).whileTrue(new ManualPivot()); // Left Y
     operatorController.axisLessThan(1, -0.1).whileTrue(new ManualPivot()); // Left Y
-    operatorController.leftTrigger(0.27).whileTrue(new IntakeNote());
-    operatorController.rightTrigger(0.27).whileTrue(new ScoreNote());
+    operatorController.leftTrigger(0.27).whileTrue(new IntakeGroup());
+    operatorController.rightTrigger(0.27).whileTrue(new SpoolShooter());
     operatorController.rightBumper().whileTrue(new LaunchNote());
 
     leftJoystick.button(4).whileTrue(new AimDT());
     rightJoystick.button(4).whileTrue(new AimDT());
 
-    leftJoystick.button(1).whileTrue(new LaunchGroup());
-    rightJoystick.button(1).whileTrue(new LaunchGroup());
-    //    operatorController.rightBumper().whileTrue(new ScoreNote());
+    leftJoystick.button(1).whileTrue(new LaunchNote());
+    rightJoystick.button(1).whileTrue(new LaunchNote());
 
     operatorController.a().onTrue(new IntakePosition());
     operatorController.x().onTrue(new SubwooferPosition());
@@ -60,8 +59,6 @@ public class OI implements Logged {
     operatorController.y().onTrue(new AmpPosition());
     operatorController.povDown().whileTrue(new IntakeNote());
     operatorController.povUp().whileTrue(new ClearNote());
-//    operatorController.b().onTrue(new PivotProfile(new MotionProfile.State(Units.degreesToRadians(0)), "zeroPoint"));
-//    operatorController.x().onTrue(new PivotProfile(new MotionProfile.State(Constants.PivotConstants.intakePosition), "30Point"));
   }
 
   private static boolean getSlowmode() {

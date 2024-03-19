@@ -33,6 +33,7 @@ public class LaunchNote extends Command {
     Robot.feeder.rollerController(0);
     Robot.shooter.coast();
     Robot.feeder.setCommand("None");
+    Robot.shooter.setCommand("None");
   }
 
   // Returns true when the command should end.

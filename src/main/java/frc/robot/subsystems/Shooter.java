@@ -81,12 +81,19 @@ public class Shooter extends SubsystemBase implements Logged {
   }
 
   public void setWheelTargetSpeed() {
-    if (Robot.state == RobotState.SUBWOOFER) {
-      setSpeed(subwooferLeft, -subwooferRight);
-    } else {
-      double distance = Utils.getSpeakerDistance();
-      double avgSpeed = rpmTree.get(distance);
-      setSpeed(avgSpeed, avgSpeed); // TODO: find out if different sides should be different speeds?
+    switch (Robot.state) {
+      case SUBWOOFER :
+      case INTAKE :
+        setSpeed(subwooferLeft, subwooferRight);
+        break;
+      case AMP :
+        setSpeed(ampSpeed, ampSpeed);
+      case TRAP :
+        setSpeed(trapSpeed, trapSpeed);
+      default:  //Targeting
+        double distance = Utils.getSpeakerDistance();
+        double avgSpeed = rpmTree.get(distance);
+        setSpeed(avgSpeed + avgSpeed/speedDifference, avgSpeed - avgSpeed/speedDifference);
     }
   }
 
