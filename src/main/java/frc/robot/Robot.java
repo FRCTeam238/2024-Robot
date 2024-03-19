@@ -24,6 +24,7 @@ import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Vision;
 import java.util.List;
 import java.util.Map;
 import monologue.Annotations.Log;
@@ -49,6 +50,7 @@ public class Robot extends TimedRobot implements Logged {
   public static Feeder feeder = new Feeder();
   public static Pivot pivot = new Pivot();
   public static Shooter shooter = new Shooter();
+  public static Vision vision = new Vision();
   public static OI oi = new OI();
 
   @Override
@@ -116,7 +118,11 @@ public class Robot extends TimedRobot implements Logged {
   }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    if (Constants.VisionConstants.updatesInAuto) {
+      vision.updateVision();
+    }
+  }
 
   @Override
   public void autonomousExit() {}
@@ -129,7 +135,12 @@ public class Robot extends TimedRobot implements Logged {
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+
+    if (Constants.VisionConstants.updatesInTeleop) {
+      vision.updateVision();
+    }
+  }
 
   @Override
   public void teleopExit() {}

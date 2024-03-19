@@ -1,6 +1,7 @@
 package frc.robot;
 
-import static frc.robot.Constants.OperatorConstants.*;
+import static frc.robot.Constants.OperatorConstants.driverJoystickDeadzone;
+import static frc.robot.Constants.OperatorConstants.xboxControllerDeadzone;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.util.Units;
@@ -9,7 +10,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.ElevatorConstants.ElevatorDirection;
-import frc.robot.commands.*;
+import frc.robot.Constants.OperatorConstants.DriveType;
+import frc.robot.commands.AimDT;
+import frc.robot.commands.AmpPosition;
+import frc.robot.commands.ClearNote;
+import frc.robot.commands.Drive;
+import frc.robot.commands.EjectNote;
+import frc.robot.commands.IntakeNote;
+import frc.robot.commands.IntakePosition;
+import frc.robot.commands.LaunchGroup;
+import frc.robot.commands.ManualElevator;
+import frc.robot.commands.ManualPivot;
+import frc.robot.commands.ScoreNote;
+import frc.robot.commands.SubwooferPosition;
 import monologue.Annotations.Log;
 import monologue.Logged;
 
@@ -27,8 +40,6 @@ public class OI implements Logged {
 
   public OI() {
     Robot.drivetrain.setDefaultCommand(new Drive());
-    leftJoystick.button(20).onTrue(Robot.drivetrain.zeroHeadingCommand());
-    rightJoystick.button(20).onTrue(Robot.drivetrain.zeroHeadingCommand());
 
     driveTypeChooser = new SendableChooser<>();
     driveTypeChooser.addOption("XBOX", DriveType.XBOX);
@@ -47,6 +58,8 @@ public class OI implements Logged {
     operatorController.rightTrigger(0.27).whileTrue(new SpoolShooter());
     operatorController.rightBumper().whileTrue(new LaunchNote());
 
+    leftJoystick.button(20).onTrue(Robot.drivetrain.zeroHeadingCommand());
+    rightJoystick.button(20).onTrue(Robot.drivetrain.zeroHeadingCommand());
     leftJoystick.button(4).whileTrue(new AimDT());
     rightJoystick.button(4).whileTrue(new AimDT());
 

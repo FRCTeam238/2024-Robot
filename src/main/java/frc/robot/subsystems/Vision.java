@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.VisionConstants.*;
 
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import java.util.Optional;
@@ -20,6 +21,10 @@ public class Vision extends SubsystemBase {
   PhotonPoseEstimator frontEstimator;
   PhotonCamera backCamera;
   PhotonPoseEstimator backEstimator;
+
+  boolean updateDuringTeleop = true;
+  boolean updateDuringAuto = true;
+  boolean updateWhenOverThreshold = true;
 
   /** Creates a new Vision. */
   public Vision() {
@@ -44,15 +49,28 @@ public class Vision extends SubsystemBase {
   @Override
   public void periodic() {
     frontEstimator.setReferencePose(Robot.drivetrain.getPose());
+  }
+
+  public boolean withinEstimateBounds(EstimatedRobotPose estimate, Pose2d pose) {
+    return Math.abs(estimate.estimatedPose.toPose2d().getTranslation().getDistance(pose.getTranslation())) < poseEstimateDistanceTolerance 
+        && Math.abs(estimate.estimatedPose.toPose2d().getRotation().getDegrees() - pose.getRotation().getDegrees()) < poseEstimateRotTolerance;
+  }
+
+  public void updateVision() {
+
     Optional<EstimatedRobotPose> estimate = frontEstimator.update();
     if (estimate.isPresent()) {
-      Robot.drivetrain.updatePoseEstimate(estimate.get());
+      if (withinEstimateBounds(estimate.get(), Robot.drivetrain.getPose())) {
+          Robot.drivetrain.updatePoseEstimate(estimate.get());
+      }
     }
 
     backEstimator.setReferencePose(Robot.drivetrain.getPose());
     estimate = backEstimator.update();
     if (estimate.isPresent()) {
-      Robot.drivetrain.updatePoseEstimate(estimate.get());
+      if (withinEstimateBounds(estimate.get(), Robot.drivetrain.getPose())) {
+          Robot.drivetrain.updatePoseEstimate(estimate.get());
+      }
     }
   }
 }
