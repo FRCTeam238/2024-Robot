@@ -22,17 +22,19 @@ public class Constants {
 
     public static int leftMotorId = 8;
     public static int rightMotorId = 7;
-    public static double kP = .125; // prev: 0.5 | these changes prevent motor losing power
+    public static double kP = .5;
     public static double kI;
     public static double kD;
-    public static double kFF =
-        0.1328 / 2; // prev: 0.1328 | these changes prevent motor losing power
-    public static double shooterTolerance = 30 / 60; // 30 RPM, convert to RPS
+    public static double kFF = 0.116504854368932;
+    public static double shooterTolerance = 30. / 60.; // 30 RPM, convert to RPS
 
     public static double subwooferLeft =
-        6650 / 60; // convert to RPS | value * 1.33 = output shaft rps
-    public static double subwooferRight = 6150 / 60; // convert to RPS
+        4000. / 60; // convert to RPS | value * 1.33 = output shaft rps
+    public static double subwooferRight = 3700. / 60; // convert to RPS
+    public static double ampSpeed = 2000. / 60;
+    public static double trapSpeed = 2000. / 60;
     public static double shotTime = .5;
+    public static double speedDifference = 20; //Percent difference in speed for targeted shots
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
 
@@ -60,27 +62,27 @@ public class Constants {
 
   public class PivotConstants {
     public static double voltageMax = 12;
-    public static double kS = .07;
-    public static double kG = .15;
-    public static double kV = 2.99; // V*s/rad
+    public static double kS = 0;
+    public static double kG = 0;
+    public static double kV = 2.3; // V*s/rad
 
-    public static double kP = 1;
+    public static double kP = 2;
     public static double kI;
-    public static double kD;
+    public static double kD = .1;
 
     public static int currentLimit = 40;
     public static int pivotID = 3;
 
     public static double maxJerk = 10000;
     public static double maxAccel = 20;
-    public static double maxVelocity = 1; // Max is 3.89?
+    public static double maxVelocity = 1.5; // Max is 3.89?
     public static double velocityTolerance = .05;
     public static final double velocityMaxError = 0.05;
     public static final double positionMaxError = 0.03;
 
     // Positions should all be in radians where 0 = horizontal
-    public static final double intakePosition = Units.degreesToRadians(30);
-    public static final double ampPosition = Units.degreesToRadians(22);
+    public static final double intakePosition = Units.degreesToRadians(17);
+    public static final double ampPosition = Units.degreesToRadians(-30);
     public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
     public static final double subwooferPosition = Units.degreesToRadians(50);
@@ -123,9 +125,9 @@ public class Constants {
     public static final float softForwardLimit = 25;
     public static final float softReverseLimit = 0.25f;
     public static final double kS = 0.1;
-    public static final double kG = 0.42;
+    public static final double kG = 0.37;
     public static final double kV = .31; // V*s/in
-    public static final double kA = 0.0016; // V*s/in^2
+    public static final double kA = 0.0012; // V*s/in^2
 
     public static final double maxElevatorJerk = 5000;
     public static final double maxAccel = 200; // in/s^2 Max = 450?
@@ -143,7 +145,7 @@ public class Constants {
     public static final double podiumPosition = 8;//TODO: change to real numbers
     public static final double feedOutPosition = 0;
 
-    public static final double gearing = 12; // 4:1 gear ratio
+    public static final double gearing = 12; // 12:1 gear ratio
     public static final double inchesPerRev = 1.5 * Math.PI; // 1.5" diameter pulley
   }
 
@@ -205,9 +207,9 @@ public class Constants {
     // TODO: change these to not zeroes please
     public static Transform3d frontCameraTransform =
         new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
-    // TODO: change these to not zeroes please
-    public static Transform3d backCameraTransform =
-        new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
+
+    public static Transform3d shooterCameraTransform =
+        new Transform3d(-.230, -.282, .62, new Rotation3d(0, Units.degreesToRadians(22), 0));
 
     public static boolean updatesInTeleop = true;
     public static boolean updatesInAuto = true;

@@ -20,6 +20,7 @@ public class LaunchNote extends Command {
     Robot.feeder.rollerController(1);
     Robot.shooter.setWheelTargetSpeed();
     Robot.feeder.setCommand("LaunchNote");
+    Robot.shooter.setCommand("LaunchNote");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,6 +33,7 @@ public class LaunchNote extends Command {
     Robot.feeder.rollerController(0);
     Robot.shooter.coast();
     Robot.feeder.setCommand("None");
+    Robot.shooter.setCommand("None");
   }
 
   // Returns true when the command should end.

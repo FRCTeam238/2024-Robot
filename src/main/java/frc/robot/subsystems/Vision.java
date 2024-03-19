@@ -42,7 +42,7 @@ public class Vision extends SubsystemBase {
             AprilTagFields.k2024Crescendo.loadAprilTagLayoutField(),
             PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR,
             backCamera,
-            backCameraTransform);
+            shooterCameraTransform);
     backEstimator.setMultiTagFallbackStrategy(PoseStrategy.CLOSEST_TO_REFERENCE_POSE);
   }
 

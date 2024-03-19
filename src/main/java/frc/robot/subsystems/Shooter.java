@@ -27,8 +27,10 @@ public class Shooter extends SubsystemBase implements Logged {
     config.Slot0.kI = kI;
     config.Slot0.kD = kD;
     config.Slot0.kV = kFF;
-    config.CurrentLimits.SupplyCurrentLimit = 40;
+    config.CurrentLimits.SupplyCurrentLimit = 30;
     config.CurrentLimits.StatorCurrentLimit = 80;
+    config.CurrentLimits.StatorCurrentLimitEnable = true;
+    config.CurrentLimits.SupplyCurrentLimitEnable = true;
 
     rightMotor.setInverted(false);
     leftMotor.setInverted(true);
@@ -79,12 +81,19 @@ public class Shooter extends SubsystemBase implements Logged {
   }
 
   public void setWheelTargetSpeed() {
-    if (Robot.state == RobotState.SUBWOOFER) {
-      setSpeed(subwooferLeft, -subwooferRight);
-    } else {
-      double distance = Utils.getSpeakerDistance();
-      double avgSpeed = rpmTree.get(distance);
-      setSpeed(avgSpeed, avgSpeed); // TODO: find out if different sides should be different speeds?
+    switch (Robot.state) {
+      case SUBWOOFER :
+      case INTAKE :
+        setSpeed(subwooferLeft, subwooferRight);
+        break;
+      case AMP :
+        setSpeed(ampSpeed, ampSpeed);
+      case TRAP :
+        setSpeed(trapSpeed, trapSpeed);
+      default:  //Targeting
+        double distance = Utils.getSpeakerDistance();
+        double avgSpeed = rpmTree.get(distance);
+        setSpeed(avgSpeed + avgSpeed/speedDifference, avgSpeed - avgSpeed/speedDifference);
     }
   }
 
@@ -100,10 +109,14 @@ public class Shooter extends SubsystemBase implements Logged {
 
   @Log.NT
   public boolean isAtSpeed() {
-    if (getLeftSpeed() <= desiredLeftSpeed + shooterTolerance
-        && getLeftSpeed() >= desiredLeftSpeed - shooterTolerance) {
-      return getRightSpeed() <= desiredRightSpeed + shooterTolerance
-          && getRightSpeed() > desiredRightSpeed - shooterTolerance;
+    if (Math.abs(getLeftSpeed() - desiredLeftSpeed) < shooterTolerance)
+    {
+      if (Math.abs(getRightSpeed() - desiredRightSpeed) < shooterTolerance)
+        return true;
+      else
+      {
+        return false;
+      }
     } else {
       return false;
     }

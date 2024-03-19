@@ -33,16 +33,14 @@ public class Pivot extends SubsystemBase implements Logged {
     pidController.setP(kP);
     pidController.setI(kI);
     pidController.setD(kD);
-    pidController.setPositionPIDWrappingEnabled(true);
-    pidController.setPositionPIDWrappingMinInput(0);
-    pidController.setPositionPIDWrappingMaxInput(2.4586);
+    pidController.setPositionPIDWrappingEnabled(false);
     pivotMotor.setSmartCurrentLimit(currentLimit);
     pivotMotor.setIdleMode(IdleMode.kBrake);
-    pivotMotor.setInverted(true);
+    pivotMotor.setInverted(true); //set inversion such that CCW positive
     encoder.setPositionConversionFactor(
-        2 * Math.PI * 18 / 46); // Convert rotations to rads then multiply by gearing
+        2 * Math.PI * 31 / 74); // Convert rotations to rads then multiply by gearing
     encoder.setVelocityConversionFactor(
-        (2 * Math.PI / 60) * 18 / 46); // Convert rotations to rads/s then multiply by gearing
+        (2 * Math.PI / 60) * 31 / 74); // Convert rotations to rads/s then multiply by gearing
 
     pivotMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus2, 100); // Motor position from internal encoder. Not currently used,
@@ -60,45 +58,29 @@ public class Pivot extends SubsystemBase implements Logged {
   }
 
   public void setDesiredState(MotionProfile.State state) {
+    //Desired positions are angle of shooter side in radians with 0 equal horizontal, CCW positive = shooter up positive
+    //Valid range should be ~70 degrees up to about 40 degrees down
+    //Commanded postition translates this to the Spark encoder position where 0 is shooter straight up and CW positive
+    //FF needs offset of Pi/2 as when at 0 in desired position from, CoG is actually straight up (Pi/2)
     double desiredPosition = state.position;
+    double commandedPosition = -1*(desiredPosition-Math.PI/2);
     double desiredVelocity = state.velocity;
     double desiredAcceleration = state.acceleration;
-    double feed = ff.calculate(desiredPosition, desiredVelocity, desiredAcceleration);
+    double feed = -1*ff.calculate(desiredPosition + Math.PI/2, desiredVelocity, desiredAcceleration); //flip FF because it wants CW positive
+
     this.log("desiredPosition", desiredPosition);
+    this.log("commandedPosition", commandedPosition);
     this.log("desiredVelocity", desiredVelocity);
     this.log("desiredAccel", desiredAcceleration);
     this.log("feed", feed);
 
-    // -voltageMax < feed < voltageMax
-    if (voltageMax < feed) {
-      feed = voltageMax;
-    } else if (-voltageMax > feed) {
-      feed = -voltageMax;
-    }
-    if (getCurrentPosition() < 2) // if not past rollover, control normally
-    {
-      pivotMotor
-          .getPIDController()
-          .setReference(desiredPosition, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
-    } else {
-      pivotMotor.set(.05); // If past rollover, slowly move back towards rollover point
-    }
+    pivotMotor
+        .getPIDController()
+        .setReference(commandedPosition, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
   }
 
   public void holdPosition() {
-    if (getCurrentPosition() < 2) {
-      double feed = ff.calculate(getCurrentPosition(), 0, 0);
-      if (voltageMax < feed) {
-        feed = voltageMax;
-      } else if (-voltageMax > feed) {
-        feed = -voltageMax;
-      }
-      pivotMotor
-          .getPIDController()
-          .setReference(getCurrentPosition(), ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
-    } else {
-      pivotMotor.getPIDController().setReference(getCurrentPosition(), ControlType.kPosition, 0);
-    }
+      pivotMotor.getPIDController().setReference(encoder.getPosition(), ControlType.kPosition, 0);
   }
 
   public void setSpeed(double speed) {
@@ -112,6 +94,9 @@ public class Pivot extends SubsystemBase implements Logged {
 
   @Log.NT
   public double getCurrentPosition() {
-    return encoder.getPosition();
+    return -(encoder.getPosition() - Math.PI/2);
   }
+
+  @Log
+  public double getSparkPosition() { return encoder.getPosition(); };
 }
