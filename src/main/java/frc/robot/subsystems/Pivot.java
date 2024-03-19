@@ -67,6 +67,7 @@ public class Pivot extends SubsystemBase implements Logged {
     double desiredVelocity = state.velocity;
     double desiredAcceleration = state.acceleration;
     double feed = -1*ff.calculate(desiredPosition + Math.PI/2, desiredVelocity, desiredAcceleration); //flip FF because it wants CW positive
+
     this.log("desiredPosition", desiredPosition);
     this.log("commandedPosition", commandedPosition);
     this.log("desiredVelocity", desiredVelocity);
@@ -95,4 +96,7 @@ public class Pivot extends SubsystemBase implements Logged {
   public double getCurrentPosition() {
     return -(encoder.getPosition() - Math.PI/2);
   }
+
+  @Log
+  public double getSparkPosition() { return encoder.getPosition(); };
 }

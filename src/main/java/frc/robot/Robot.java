@@ -58,7 +58,8 @@ public class Robot extends TimedRobot implements Logged {
     SignalLogger.start();
     DataLogManager.start();
     DriverStation.startDataLog(DataLogManager.getLog());
-    URCL.start(
+    URCL.start();
+    /*URCL.start(
         Map.ofEntries(
             Map.entry(PivotConstants.pivotID, "Pivot"),
             Map.entry(IntakeConstants.kID, "Intake"),
@@ -68,7 +69,7 @@ public class Robot extends TimedRobot implements Logged {
             Map.entry(DriveConstants.backLeftTurnCANId, "BL Steer"),
             Map.entry(DriveConstants.backRightTurnCANId, "BR Steer"),
             Map.entry(DriveConstants.frontLeftTurnCANId, "FL Steer"),
-            Map.entry(DriveConstants.frontRightTurnCANId, "FR Steer")));
+            Map.entry(DriveConstants.frontRightTurnCANId, "FR Steer")));*/
     amodeReader =
         new AutonomousModesReader(
             new DataFileAutonomousModeDataSource(

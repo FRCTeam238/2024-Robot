@@ -35,6 +35,7 @@ public class Feeder extends SubsystemBase implements Logged {
 
     feederMotor.setSmartCurrentLimit(30);
     Timer.delay(.02); // Pause between subsystems to ease CAN traffic at startup
+    feederMotor.setInverted(true);
   }
 
   public void setCommand(String name) {
@@ -47,7 +48,7 @@ public class Feeder extends SubsystemBase implements Logged {
 
   @Log.NT
   public boolean sensor() {
-    return sensorMachine.get();
+    return !sensorMachine.get();
   }
 
   @Log.NT

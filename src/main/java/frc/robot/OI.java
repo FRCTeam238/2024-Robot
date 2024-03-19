@@ -3,6 +3,7 @@ package frc.robot;
 import static frc.robot.Constants.OperatorConstants.*;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -44,6 +45,7 @@ public class OI implements Logged {
     operatorController.axisLessThan(1, -0.1).whileTrue(new ManualPivot()); // Left Y
     operatorController.leftTrigger(0.27).whileTrue(new IntakeNote());
     operatorController.rightTrigger(0.27).whileTrue(new ScoreNote());
+    operatorController.rightBumper().whileTrue(new LaunchNote());
 
     leftJoystick.button(4).whileTrue(new AimDT());
     rightJoystick.button(4).whileTrue(new AimDT());
@@ -58,7 +60,8 @@ public class OI implements Logged {
     operatorController.y().onTrue(new AmpPosition());
     operatorController.povDown().whileTrue(new IntakeNote());
     operatorController.povUp().whileTrue(new ClearNote());
-    operatorController.povRight().whileTrue(new EjectNote());
+//    operatorController.b().onTrue(new PivotProfile(new MotionProfile.State(Units.degreesToRadians(0)), "zeroPoint"));
+//    operatorController.x().onTrue(new PivotProfile(new MotionProfile.State(Constants.PivotConstants.intakePosition), "30Point"));
   }
 
   private static boolean getSlowmode() {

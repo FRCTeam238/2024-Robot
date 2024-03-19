@@ -18,16 +18,15 @@ public class Constants {
 
     public static int leftMotorId = 8;
     public static int rightMotorId = 7;
-    public static double kP = .125; // prev: 0.5 | these changes prevent motor losing power
+    public static double kP = .5;
     public static double kI;
     public static double kD;
-    public static double kFF =
-        0.1328 / 2; // prev: 0.1328 | these changes prevent motor losing power
-    public static double shooterTolerance = 30 / 60; // 30 RPM, convert to RPS
+    public static double kFF = 0.116504854368932;
+    public static double shooterTolerance = 30. / 60.; // 30 RPM, convert to RPS
 
     public static double subwooferLeft =
-        6650 / 60; // convert to RPS | value * 1.33 = output shaft rps
-    public static double subwooferRight = 6150 / 60; // convert to RPS
+        4000 / 60; // convert to RPS | value * 1.33 = output shaft rps
+    public static double subwooferRight = 3700 / 60; // convert to RPS
     public static double shotTime = .5;
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
@@ -56,26 +55,26 @@ public class Constants {
 
   public class PivotConstants {
     public static double voltageMax = 12;
-    public static double kS = .07;
-    public static double kG = .12;
-    public static double kV = 2.8; // V*s/rad
+    public static double kS = 0;
+    public static double kG = 0;
+    public static double kV = 2.3; // V*s/rad
 
-    public static double kP = 1;
+    public static double kP = 2;
     public static double kI;
-    public static double kD;
+    public static double kD = .1;
 
     public static int currentLimit = 40;
     public static int pivotID = 3;
 
     public static double maxJerk = 10000;
     public static double maxAccel = 20;
-    public static double maxVelocity = 1; // Max is 3.89?
+    public static double maxVelocity = 1.5; // Max is 3.89?
     public static double velocityTolerance = .05;
     public static final double velocityMaxError = 0.05;
     public static final double positionMaxError = 0.03;
 
     // Positions should all be in radians where 0 = horizontal
-    public static final double intakePosition = Units.degreesToRadians(30);
+    public static final double intakePosition = Units.degreesToRadians(17);
     public static final double ampPosition = Units.degreesToRadians(-30);
     public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
