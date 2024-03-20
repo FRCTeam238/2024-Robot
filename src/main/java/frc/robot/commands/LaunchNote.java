@@ -12,6 +12,7 @@ public class LaunchNote extends Command {
   public LaunchNote() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.feeder, Robot.shooter);
+    
   }
 
   // Called when the command is initially scheduled.

@@ -16,12 +16,15 @@ import frc.robot.commands.AmpPosition;
 import frc.robot.commands.ClearNote;
 import frc.robot.commands.Drive;
 import frc.robot.commands.EjectNote;
+import frc.robot.commands.IntakeGroup;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.IntakePosition;
 import frc.robot.commands.LaunchGroup;
+import frc.robot.commands.LaunchNote;
 import frc.robot.commands.ManualElevator;
 import frc.robot.commands.ManualPivot;
 import frc.robot.commands.ScoreNote;
+import frc.robot.commands.SpoolShooter;
 import frc.robot.commands.SubwooferPosition;
 import monologue.Annotations.Log;
 import monologue.Logged;
@@ -58,6 +61,8 @@ public class OI implements Logged {
     operatorController.rightTrigger(0.27).whileTrue(new SpoolShooter());
     operatorController.rightBumper().whileTrue(new LaunchNote());
 
+    leftJoystick.button(19).onTrue(Robot.drivetrain.zeroHeadingCommand());
+    rightJoystick.button(19).onTrue(Robot.drivetrain.zeroHeadingCommand());
     leftJoystick.button(20).onTrue(Robot.drivetrain.zeroHeadingCommand());
     rightJoystick.button(20).onTrue(Robot.drivetrain.zeroHeadingCommand());
     leftJoystick.button(4).whileTrue(new AimDT());

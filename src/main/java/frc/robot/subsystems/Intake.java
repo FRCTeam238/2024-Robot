@@ -15,7 +15,7 @@ public class Intake extends SubsystemBase implements Logged {
 
   CANSparkMax intakeMotor = new CANSparkMax(kID, MotorType.kBrushless);
 
-  @Log String command;
+  @Log.NT String command;
 
   public Intake() {
     intakeMotor.setInverted(true);
@@ -39,6 +39,8 @@ public class Intake extends SubsystemBase implements Logged {
       return intakeMotor.getEncoder().getVelocity();
 
   }
+
+
 
   public void setCommand(String name) {
     command = name;
