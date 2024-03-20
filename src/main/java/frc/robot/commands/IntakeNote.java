@@ -62,7 +62,7 @@ public class IntakeNote extends Command {
     Robot.intake.setSpeed(0);
     Robot.feeder.setCommand("None");
     Robot.intake.setCommand("None");
-    SmartDashboard.putBoolean("isStalling", false);oi
+    SmartDashboard.putBoolean("isStalling", false);
   }
 
   // Returns true when the command should end.
