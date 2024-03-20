@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Constants;
@@ -23,7 +24,7 @@ public class PodiumPosition extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new RunCommand(() -> Robot.state = Constants.RobotState.SUBWOOFER),
+        new InstantCommand(() -> Robot.state = Constants.RobotState.SUBWOOFER),
         new ElevatorProfile(new State(ElevatorConstants.podiumPosition), "SubwooferPosition"),
         new PivotProfile(new State(PivotConstants.podiumPosition), "SubwooferPosition"));
   }
