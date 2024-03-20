@@ -107,7 +107,7 @@ public class Constants {
 
     public static final double ejectRunTime = 4; // seconds
     public static final double ejectPercent = -0.6;
-    public static final double feedSpeed = 0.65;
+    public static final double feedSpeed = 1;
   }
 
   public class ElevatorConstants {
