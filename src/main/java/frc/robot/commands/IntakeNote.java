@@ -7,7 +7,6 @@ package frc.robot.commands;
 import static frc.robot.Constants.FeederConstants.*;
 import static frc.robot.Constants.IntakeConstants.*;
 
-import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -38,21 +37,22 @@ public class IntakeNote extends Command {
   @Override
   public void execute() {
     Robot.feeder.rollerController(feedSpeed);
-    if (timer.get() < reverseTime) {
-        Robot.intake.setSpeed(ejectSpeed);
-        stallTime = timer.get() + spinupDuration;
-    } else if (timer.get() > stallTime) {
-        if (Robot.intake.getVelocity() < stallVelocity) {
-            Robot.intake.setSpeed(ejectSpeed);
-            reverseTime = timer.get() + reverseDuration;
+    Robot.intake.setSpeed(intakeSpeed);
+    // if (timer.get() < reverseTime) {
+    //     Robot.intake.setSpeed(ejectSpeed);
+    //     stallTime = timer.get() + spinupDuration;
+    // } else if (timer.get() > stallTime) {
+    //     if (Robot.intake.getVelocity() < stallVelocity) {
+    //         Robot.intake.setSpeed(ejectSpeed);
+    //         reverseTime = timer.get() + reverseDuration;
 
-        } else {
-            Robot.intake.setSpeed(intakeSpeed);
-        }
+    //     } else {
+    //         Robot.intake.setSpeed(intakeSpeed);
+    //     }
         
-    } else {
-        Robot.intake.setSpeed(intakeSpeed);
-    }
+    // } else {
+    //     Robot.intake.setSpeed(intakeSpeed);
+    // }
   }
 
   // Called once the command ends or is interrupted.
@@ -62,7 +62,7 @@ public class IntakeNote extends Command {
     Robot.intake.setSpeed(0);
     Robot.feeder.setCommand("None");
     Robot.intake.setCommand("None");
-    SmartDashboard.putBoolean("isStalling", false);oi
+    SmartDashboard.putBoolean("isStalling", false);
   }
 
   // Returns true when the command should end.

@@ -32,12 +32,12 @@ public class Shooter extends SubsystemBase implements Logged {
     config.CurrentLimits.StatorCurrentLimitEnable = true;
     config.CurrentLimits.SupplyCurrentLimitEnable = true;
 
-    rightMotor.setInverted(false);
-    leftMotor.setInverted(true);
     rightMotor.setNeutralMode(NeutralModeValue.Coast);
     leftMotor.setNeutralMode(NeutralModeValue.Coast);
     leftMotor.getConfigurator().apply(config);
     rightMotor.getConfigurator().apply(config);
+    leftMotor.setInverted(false);
+    rightMotor.setInverted(true);
 
     rightMotor.getVelocity().setUpdateFrequency(100); // Set update frequency to 100 Hert, 10ms
     rightMotor.getClosedLoopError().setUpdateFrequency(50);
