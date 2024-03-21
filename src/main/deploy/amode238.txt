@@ -32,6 +32,10 @@
       "name" : "LaunchSubwooferGroupAuto",
       "parameters" : [ ],
       "parallelType" : "None"
+    }, {
+      "name" : "IntakePosition",
+      "parameters" : [ ],
+      "parallelType" : "None"
     } ]
   }, {
     "name" : "Center_4GP",
@@ -53,7 +57,7 @@
       "parallelType" : "Deadline_Follower"
     }, {
       "name" : "Delay",
-      "parameters" : [ ".01" ],
+      "parameters" : [ ".001" ],
       "parallelType" : "None"
     }, {
       "name" : "TargetSubwoofer",
@@ -70,7 +74,7 @@
     }, {
       "name" : "IntakePosition",
       "parameters" : [ ],
-      "parallelType" : "Deadline_Leader"
+      "parallelType" : "None"
     }, {
       "name" : "IntakeNote",
       "parameters" : [ ],
@@ -81,11 +85,11 @@
       "parallelType" : "Deadline_Follower"
     }, {
       "name" : "Delay",
-      "parameters" : [ ".01" ],
+      "parameters" : [ ".001" ],
       "parallelType" : "None"
     }, {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "", "false", "0" ],
+      "parameters" : [ "Center_4GP.4", "false", "0" ],
       "parallelType" : "Parallel"
     }, {
       "name" : "TargetSubwoofer",
@@ -105,7 +109,7 @@
       "parallelType" : "Deadline_Leader"
     }, {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "", "false", "0" ],
+      "parameters" : [ "Center_4GP.5", "false", "0" ],
       "parallelType" : "Deadline_Follower"
     }, {
       "name" : "Delay",
@@ -117,7 +121,7 @@
       "parallelType" : "Parallel"
     }, {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "", "false", "0" ],
+      "parameters" : [ "Center_4GP.6", "false", "0" ],
       "parallelType" : "Parallel"
     }, {
       "name" : "LaunchSubwooferGroupAuto",
@@ -153,7 +157,7 @@
     "name" : "LeaveRightNoShoot",
     "commands" : [ {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "LeaveAutoRight_NEW", "true", "0" ],
+      "parameters" : [ "", "true", "0" ],
       "parallelType" : "None"
     }, {
       "name" : "Delay",
@@ -218,7 +222,7 @@
       "parallelType" : "Deadline_Follower"
     }, {
       "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Right_2GP.2", "false", "0" ],
+      "parameters" : [ "", "false", "0" ],
       "parallelType" : "None"
     }, {
       "name" : "LaunchSubwooferGroupAuto",
