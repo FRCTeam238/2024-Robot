@@ -30,7 +30,10 @@ public class Constants {
 
     public static double subwooferLeft =
         4000. / 60; // convert to RPS | value * 1.33 = output shaft rps
-    public static double subwooferRight = 3700. / 60; // convert to RPS
+    public static double subwooferRight = 3700. / 60.; // convert to RPS
+    public static double podiumLeft = 4200. / 60.;
+    public static double podiumRight = 3700. / 60.;
+
     public static double ampSpeed = 2000. / 60;
     public static double trapSpeed = 2000. / 60;
     public static double shotTime = .4;
@@ -86,7 +89,7 @@ public class Constants {
     public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
     public static final double subwooferPosition = Units.degreesToRadians(50);
-    public static final double podiumPosition = Units.degreesToRadians(50);
+    public static final double podiumPosition = Units.degreesToRadians(30);
     public static final double feedOutPosition = Units.degreesToRadians(15);
 
     public static InterpolatingDoubleTreeMap pivotAngles = new InterpolatingDoubleTreeMap();
@@ -142,7 +145,7 @@ public class Constants {
     public static final double trapPosition = 0;
     public static final double climbPosition = 0;
     public static final double subwooferPosition = 8;
-    public static final double podiumPosition = 8;//TODO: change to real numbers
+    public static final double podiumPosition = 6;//TODO: change to real numbers
     public static final double feedOutPosition = 0;
 
     public static final double gearing = 12; // 12:1 gear ratio

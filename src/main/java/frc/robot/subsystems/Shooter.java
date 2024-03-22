@@ -88,8 +88,12 @@ public class Shooter extends SubsystemBase implements Logged {
         break;
       case AMP :
         setSpeed(ampSpeed, ampSpeed);
+        break;
+      case PODIUM:
+        setSpeed(podiumLeft, podiumRight);
       case TRAP :
         setSpeed(trapSpeed, trapSpeed);
+        break;
       default:  //Targeting
         double distance = Utils.getSpeakerDistance();
         double avgSpeed = rpmTree.get(distance);

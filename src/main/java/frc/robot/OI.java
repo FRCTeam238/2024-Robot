@@ -23,6 +23,7 @@ import frc.robot.commands.LaunchGroup;
 import frc.robot.commands.LaunchNote;
 import frc.robot.commands.ManualElevator;
 import frc.robot.commands.ManualPivot;
+import frc.robot.commands.PodiumPosition;
 import frc.robot.commands.ScoreNote;
 import frc.robot.commands.SpoolShooter;
 import frc.robot.commands.SubwooferPosition;
@@ -60,6 +61,8 @@ public class OI implements Logged {
     operatorController.leftTrigger(0.27).whileTrue(new IntakeGroup());
     operatorController.rightTrigger(0.27).whileTrue(new SpoolShooter());
     operatorController.rightBumper().whileTrue(new LaunchNote());
+    operatorController.leftBumper().whileTrue(new EjectNote());
+
 
     leftJoystick.button(19).onTrue(Robot.drivetrain.zeroHeadingCommand());
     rightJoystick.button(19).onTrue(Robot.drivetrain.zeroHeadingCommand());
@@ -73,7 +76,7 @@ public class OI implements Logged {
 
     operatorController.a().onTrue(new IntakePosition());
     operatorController.x().onTrue(new SubwooferPosition());
-    operatorController.b().onTrue(new SubwooferPosition());
+    operatorController.b().onTrue(new PodiumPosition());
     operatorController.y().onTrue(new AmpPosition());
     operatorController.povDown().whileTrue(new IntakeNote());
     operatorController.povUp().whileTrue(new ClearNote());

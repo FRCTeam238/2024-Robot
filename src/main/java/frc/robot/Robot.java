@@ -97,7 +97,10 @@ public class Robot extends TimedRobot implements Logged {
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    pivot.stop();
+    elevator.stop();
+  }
 
   @Override
   public void disabledPeriodic() {

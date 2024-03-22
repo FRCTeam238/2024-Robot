@@ -98,5 +98,12 @@ public class Pivot extends SubsystemBase implements Logged {
   }
 
   @Log
-  public double getSparkPosition() { return encoder.getPosition(); };
+  public double getSparkPosition() {
+    return encoder.getPosition();
+  };
+  
+  public void stop() {
+    pivotMotor.set(0);
+  }
+
 }

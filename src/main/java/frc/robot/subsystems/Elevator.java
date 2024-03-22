@@ -111,6 +111,10 @@ public class Elevator extends SubsystemBase implements Logged {
         .setReference(getEncoderPosition(), ControlType.kPosition, 0, feed);
   }
 
+  public void stop() {
+    leadingMotor.set(0);
+  }
+
   @Log.NT
   public double getVelocity() {
     return leadingMotor.getEncoder().getVelocity();

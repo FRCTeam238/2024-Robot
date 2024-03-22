@@ -25,7 +25,7 @@ public class PodiumPosition extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new InstantCommand(() -> Robot.state = Constants.RobotState.SUBWOOFER),
-        new ElevatorProfile(new State(ElevatorConstants.podiumPosition), "SubwooferPosition"),
-        new PivotProfile(new State(PivotConstants.podiumPosition), "SubwooferPosition"));
+        new ElevatorProfile(new State(ElevatorConstants.podiumPosition), "PodiumPosition"),
+        new PivotProfile(new State(PivotConstants.podiumPosition), "PodiumPosition"));
   }
 }

@@ -54,4 +54,8 @@ public class Intake extends SubsystemBase implements Logged {
   public double getSpeed() {
     return intakeMotor.get();
   }
+
+  public void stop() {
+    intakeMotor.set(0);
+  }
 }

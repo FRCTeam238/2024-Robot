@@ -46,6 +46,10 @@ public class Feeder extends SubsystemBase implements Logged {
     feederMotor.set(speed);
   }
 
+  public void stop() {
+    feederMotor.set(0);
+  }
+
   @Log.NT
   public boolean sensor() {
     return !sensorMachine.get();

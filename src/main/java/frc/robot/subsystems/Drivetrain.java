@@ -52,6 +52,7 @@ public class Drivetrain extends SubsystemBase implements Logged {
     x = new PIDController(kP, kI, kD);
     y = new PIDController(kP, kI, kD);
     theta = new PIDController(kPAngular, kIAngular, kDAngular);
+    theta.enableContinuousInput(-Math.PI, Math.PI);
   }
 
   @Override
@@ -197,8 +198,11 @@ public class Drivetrain extends SubsystemBase implements Logged {
     double yFeedback = y.calculate(currentPose.getY(), referenceState.y);
     double rotationFeedback =
         theta.calculate(currentPose.getRotation().getRadians(), referenceState.heading);
-
-    return ChassisSpeeds.fromFieldRelativeSpeeds(
+    log("CurrentRotation", currentPose.getRotation().getRadians());
+    log("PoseRotation", referenceState.getPose().getRotation().getRadians());
+    ChassisSpeeds retval = ChassisSpeeds.fromFieldRelativeSpeeds(
         xFF + xFeedback, yFF + yFeedback, rotationFF + rotationFeedback, currentPose.getRotation());
+    log("ChassisSpeeds", retval);
+    return retval;
   }
 }
