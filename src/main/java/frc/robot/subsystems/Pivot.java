@@ -38,14 +38,14 @@ public class Pivot extends SubsystemBase implements Logged {
     pivotMotor.setIdleMode(IdleMode.kBrake);
     pivotMotor.setInverted(true); //set inversion such that CCW positive
     encoder.setPositionConversionFactor(
-        2 * Math.PI * 31 / 74); // Convert rotations to rads then multiply by gearing
+        2 * Math.PI * 13 / 26); // Convert rotations to rads then multiply by gearing
     encoder.setVelocityConversionFactor(
-        (2 * Math.PI / 60) * 31 / 74); // Convert rotations to rads/s then multiply by gearing
+        (2 * Math.PI / 60) * 13 / 26); // Convert rotations to rads/s then multiply by gearing
 
     pivotMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus2, 100); // Motor position from internal encoder. Not currently used,
-    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
-    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 65535); // Alternate Encoder. Not Used
+    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 32767); // Analog sensor. Not Used
+    pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 32767); // Alternate Encoder. Not Used
     pivotMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus5, 10); // Absolute encoder position and angle
     pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 10); // Absolute encoder velocity

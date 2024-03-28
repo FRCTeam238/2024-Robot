@@ -36,7 +36,7 @@ public class Constants {
 
     public static double ampSpeed = 2000. / 60;
     public static double trapSpeed = 2000. / 60;
-    public static double shotTime = .4;
+    public static double shotTime = .6;
     public static double speedDifference = 20; //Percent difference in speed for targeted shots
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
@@ -143,7 +143,7 @@ public class Constants {
     public static final double intakePosition = .5;
     public static final double ampPosition = 25;
     public static final double trapPosition = 0;
-    public static final double climbPosition = 0;
+    public static final double climbPosition = 32;
     public static final double subwooferPosition = 8;
     public static final double podiumPosition = 6;//TODO: change to real numbers
     public static final double feedOutPosition = 0;
@@ -166,15 +166,15 @@ public class Constants {
     public static final int backLeftTurnCANId = 4;
     public static final int frontLeftTurnCANId = 11;
 
-    public static final double kP = 1;
+    public static final double kP = 10;
     public static final double kI = 0;
-    public static final double kD = 0;
+    public static final double kD = 0.01;
 
     public static final double kPAngular = 1;
     public static final double kIAngular = 0;
     public static final double kDAngular = 0;
 
-    public static final double maxVelocityMetersPerSec = 4.86;
+    public static final double maxVelocityMetersPerSec = 4.3;
     public static final double maxAccelerationMetersPerSec2 = 100; // TODO: make this a real number
 
     public static final double kTrackWidth = Units.inchesToMeters(20.75);

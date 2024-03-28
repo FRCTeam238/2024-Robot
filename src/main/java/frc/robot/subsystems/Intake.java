@@ -20,15 +20,15 @@ public class Intake extends SubsystemBase implements Logged {
   public Intake() {
     intakeMotor.setInverted(true);
     intakeMotor.setPeriodicFramePeriod(
-        PeriodicFrame.kStatus2, 65535); // Motor position from internal encoder. Not currently used,
-    intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
+        PeriodicFrame.kStatus2, 32767); // Motor position from internal encoder. Not currently used,
+    intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 32767); // Analog sensor. Not Used
     intakeMotor.setPeriodicFramePeriod(
-        PeriodicFrame.kStatus4, 65535); // Alternate Encoder. Not Used
+        PeriodicFrame.kStatus4, 32767); // Alternate Encoder. Not Used
     intakeMotor.setPeriodicFramePeriod(
-        PeriodicFrame.kStatus5, 65535); // Absolute encoder position and angle
+        PeriodicFrame.kStatus5, 32767); // Absolute encoder position and angle
     intakeMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus6,
-        65535); // Absolute encoder velocity, not currently used, leave at default
+        32767); // Absolute encoder velocity, not currently used, leave at default
 
     intakeMotor.setSmartCurrentLimit(80);
     Timer.delay(.02); // Pause between subsystems to ease CAN traffic at startup

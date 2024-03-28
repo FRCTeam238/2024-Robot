@@ -129,6 +129,97 @@
       "parallelType" : "None"
     } ]
   }, {
+    "name" : "Center_4GP_Invert",
+    "commands" : [ {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakePosition",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakeNote",
+      "parameters" : [ ],
+      "parallelType" : "Deadline_Leader"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Center_4GP_Invert.1", "true", "0" ],
+      "parallelType" : "Deadline_Follower"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.001" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "TargetSubwoofer",
+      "parameters" : [ ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Center_4GP.2", "false", "0" ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakePosition",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakeNote",
+      "parameters" : [ ],
+      "parallelType" : "Deadline_Leader"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Center_4GP_Invert.3", "false", "0" ],
+      "parallelType" : "Deadline_Follower"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.001" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "TargetSubwoofer",
+      "parameters" : [ ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Center_4GP_Invert.5", "false", "0" ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakePosition",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakeNote",
+      "parameters" : [ ],
+      "parallelType" : "Deadline_Leader"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Center_4GP_Invert.6", "false", "0" ],
+      "parallelType" : "Deadline_Follower"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.001" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "TargetSubwoofer",
+      "parameters" : [ ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Center_4GP_Invert.6", "false", "0" ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    } ]
+  }, {
     "name" : "Center_Leave",
     "commands" : [ {
       "name" : "LaunchSubwooferGroupAuto",
@@ -192,6 +283,69 @@
       "parallelType" : "None"
     } ]
   }, {
+    "name" : "Left_3GP",
+    "commands" : [ {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakePosition",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakeNote",
+      "parameters" : [ ],
+      "parallelType" : "Deadline_Leader"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Left_Mid3GP.1", "true", "0" ],
+      "parallelType" : "Deadline_Follower"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.001" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "TargetSubwoofer",
+      "parameters" : [ ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Left_Mid3GP.2", "false", "0" ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakePosition",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakeNote",
+      "parameters" : [ ],
+      "parallelType" : "Deadline_Leader"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Left_Mid3GP.3", "false", "0" ],
+      "parallelType" : "Deadline_Follower"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.001" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "TargetSubwoofer",
+      "parameters" : [ ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Left_Mid3GP.4", "false", "0" ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    } ]
+  }, {
     "name" : "Left_Leave",
     "commands" : [ {
       "name" : "LaunchSubwooferGroupAuto",
@@ -230,6 +384,45 @@
       "parallelType" : "None"
     } ]
   }, {
+    "name" : "Right_2GP_Mid",
+    "commands" : [ {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakePosition",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakeNote",
+      "parameters" : [ ],
+      "parallelType" : "Deadline_Leader"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Right_2GP_Mid.1", "true", "0" ],
+      "parallelType" : "Deadline_Follower"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.001" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Right_2GP_Mid.2", "false", "0" ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "TargetSubwoofer",
+      "parameters" : [ ],
+      "parallelType" : "Parallel"
+    }, {
+      "name" : "LaunchSubwooferGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    }, {
+      "name" : "IntakePosition",
+      "parameters" : [ ],
+      "parallelType" : "None"
+    } ]
+  }, {
     "name" : "Right_Leave",
     "commands" : [ {
       "name" : "LaunchSubwooferGroupAuto",
@@ -243,6 +436,10 @@
   }, {
     "name" : "whoopsydaisy",
     "commands" : [ {
+      "name" : "TrajectoryDriveCommand",
+      "parameters" : [ "Do_Nothing", "true", "0" ],
+      "parallelType" : "None"
+    }, {
       "name" : "Delay",
       "parameters" : [ "16" ],
       "parallelType" : "None"

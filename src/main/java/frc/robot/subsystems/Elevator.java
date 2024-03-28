@@ -67,11 +67,11 @@ public class Elevator extends SubsystemBase implements Logged {
     leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 10); // Motor velocity
     leadingMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus2, 10); // Motor position from internal encoder.
-    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
+    leadingMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 32767); // Analog sensor. Not Used
     leadingMotor.setPeriodicFramePeriod(
-        PeriodicFrame.kStatus4, 65535); // Alternate Encoder. Not Used
+        PeriodicFrame.kStatus4, 32767); // Alternate Encoder. Not Used
     leadingMotor.setPeriodicFramePeriod(
-        PeriodicFrame.kStatus5, 65535); // Absolute encoder position and angle
+        PeriodicFrame.kStatus5, 32767); // Absolute encoder position and angle
     leadingMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus6,
         65535); // Absolute encoder velocity, not currently used, leave at default
@@ -79,11 +79,11 @@ public class Elevator extends SubsystemBase implements Logged {
     followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 50); // Motor velocity
     followerMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus2, 50); // Motor position from internal encoder.
-    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
+    followerMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 32767); // Analog sensor. Not Used
     followerMotor.setPeriodicFramePeriod(
-        PeriodicFrame.kStatus4, 65535); // Alternate Encoder. Not Used
+        PeriodicFrame.kStatus4, 32767); // Alternate Encoder. Not Used
     followerMotor.setPeriodicFramePeriod(
-        PeriodicFrame.kStatus5, 65535); // Absolute encoder position and angle
+        PeriodicFrame.kStatus5, 32767); // Absolute encoder position and angle
     followerMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus6,
         65535); // Absolute encoder velocity, not currently used, leave at default

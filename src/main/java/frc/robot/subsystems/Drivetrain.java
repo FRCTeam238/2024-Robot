@@ -138,7 +138,6 @@ public class Drivetrain extends SubsystemBase implements Logged {
   public void setModuleStates(SwerveModuleState[] states) {
     SwerveDriveKinematics.desaturateWheelSpeeds(states, maxVelocityMetersPerSec);
 
-    log("DesiredStates", states);
     frontLeft.setDesiredState(states[0]);
     frontRight.setDesiredState(states[1]);
     backLeft.setDesiredState(states[2]);
@@ -159,6 +158,13 @@ public class Drivetrain extends SubsystemBase implements Logged {
     };
   }
 
+  @Log
+  public SwerveModuleState[] getDesiredStates() {
+    return new SwerveModuleState[] {
+            frontLeft.getDesiredState(), frontRight.getDesiredState(), backLeft.getDesiredState(), backRight.getDesiredState()
+    };
+  }
+
   public SwerveModulePosition[] getSwerveModulePosition() {
     return new SwerveModulePosition[] {
       frontLeft.getPosition(),
@@ -170,6 +176,13 @@ public class Drivetrain extends SubsystemBase implements Logged {
 
   public void zeroHeading() {
     gyro.reset();
+    if (DriverStation.getAlliance().isPresent()) {
+      if (DriverStation.getAlliance().get() == Alliance.Red) {
+        gyro.setAngleAdjustment(180);
+      } else {
+        gyro.setAngleAdjustment(0);
+      }
+    }
   }
 
   public Command zeroHeadingCommand() {
