@@ -13,11 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.ElevatorConstants;
-import frc.robot.Constants.FeederConstants;
-import frc.robot.Constants.IntakeConstants;
-import frc.robot.Constants.PivotConstants;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Feeder;
@@ -26,7 +21,7 @@ import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
 import java.util.List;
-import java.util.Map;
+
 import monologue.Annotations.Log;
 import monologue.Logged;
 import monologue.Monologue;
@@ -51,7 +46,7 @@ public class Robot extends TimedRobot implements Logged {
   public static Pivot pivot = new Pivot();
   public static Shooter shooter = new Shooter();
   public static Vision vision; //= new Vision();
-  public static OI oi = new OI();
+  public static OpInterface opInterface = new OpInterface();
 
   @Override
   public void robotInit() {

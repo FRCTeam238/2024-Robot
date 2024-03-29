@@ -7,6 +7,7 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.RobotState;
 import frc.robot.Robot;
@@ -22,6 +23,8 @@ public class Shooter extends SubsystemBase implements Logged {
   @Log String command;
 
   public Shooter() {
+    SmartDashboard.putNumber("LeftShooterSpeed", 4000);
+    SmartDashboard.putNumber("RightShooterSpeed", 3800);
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.Slot0.kP = kP;
     config.Slot0.kI = kI;
@@ -93,6 +96,9 @@ public class Shooter extends SubsystemBase implements Logged {
         setSpeed(podiumLeft, podiumRight);
       case TRAP :
         setSpeed(trapSpeed, trapSpeed);
+        break;
+      case DASHBOARD:
+        setSpeed(SmartDashboard.getNumber("LeftShooterSpeed", 4000), SmartDashboard.getNumber("RightShooterSpeed",3800));
         break;
       default:  //Targeting
         double distance = Utils.getSpeakerDistance();

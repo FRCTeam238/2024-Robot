@@ -203,7 +203,8 @@ public class Constants {
     TARGET,
     SUBWOOFER,
     PODIUM,
-    FEEDOUT
+    FEEDOUT,
+    DASHBOARD
   }
 
   public class VisionConstants {

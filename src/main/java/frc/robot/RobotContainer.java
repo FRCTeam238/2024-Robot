@@ -15,7 +15,7 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    OI.driverController.start().onTrue(Robot.drivetrain.zeroHeadingCommand());
+    OpInterface.driverController.start().onTrue(Robot.drivetrain.zeroHeadingCommand());
   }
 
   public Command getAutonomousCommand() {

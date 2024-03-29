@@ -9,7 +9,7 @@ import static frc.robot.Constants.DriveConstants.*;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.OI;
+import frc.robot.OpInterface;
 import frc.robot.Robot;
 import frc.robot.Utils;
 
@@ -33,7 +33,7 @@ public class AimDT extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double[] joyValues = OI.getSwerveJoystickValues();
+    double[] joyValues = OpInterface.getSwerveJoystickValues();
 
     double speakerLocation = getSpeakerAngle();
     double robotAngle = Robot.drivetrain.getPose().getRotation().getRadians();

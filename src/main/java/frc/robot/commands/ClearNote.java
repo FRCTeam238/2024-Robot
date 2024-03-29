@@ -8,7 +8,7 @@ import static frc.robot.Constants.IntakeConstants.intakeSpeed;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.OI;
+import frc.robot.OpInterface;
 import frc.robot.Robot;
 
 public class ClearNote extends Command {
@@ -22,7 +22,7 @@ public class ClearNote extends Command {
   @Override
   public void initialize() {
     Robot.intake.setSpeed(-intakeSpeed);
-    OI.operatorController.getHID().setRumble(RumbleType.kBothRumble, 1);
+    OpInterface.operatorController.getHID().setRumble(RumbleType.kBothRumble, 1);
     Robot.intake.setCommand("ClearNote");
   }
 
@@ -34,7 +34,7 @@ public class ClearNote extends Command {
   @Override
   public void end(boolean interrupted) {
     Robot.intake.setSpeed(0);
-    OI.operatorController.getHID().setRumble(RumbleType.kBothRumble, 0);
+    OpInterface.operatorController.getHID().setRumble(RumbleType.kBothRumble, 0);
     Robot.intake.setCommand("None");
   }
 

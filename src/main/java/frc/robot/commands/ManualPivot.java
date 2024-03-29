@@ -6,7 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ElevatorConstants.ElevatorDirection;
-import frc.robot.OI;
+import frc.robot.OpInterface;
 import frc.robot.Robot;
 import frc.robot.subsystems.Pivot;
 
@@ -29,7 +29,7 @@ public class ManualPivot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pivot.setSpeed(OI.operatorController.getRightY() * .25);
+    pivot.setSpeed(OpInterface.operatorController.getRightY() * .25);
   }
 
   // Called once the command ends or is interrupted.

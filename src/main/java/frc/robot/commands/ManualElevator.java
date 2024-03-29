@@ -7,7 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.ElevatorConstants.ElevatorDirection;
-import frc.robot.OI;
+import frc.robot.OpInterface;
 import frc.robot.Robot;
 import frc.robot.subsystems.Elevator;
 
@@ -33,10 +33,10 @@ public class ManualElevator extends Command {
   public void execute() {
     switch (direction) {
       case DOWN:
-        elevator.setSpeed(OI.operatorController.getRightY());
+        elevator.setSpeed(OpInterface.operatorController.getRightY());
         break;
       case UP:
-        elevator.setSpeed(OI.operatorController.getRightY());
+        elevator.setSpeed(OpInterface.operatorController.getRightY());
         break;
       default:
         elevator.setSpeed(0);

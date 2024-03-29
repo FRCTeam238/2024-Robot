@@ -4,7 +4,6 @@ import static frc.robot.Constants.OperatorConstants.driverJoystickDeadzone;
 import static frc.robot.Constants.OperatorConstants.xboxControllerDeadzone;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -16,7 +15,7 @@ import monologue.Annotations.Log;
 import monologue.Logged;
 
 /** OI */
-public class OI implements Logged {
+public class OpInterface implements Logged {
 
   @Log.NT public static CommandJoystick leftJoystick = new CommandJoystick(2);
   @Log.NT public static CommandJoystick rightJoystick = new CommandJoystick(1);
@@ -27,7 +26,7 @@ public class OI implements Logged {
   static DriveType driveType = DriveType.XBOX;
   private static SendableChooser<DriveType> driveTypeChooser;
 
-  public OI() {
+  public OpInterface() {
     Robot.drivetrain.setDefaultCommand(new Drive());
 
     driveTypeChooser = new SendableChooser<>();
@@ -51,10 +50,10 @@ public class OI implements Logged {
 
     leftJoystick.button(4).onTrue(Robot.drivetrain.zeroHeadingCommand());
     rightJoystick.button(4).onTrue(Robot.drivetrain.zeroHeadingCommand());
-//    leftJoystick.button(20).onTrue(Robot.drivetrain.zeroHeadingCommand());
-//    rightJoystick.button(20).onTrue(Robot.drivetrain.zeroHeadingCommand());
-//    leftJoystick.button(4).whileTrue(new AimDT());
-//    rightJoystick.button(4).whileTrue(new AimDT());
+    rightJoystick.button(6).whileTrue(new SnapToAngle(Math.PI)); //Up button = Pi radians, shooter away from speaker
+    rightJoystick.button(7).whileTrue(new SnapToAngle(-Math.PI/2)); //Right button = -Pi/2 radians, shooter towards right
+    rightJoystick.button(8).whileTrue(new SnapToAngle(0)); //Down button = 0 radians, shooter towards speaker
+    rightJoystick.button(9).whileTrue(new SnapToAngle(Math.PI/2)); //Left button = Pi/2 radians, shooter left
 
     leftJoystick.button(1).whileTrue(new LaunchNote());
     rightJoystick.button(1).whileTrue(new LaunchNote());
