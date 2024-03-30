@@ -40,7 +40,7 @@ public class Pivot extends SubsystemBase implements Logged {
     encoder.setPositionConversionFactor(
         2 * Math.PI * 13 / 26); // Convert rotations to rads then multiply by gearing
     encoder.setVelocityConversionFactor(
-        (2 * Math.PI / 60) * 13 / 26); // Convert rotations to rads/s then multiply by gearing
+        (2 * Math.PI) * 13 / 26); // Convert rotations to rads/s then multiply by gearing
 
     pivotMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus2, 100); // Motor position from internal encoder. Not currently used,
@@ -89,7 +89,7 @@ public class Pivot extends SubsystemBase implements Logged {
 
   @Log.NT
   public double getVelocity() {
-    return encoder.getVelocity();
+    return -encoder.getVelocity();
   }
 
   @Log.NT
