@@ -204,7 +204,8 @@ public class Constants {
     SUBWOOFER,
     PODIUM,
     FEEDOUT,
-    DASHBOARD
+    DASHBOARD,
+    AUTO
   }
 
   public class VisionConstants {

@@ -100,6 +100,9 @@ public class Shooter extends SubsystemBase implements Logged {
       case DASHBOARD:
         setSpeed(SmartDashboard.getNumber("LeftShooterSpeed", 4000), SmartDashboard.getNumber("RightShooterSpeed",3800));
         break;
+      case AUTO:
+        //speed already set by spool and launch doesn't know the speed
+        break;
       default:  //Targeting
         double distance = Utils.getSpeakerDistance();
         double avgSpeed = rpmTree.get(distance);
