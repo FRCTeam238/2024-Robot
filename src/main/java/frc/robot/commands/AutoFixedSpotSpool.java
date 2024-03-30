@@ -24,7 +24,7 @@ public class AutoFixedSpotSpool extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.setSpeed(leftSpeed, rightSpeed);
+    Robot.shooter.setSpeed(leftSpeed/60, rightSpeed/60);
     Robot.shooter.setCommand("SpoolShooter");
   }
 

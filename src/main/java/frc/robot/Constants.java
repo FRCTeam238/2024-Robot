@@ -68,6 +68,7 @@ public class Constants {
     public static double kS = 0;
     public static double kG = 0;
     public static double kV = 2.3; // V*s/rad
+    public static double kA = 0.1;
 
     public static double kP = 2;
     public static double kI;
@@ -77,8 +78,8 @@ public class Constants {
     public static int pivotID = 3;
 
     public static double maxJerk = 10000;
-    public static double maxAccel = 20;
-    public static double maxVelocity = 1.5; // Max is 3.89?
+    public static double maxAccel = 15;
+    public static double maxVelocity = 2.5; // Max is 3.89?
     public static double velocityTolerance = .05;
     public static final double velocityMaxError = 0.05;
     public static final double positionMaxError = 0.03;
@@ -133,8 +134,8 @@ public class Constants {
     public static final double kA = 0.0012; // V*s/in^2
 
     public static final double maxElevatorJerk = 5000;
-    public static final double maxAccel = 400; // in/s^2 Max = 450?
-    public static final double maxVelocity = 36; // in/s Max = 36?
+    public static final double maxAccel = 200; // in/s^2 Max = 450?
+    public static final double maxVelocity = 30; // in/s Max = 36?
     public static final double velocityTolerance = 0.5;
     public static final double velocityMaxError = 0.2;
     public static final double positionMaxError = 0.5;

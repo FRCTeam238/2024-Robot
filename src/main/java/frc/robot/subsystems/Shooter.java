@@ -98,7 +98,7 @@ public class Shooter extends SubsystemBase implements Logged {
         setSpeed(trapSpeed, trapSpeed);
         break;
       case DASHBOARD:
-        setSpeed(SmartDashboard.getNumber("LeftShooterSpeed", 4000), SmartDashboard.getNumber("RightShooterSpeed",3800));
+        setSpeed(SmartDashboard.getNumber("LeftShooterSpeed", 4000)/60, SmartDashboard.getNumber("RightShooterSpeed",3800)/60);
         break;
       case AUTO:
         //speed already set by spool and launch doesn't know the speed

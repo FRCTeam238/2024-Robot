@@ -63,6 +63,7 @@ public class OpInterface implements Logged {
     operatorController.b().onTrue(new PodiumPosition());
     operatorController.y().onTrue(new AmpPosition());
     operatorController.povDown().whileTrue(new IntakeNote());
+    operatorController.povLeft().onTrue(new DashboardPosition());
     operatorController.povUp().whileTrue(new ClearNote());
   }
 

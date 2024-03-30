@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.MotionProfile;
@@ -28,7 +29,7 @@ public class DashboardPivotProfile extends Command {
 
   @Override
   public void initialize() {
-    goal = new MotionProfile.State(SmartDashboard.getNumber("PivotSetpoint", 0));
+    goal = new MotionProfile.State(Units.degreesToRadians(SmartDashboard.getNumber("PivotSetpoint", 0)));
     MotionProfile.State currentState =
         new MotionProfile.State(pivot.getCurrentPosition(), pivot.getVelocity());
     profile = new MotionProfile(goal, currentState, constraints, MotionProfile.ProfileType.AUTO);

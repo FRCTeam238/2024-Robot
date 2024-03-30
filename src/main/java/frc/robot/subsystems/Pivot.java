@@ -26,7 +26,7 @@ public class Pivot extends SubsystemBase implements Logged {
   ArmFeedforward ff;
 
   public Pivot() {
-    ff = new ArmFeedforward(kS, kG, kV);
+    ff = new ArmFeedforward(kS, kG, kV, kA);
     pivotMotor.getPIDController().setFeedbackDevice(encoder);
     SparkPIDController pidController = pivotMotor.getPIDController();
 

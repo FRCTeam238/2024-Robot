@@ -6,7 +6,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
+import org.frc238.lib.autonomous.AutonomousModeAnnotation;
 
+
+@AutonomousModeAnnotation(parameterNames = {})
 public class LaunchNote extends Command {
   /** Creates a new LaunchNode. */
   public LaunchNote() {

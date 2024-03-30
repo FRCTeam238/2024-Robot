@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants;
@@ -25,6 +26,6 @@ public class AutoPosition extends ParallelCommandGroup {
     addCommands(
         new InstantCommand(() -> Robot.state = Constants.RobotState.AUTO),
         new ElevatorProfile(new State(elevatorPosition), "AutoPosition"),
-        new PivotProfile(new State(pivotPosition), "AutoPosition"));
+        new PivotProfile(new State(Units.degreesToRadians(pivotPosition)), "AutoPosition"));
   }
 }
