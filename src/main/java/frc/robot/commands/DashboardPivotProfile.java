@@ -49,7 +49,8 @@ public class DashboardPivotProfile extends Command {
   @Override
   public boolean isFinished() {
     return Math.abs(pivot.getVelocity() - goal.velocity) <= velocityMaxError
-        && Math.abs(pivot.getCurrentPosition() - goal.position) <= positionMaxError;
+        && Math.abs(pivot.getCurrentPosition() - goal.position) <= positionMaxError
+        && profile.isFinished();
   }
 
   @Override

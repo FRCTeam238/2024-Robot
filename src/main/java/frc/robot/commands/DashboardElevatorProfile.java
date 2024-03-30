@@ -51,7 +51,8 @@ public class DashboardElevatorProfile extends Command {
   public boolean isFinished() {
     // TODO: Make this return true when this Command no longer needs to run execute()
     return Math.abs(elevator.getVelocity() - goal.velocity) <= velocityMaxError
-        && Math.abs(elevator.getEncoderPosition() - goal.position) <= positionMaxError;
+        && Math.abs(elevator.getEncoderPosition() - goal.position) <= positionMaxError
+        && profile.isFinished();
   }
 
   @Override
