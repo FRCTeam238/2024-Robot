@@ -483,7 +483,7 @@
       "parallelType" : "None"
     } ]
   }, {
-    "name" : "New Auto",
+    "name" : "Center_GP_Mid_Podium",
     "commands" : [ {
       "name" : "LaunchSubwooferGroupAuto",
       "parameters" : [ ],
@@ -541,7 +541,7 @@
       "parameters" : [ "Center_GP_Mid_Podium.3", "false", "0" ],
       "parallelType" : "Parallel"
     }, {
-      "name" : "TargetSubwoofer",
+      "name" : "TriggeredTargetSubwoofer",
       "parameters" : [ ],
       "parallelType" : "Parallel"
     }, {
