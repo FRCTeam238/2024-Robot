@@ -36,7 +36,7 @@ public class PivotProfile extends Command {
 
   @Override
   public void execute() {
-    if (goal.position > .33 && Robot.elevator.getEncoderPosition() < 6) {
+    if (goal.position > .33 && Robot.elevator.getEncoderPosition() < 5.75) {
       // Pivot will collide with swerves, wait for elevator to go up
       // TODO: Better way to do this? Should these be constants?
     } else {
