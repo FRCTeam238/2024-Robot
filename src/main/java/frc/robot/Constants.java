@@ -137,7 +137,7 @@ public class Constants {
     public static final double maxAccel = 200; // in/s^2 Max = 450?
     public static final double maxVelocity = 30; // in/s Max = 36?
     public static final double velocityTolerance = 0.5;
-    public static final double velocityMaxError = 0.2;
+    public static final double velocityMaxError = 0.3;
     public static final double positionMaxError = 0.5;
 
     // All positions should be in inches
