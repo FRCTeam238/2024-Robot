@@ -13,6 +13,7 @@ public class PivotProfile extends Command {
   private MotionProfile profile;
   private MotionProfile.State goal;
   private MotionProfile.MotionConstraints constraints;
+  private boolean bypass;
 
   public PivotProfile(MotionProfile.State goal, String name) {
     pivot = Robot.pivot;
@@ -32,28 +33,35 @@ public class PivotProfile extends Command {
         new MotionProfile.State(pivot.getCurrentPosition(), pivot.getVelocity());
     profile = new MotionProfile(goal, currentState, constraints, MotionProfile.ProfileType.AUTO);
     pivot.setCommand(getName());
+
+    bypass = onTarget();
   }
 
   @Override
   public void execute() {
-    if (goal.position > .33 && Robot.elevator.getEncoderPosition() < 5.75) {
-      // Pivot will collide with swerves, wait for elevator to go up
-      // TODO: Better way to do this? Should these be constants?
-    } else {
-      MotionProfile.State sample = profile.sample();
-      pivot.setDesiredState(sample);
+    if(!bypass) {
+      if (goal.position > .33 && Robot.elevator.getEncoderPosition() < 5.75) {
+        // Pivot will collide with swerves, wait for elevator to go up
+        // TODO: Better way to do this? Should these be constants?
+      } else {
+        MotionProfile.State sample = profile.sample();
+        pivot.setDesiredState(sample);
+      }
     }
   }
 
   @Override
   public boolean isFinished() {
-    return Math.abs(pivot.getVelocity() - goal.velocity) <= velocityMaxError
-        && Math.abs(pivot.getCurrentPosition() - goal.position) <= positionMaxError
-        && profile.isFinished();
+    return bypass || (onTarget() && profile.isFinished());
   }
 
   @Override
   public void end(boolean interrupted) {
     pivot.setCommand("None");
+  }
+
+  public boolean onTarget() {
+    return Math.abs(pivot.getVelocity() - goal.velocity) <= velocityMaxError
+        && Math.abs(pivot.getCurrentPosition() - goal.position) <= positionMaxError;
   }
 }
