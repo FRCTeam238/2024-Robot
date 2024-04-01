@@ -175,6 +175,10 @@ public class Constants {
     public static final double kIAngular = 0;
     public static final double kDAngular = 0;
 
+    public static final double llkP = .2;
+    public static final double llkI = 0;
+    public static final double llkD = 0;
+
     public static final double maxVelocityMetersPerSec = 4.3;
     public static final double maxAccelerationMetersPerSec2 = 100; // TODO: make this a real number
 
