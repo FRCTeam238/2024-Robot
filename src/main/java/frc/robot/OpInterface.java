@@ -50,10 +50,10 @@ public class OpInterface implements Logged {
 
     leftJoystick.button(4).onTrue(Robot.drivetrain.zeroHeadingCommand());
     rightJoystick.button(4).onTrue(Robot.drivetrain.zeroHeadingCommand());
-    rightJoystick.button(6).whileTrue(new SnapToAngle(Math.PI)); //Up button = Pi radians, shooter away from speaker
-    rightJoystick.button(7).whileTrue(new SnapToAngle(-Math.PI/2)); //Right button = -Pi/2 radians, shooter towards right
-    rightJoystick.button(8).whileTrue(new SnapToAngle(0)); //Down button = 0 radians, shooter towards speaker
-    rightJoystick.button(9).whileTrue(new SnapToAngle(Math.PI/2)); //Left button = Pi/2 radians, shooter left
+    rightJoystick.button(6).whileTrue(new SnapToAngle(0)); //Up button = intake away from speaker
+    rightJoystick.button(7).whileTrue(new SnapToAngle(-Math.PI/2)); //Right button = intake towards right
+    rightJoystick.button(8).whileTrue(new SnapToAngle(Math.PI)); //Down button = intake towards speaker
+    rightJoystick.button(9).whileTrue(new SnapToAngle(Math.PI/2)); //Left button = intake towards left
 
     leftJoystick.button(1).whileTrue(new LaunchNote());
     rightJoystick.button(1).whileTrue(new LaunchNote());
