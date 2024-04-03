@@ -122,9 +122,9 @@ public class Constants {
 
     public static final int leaderId = 2;
     public static final int followerId = 12;
-    public static final double kP = 0.05;
+    public static final double kP = 0.045;
     public static final double kI = 0;
-    public static final double kD = 0;
+    public static final double kD = 0.015; // 0.005 or 0.01
     public static final int currentLimit = 40;
     public static final float softForwardLimit = 25;
     public static final float softReverseLimit = 0.25f;
