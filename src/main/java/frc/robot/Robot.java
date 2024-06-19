@@ -45,7 +45,7 @@ public class Robot extends TimedRobot implements Logged {
   public static Feeder feeder = new Feeder();
   public static Pivot pivot = new Pivot();
   public static Shooter shooter = new Shooter();
-  public static Vision vision; //= new Vision();
+  public static Vision vision = new Vision();
   public static OpInterface opInterface = new OpInterface();
 
   @Override
@@ -118,7 +118,7 @@ public class Robot extends TimedRobot implements Logged {
   @Override
   public void autonomousPeriodic() {
     if (Constants.VisionConstants.updatesInAuto) {
-//      vision.updateVision();
+      vision.updateVision();
     }
   }
 
@@ -136,7 +136,7 @@ public class Robot extends TimedRobot implements Logged {
   public void teleopPeriodic() {
 
     if (Constants.VisionConstants.updatesInTeleop) {
-//      vision.updateVision();
+      vision.updateVision();
     }
   }
 

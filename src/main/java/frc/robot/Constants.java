@@ -37,6 +37,7 @@ public class Constants {
     public static double ampSpeed = 2000. / 60;
     public static double trapSpeed = 2000. / 60;
     public static double shotTime = .6;
+    public static double arbitraryShotTime = .75; //specifically for fixed shot auto stuff because of potential extra spin up time
     public static double speedDifference = 20; //Percent difference in speed for targeted shots
 
     public static InterpolatingDoubleTreeMap rpmTree = new InterpolatingDoubleTreeMap();
@@ -171,7 +172,7 @@ public class Constants {
     public static final double kI = 0;
     public static final double kD = 0.01;
 
-    public static final double kPAngular = 1;
+    public static final double kPAngular = 4;
     public static final double kIAngular = 0;
     public static final double kDAngular = 0;
 
@@ -219,11 +220,11 @@ public class Constants {
         new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
 
     public static Transform3d shooterCameraTransform =
-        new Transform3d(-.230, -.282, .62, new Rotation3d(0, Units.degreesToRadians(22), 0));
+        new Transform3d(-.230, .282, -.62, new Rotation3d(0, Units.degreesToRadians(22), 0));
 
     public static boolean updatesInTeleop = true;
     public static boolean updatesInAuto = true;
-    public static double poseEstimateDistanceTolerance = 1;
+    public static double poseEstimateDistanceTolerance = 10000000;
     /**
      * {@summary units in radians}
     */
