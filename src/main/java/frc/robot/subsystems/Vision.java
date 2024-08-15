@@ -4,27 +4,28 @@
 
 package frc.robot.subsystems;
 
-import static frc.robot.Constants.VisionConstants.*;
+import static frc.robot.Constants.VisionConstants.poseEstimateDistanceTolerance;
+import static frc.robot.Constants.VisionConstants.poseEstimateRotTolerance;
+import static frc.robot.Constants.VisionConstants.shooterCameraTransform;
+
+import java.util.Optional;
+
+import org.photonvision.EstimatedRobotPose;
+import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonPoseEstimator;
+import org.photonvision.PhotonPoseEstimator.PoseStrategy;
+import org.photonvision.PhotonUtils;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
-import java.util.Optional;
-
-import monologue.Annotations;
-import monologue.Logged;
 import monologue.Annotations.Log;
-
-import org.photonvision.EstimatedRobotPose;
-import org.photonvision.PhotonCamera;
-import org.photonvision.PhotonPoseEstimator;
-import org.photonvision.PhotonUtils;
-import org.photonvision.PhotonPoseEstimator.PoseStrategy;
+import monologue.Logged;
 
 public class Vision extends SubsystemBase implements Logged {
   PhotonCamera frontCamera;
@@ -86,6 +87,7 @@ public class Vision extends SubsystemBase implements Logged {
     // }
   }
 
+
   @Log.NT
   Transform3d getTranslationToTag() {
     frontEstimator.setReferencePose(Robot.drivetrain.getPose());
@@ -99,7 +101,7 @@ public class Vision extends SubsystemBase implements Logged {
     return new Transform3d();
   }
 
-  @Annotations.Log.NT
+ 
   Pose3d getPose() {
     frontEstimator.setReferencePose(Robot.drivetrain.getPose());
     if (!frontCamera.isConnected()) return new Pose3d();
@@ -108,6 +110,21 @@ public class Vision extends SubsystemBase implements Logged {
       var target = frontCamera.getLatestResult().getTargets().get(0);
       return PhotonUtils.estimateFieldToRobotAprilTag(target.getBestCameraToTarget(), fieldLayout.getTagPose(target.getFiducialId()).get(), shooterCameraTransform);
     }
+
     return new Pose3d();
   }
+
+  @Log.NT
+  public double getAngle() {
+    if (!frontCamera.isConnected()) return 0;
+    if (frontCamera.getLatestResult().hasTargets()) {
+
+      var target = frontCamera.getLatestResult().getTargets().get(0);
+      var value = target.getBestCameraToTarget().getRotation().getY();
+      System.out.println(value);
+      return value;
+
+  }
+  return 0;
+}
 }

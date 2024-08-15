@@ -1,76 +1,5 @@
 {
   "autonomousModes" : [ {
-    "name" : "Amp_Close_MidInside",
-    "commands" : [ {
-      "name" : "LaunchSubwooferGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "None"
-    }, {
-      "name" : "IntakeGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "Deadline_Leader"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Amp_Close_MidInside.1", "true", "0" ],
-      "parallelType" : "Deadline_Follower"
-    }, {
-      "name" : "Delay",
-      "parameters" : [ ".01" ],
-      "parallelType" : "None"
-    }, {
-      "name" : "AutoPosition",
-      "parameters" : [ "7", "30.5" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "AutoFixedSpotSpool",
-      "parameters" : [ "4500", "3800" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "LaunchNoteAuto",
-      "parameters" : [ ],
-      "parallelType" : "None"
-    }, {
-      "name" : "IntakeGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "Deadline_Leader"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Amp_Close_MidInside.2", "false", "0" ],
-      "parallelType" : "Deadline_Follower"
-    }, {
-      "name" : "Delay",
-      "parameters" : [ ".01" ],
-      "parallelType" : "None"
-    }, {
-      "name" : "AutoFixedSpotSpool",
-      "parameters" : [ "4800", "3500" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "AutoPosition",
-      "parameters" : [ "7", "27" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Amp_Close_MidInside.3", "false", "0" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "LaunchNoteAuto",
-      "parameters" : [ ],
-      "parallelType" : "None"
-    }, {
-      "name" : "IntakeGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "Deadline_Leader"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Amp_Close_MidInside.4", "false", "0" ],
-      "parallelType" : "Deadline_Follower"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Amp_Close_MidInside.5", "false", "0" ],
-      "parallelType" : "None"
-    } ]
-  }, {
     "name" : "Amp_Close_MidOutside",
     "commands" : [ {
       "name" : "LaunchSubwooferGroupAuto",
@@ -97,7 +26,7 @@
       "parameters" : [ "4500", "3800" ],
       "parallelType" : "Parallel"
     }, {
-      "name" : "LaunchNoteAuto",
+      "name" : "LaunchNote",
       "parameters" : [ ],
       "parallelType" : "None"
     }, {
@@ -125,7 +54,7 @@
       "parameters" : [ "Amp_Close_MidOutside.3", "false", "0" ],
       "parallelType" : "Parallel"
     }, {
-      "name" : "LaunchNoteAuto",
+      "name" : "LaunchNote",
       "parameters" : [ ],
       "parallelType" : "None"
     }, {
@@ -148,13 +77,13 @@
       "parameters" : [ ],
       "parallelType" : "None"
     }, {
-      "name" : "IntakeGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "Deadline_Leader"
-    }, {
       "name" : "TrajectoryDriveCommand",
       "parameters" : [ "Amp_MidDirect.1", "true", "0" ],
       "parallelType" : "Deadline_Follower"
+    }, {
+      "name" : "IntakeGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "Deadline_Leader"
     }, {
       "name" : "Delay",
       "parameters" : [ ".01" ],
@@ -172,17 +101,17 @@
       "parameters" : [ "4800", "3800" ],
       "parallelType" : "Parallel"
     }, {
-      "name" : "LaunchNoteAuto",
+      "name" : "LaunchNote",
       "parameters" : [ ],
       "parallelType" : "None"
-    }, {
-      "name" : "IntakeGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "Deadline_Leader"
     }, {
       "name" : "TrajectoryDriveCommand",
       "parameters" : [ "Amp_MidDirect.3", "false", "0" ],
       "parallelType" : "Deadline_Follower"
+    }, {
+      "name" : "IntakeGroupAuto",
+      "parameters" : [ ],
+      "parallelType" : "Deadline_Leader"
     }, {
       "name" : "Delay",
       "parameters" : [ ".01" ],
@@ -199,10 +128,6 @@
       "name" : "TrajectoryDriveCommand",
       "parameters" : [ "Amp_MidDirect.4", "false", "0" ],
       "parallelType" : "Parallel"
-    }, {
-      "name" : "LaunchNoteAuto",
-      "parameters" : [ ],
-      "parallelType" : "None"
     } ]
   }, {
     "name" : "Center_4Close_AmpFirst",
@@ -413,8 +338,20 @@
       "parameters" : [ "7", "28.25" ],
       "parallelType" : "Parallel"
     }, {
-      "name" : "LaunchNoteAuto",
+      "name" : "Delay",
+      "parameters" : [ "0.001" ],
+      "parallelType" : "None"
+    }, {
+      "name" : "LaunchNote",
       "parameters" : [ ],
+      "parallelType" : "Race"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.6" ],
+      "parallelType" : "Race"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.001" ],
       "parallelType" : "None"
     }, {
       "name" : "IntakeGroupAuto",
@@ -453,77 +390,19 @@
       "parameters" : [ ],
       "parallelType" : "None"
     }, {
-      "name" : "LaunchNoteAuto",
+      "name" : "LaunchNote",
       "parameters" : [ ],
-      "parallelType" : "None"
+      "parallelType" : "Race"
+    }, {
+      "name" : "Delay",
+      "parameters" : [ "0.6" ],
+      "parallelType" : "Race"
     } ]
   }, {
     "name" : "LeaveOnly",
     "commands" : [ {
       "name" : "TrajectoryDriveCommand",
       "parameters" : [ "Leave_Only", "true", "0" ],
-      "parallelType" : "None"
-    } ]
-  }, {
-    "name" : "Source_Leave_Safe",
-    "commands" : [ {
-      "name" : "LaunchSubwooferGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "None"
-    }, {
-      "name" : "Delay",
-      "parameters" : [ "4" ],
-      "parallelType" : "None"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Source_Leave_Safe.1", "true", "0" ],
-      "parallelType" : "None"
-    } ]
-  }, {
-    "name" : "Source_Mid_Inside",
-    "commands" : [ {
-      "name" : "LaunchSubwooferGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "None"
-    }, {
-      "name" : "IntakeGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "Deadline_Leader"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Source_Mid_Inside.1", "true", "0" ],
-      "parallelType" : "Deadline_Follower"
-    }, {
-      "name" : "Delay",
-      "parameters" : [ ".01" ],
-      "parallelType" : "None"
-    }, {
-      "name" : "AutoPosition",
-      "parameters" : [ "7", "28.5" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "AutoFixedSpotSpool",
-      "parameters" : [ "4800", "3500" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Source_Mid_Inside.2", "false", "0" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "LaunchNoteAuto",
-      "parameters" : [ ],
-      "parallelType" : "None"
-    }, {
-      "name" : "IntakeGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Source_Mid_Inside.3", "false", "0" ],
-      "parallelType" : "Parallel"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Source_Mid_Inside.4", "false", "0" ],
       "parallelType" : "None"
     } ]
   }, {
@@ -546,7 +425,7 @@
       "parallelType" : "None"
     }, {
       "name" : "AutoPosition",
-      "parameters" : [ "7", "28.5" ],
+      "parameters" : [ "7", "27" ],
       "parallelType" : "Parallel"
     }, {
       "name" : "AutoFixedSpotSpool",
@@ -557,7 +436,7 @@
       "parameters" : [ "Source_Mid_OutsideFirst.2", "false", "0" ],
       "parallelType" : "Parallel"
     }, {
-      "name" : "LaunchNoteAuto",
+      "name" : "LaunchNote",
       "parameters" : [ ],
       "parallelType" : "None"
     }, {
@@ -606,17 +485,6 @@
     }, {
       "name" : "LaunchSubwooferGroupAuto",
       "parameters" : [ ],
-      "parallelType" : "None"
-    } ]
-  }, {
-    "name" : "Source_Sweep",
-    "commands" : [ {
-      "name" : "LaunchSubwooferGroupAuto",
-      "parameters" : [ ],
-      "parallelType" : "None"
-    }, {
-      "name" : "TrajectoryDriveCommand",
-      "parameters" : [ "Source_Sweep", "true", "0" ],
       "parallelType" : "None"
     } ]
   } ]
