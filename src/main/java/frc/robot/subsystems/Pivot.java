@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.SparkPIDController.ArbFFUnits;
@@ -21,7 +22,9 @@ import monologue.Logged;
 public class Pivot extends SubsystemBase implements Logged {
 
   CANSparkMax pivotMotor = new CANSparkMax(pivotID, MotorType.kBrushless);
-  AbsoluteEncoder encoder = pivotMotor.getAbsoluteEncoder(Type.kDutyCycle);
+  AbsoluteEncoder absEncoder = pivotMotor.getAbsoluteEncoder(Type.kDutyCycle);
+  RelativeEncoder encoder = pivotMotor.getEncoder();
+  
   @Log String command;
   ArmFeedforward ff;
 
@@ -33,15 +36,17 @@ public class Pivot extends SubsystemBase implements Logged {
     pidController.setP(kP);
     pidController.setI(kI);
     pidController.setD(kD);
-    pidController.setPositionPIDWrappingEnabled(false);
+    pidController.setPositionPIDWrappingEnabled(true);
     pivotMotor.setSmartCurrentLimit(currentLimit);
     pivotMotor.setIdleMode(IdleMode.kBrake);
-    pivotMotor.setInverted(true); //set inversion such that CCW positive
-    encoder.setPositionConversionFactor(
-        2 * Math.PI * 13 / 26); // Convert rotations to rads then multiply by gearing
-    encoder.setVelocityConversionFactor(
-        (2 * Math.PI / 60) * 13 / 26); // Convert rotations to rads/s then multiply by gearing
-
+    pivotMotor.setInverted(false); //set inversion such that CCW positive
+    absEncoder.setPositionConversionFactor(
+        2 * Math.PI * 14 / 72); // Convert rotations to rads then multiply by gearing
+    absEncoder.setVelocityConversionFactor(
+        (2 * Math.PI / 60) * 14/ 72); // Convert rotations to rads/s then multiply by gearing
+    encoder.setPositionConversionFactor(2 * Math.PI * 14 / (72*25));
+    encoder.setVelocityConversionFactor((2 * Math.PI / 60 ) * 14 / (72*25));
+    encoder.setPosition((2 * Math.PI * 14 / 72) - absEncoder.getPosition());
     pivotMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus2, 100); // Motor position from internal encoder. Not currently used,
     pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 65535); // Analog sensor. Not Used
@@ -49,7 +54,6 @@ public class Pivot extends SubsystemBase implements Logged {
     pivotMotor.setPeriodicFramePeriod(
         PeriodicFrame.kStatus5, 10); // Absolute encoder position and angle
     pivotMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 10); // Absolute encoder velocity
-
     Timer.delay(.02); // Pause between subsystems to ease CAN traffic at startup
   }
 
@@ -63,20 +67,19 @@ public class Pivot extends SubsystemBase implements Logged {
     //Commanded postition translates this to the Spark encoder position where 0 is shooter straight up and CW positive
     //FF needs offset of Pi/2 as when at 0 in desired position from, CoG is actually straight up (Pi/2)
     double desiredPosition = state.position;
-    double commandedPosition = -1*(desiredPosition-Math.PI/2);
+
     double desiredVelocity = state.velocity;
     double desiredAcceleration = state.acceleration;
     double feed = -1*ff.calculate(desiredPosition + Math.PI/2, desiredVelocity, desiredAcceleration); //flip FF because it wants CW positive
 
     this.log("desiredPosition", desiredPosition);
-    this.log("commandedPosition", commandedPosition);
     this.log("desiredVelocity", desiredVelocity);
     this.log("desiredAccel", desiredAcceleration);
     this.log("feed", feed);
 
     pivotMotor
         .getPIDController()
-        .setReference(commandedPosition, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
+        .setReference(desiredPosition, ControlType.kPosition, 0, feed, ArbFFUnits.kVoltage);
   }
 
   public void holdPosition() {
@@ -94,7 +97,7 @@ public class Pivot extends SubsystemBase implements Logged {
 
   @Log.NT
   public double getCurrentPosition() {
-    return -(encoder.getPosition() - Math.PI/2);
+    return encoder.getPosition();
   }
 
   @Log

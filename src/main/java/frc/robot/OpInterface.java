@@ -58,7 +58,7 @@ public class OpInterface implements Logged {
     leftJoystick.button(1).whileTrue(new LaunchNote());
     rightJoystick.button(1).whileTrue(new LaunchNote());
 
-    operatorController.a().whileTrue(new IntakePosition());
+    operatorController.a().onTrue(new IntakePosition());
     operatorController.x().onTrue(new SubwooferPosition());
     operatorController.b().onTrue(new PodiumPosition());
     operatorController.y().onTrue(new AmpPosition());

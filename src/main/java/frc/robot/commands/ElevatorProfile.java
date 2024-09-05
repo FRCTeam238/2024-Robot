@@ -39,7 +39,7 @@ public class ElevatorProfile extends Command {
   @Override
   public void execute() {
     if (!bypass){ //If bypass is true, skip executing
-      if (goal.position < 6 && Robot.pivot.getCurrentPosition() > .33) {
+      if (goal.position < 6 && Robot.pivot.getCurrentPosition() > .45) {
         // Pivot is currently in position to collide with swerves, wait for it to clear
         // TODO: Any better way to handle this? Should these be made constants?
       } else {
