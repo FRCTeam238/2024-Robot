@@ -37,6 +37,7 @@ public class Pivot extends SubsystemBase implements Logged {
     pidController.setI(kI);
     pidController.setD(kD);
     pidController.setPositionPIDWrappingEnabled(true);
+    // pidController.setmax
     pivotMotor.setSmartCurrentLimit(currentLimit);
     pivotMotor.setIdleMode(IdleMode.kBrake);
     pivotMotor.setInverted(false); //set inversion such that CCW positive
