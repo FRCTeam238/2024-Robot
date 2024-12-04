@@ -86,7 +86,7 @@ public class Constants {
     public static final double positionMaxError = 0.03;
 
     // Positions should all be in radians where 0 = horizontal
-    public static final double intakePosition = Units.degreesToRadians(17);
+    public static final double intakePosition = Units.degreesToRadians(24.32);
     public static final double ampPosition = Units.degreesToRadians(-30);
     public static final double trapPosition = Units.degreesToRadians(30);
     public static final double climbPosition = 0;
@@ -142,12 +142,12 @@ public class Constants {
     public static final double positionMaxError = 0.5;
 
     // All positions should be in inches
-    public static final double intakePosition = .5;
-    public static final double ampPosition = 25;
+    public static final double intakePosition = 0.1;
+    public static final double ampPosition = 24;
     public static final double trapPosition = 0;
-    public static final double climbPosition = 32;
-    public static final double subwooferPosition = 8;
-    public static final double podiumPosition = 6;//TODO: change to real numbers
+    public static final double climbPosition = 31;
+    public static final double subwooferPosition = 7;
+    public static final double podiumPosition = 5;//TODO: change to real numbers
     public static final double feedOutPosition = 0;
 
     public static final double gearing = 12; // 12:1 gear ratio

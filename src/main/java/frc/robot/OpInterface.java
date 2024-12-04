@@ -8,9 +8,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants.RobotState;
 import frc.robot.Constants.ElevatorConstants.ElevatorDirection;
 import frc.robot.Constants.OperatorConstants.DriveType;
 import frc.robot.commands.*;
+import frc.robot.subsystems.Drivetrain;
 import monologue.Annotations.Log;
 import monologue.Logged;
 
@@ -40,11 +42,11 @@ public class OpInterface implements Logged {
     operatorController
         .axisLessThan(5, -0.1)
         .whileTrue(new ManualElevator(ElevatorDirection.DOWN)); // Right Y
-    operatorController.axisGreaterThan(1, 0.1).whileTrue(new ManualPivot()); // Left Y
-    operatorController.axisLessThan(1, -0.1).whileTrue(new ManualPivot()); // Left Y
+    // operatorController.axisGreaterThan(1, 0.1).whileTrue(new ManualPivot()); // Left Y
+    // operatorController.axisLessThan(1, -0.1).whileTrue(new ManualPivot()); // Left Y
     operatorController.leftTrigger(0.27).whileTrue(new IntakeGroup());
     operatorController.rightTrigger(0.27).whileTrue(new SpoolShooter());
-    operatorController.rightBumper().whileTrue(new ClimbPosition());
+    operatorController.rightBumper().onTrue(new ClimbPosition());
     operatorController.leftBumper().whileTrue(new EjectNote());
 
 
@@ -58,12 +60,12 @@ public class OpInterface implements Logged {
     leftJoystick.button(1).whileTrue(new LaunchNote());
     rightJoystick.button(1).whileTrue(new LaunchNote());
 
-    operatorController.a().whileTrue(new IntakePosition());
-    operatorController.x().onTrue(new SubwooferPosition());
+    operatorController.a().onTrue(new IntakePosition());
+    operatorController.x().and(() -> {return Robot.state != RobotState.AMP;}).onTrue(new SubwooferPosition());
     operatorController.b().onTrue(new PodiumPosition());
-    operatorController.y().onTrue(new AmpPosition());
+    operatorController.y().and(() -> {return Robot.state != RobotState.SUBWOOFER;}).onTrue(new AmpPosition());
     operatorController.povDown().whileTrue(new IntakeNote());
-    operatorController.povLeft().onTrue(new DashboardPosition());
+    // operatorController.povLeft().onTrue(new DashboardPosition());
     operatorController.povUp().whileTrue(new ClearNote());
   }
 

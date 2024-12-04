@@ -33,10 +33,10 @@ public class ManualElevator extends Command {
   public void execute() {
     switch (direction) {
       case DOWN:
-        elevator.setSpeed(OpInterface.operatorController.getRightY());
+        elevator.setSpeed(OpInterface.operatorController.getRightY() / 3);
         break;
       case UP:
-        elevator.setSpeed(OpInterface.operatorController.getRightY());
+        elevator.setSpeed(OpInterface.operatorController.getRightY() / 3);
         break;
       default:
         elevator.setSpeed(0);
